@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA LASER - Resources</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'brand-red': '#FF0000', 'brand-dark': '#0a0a0a', 'brand-darker': '#050505', 'brand-gray': '#1a1a1a', },
+                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], montserrat: ['Montserrat', 'sans-serif'], },
+                    boxShadow: { 'glow': '0 0 20px rgba(255, 0, 0, 0.5)', }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
+
+    <!-- Header (Dynamic) -->
+    <header id="header-container" class="fixed top-0 left-0 w-full z-50 bg-black/95 border-b border-white/5">
+        <!-- Content injected by components.js -->
+    </header>
+
+    <!-- Page Header -->
+    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0"><img src="assets/img/hero-bg.jpg"
+                class="w-full h-full object-cover opacity-30"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-lang-key="resources.page_title">
+                RESOURCES</h1>
+            <p class="text-gray-400" data-lang-key="resources.page_desc">제품 카탈로그 및 기술 자료를 다운로드하세요.</p>
+        </div>
+    </section>
+
+    <!-- Resource List -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <!-- Tabs -->
+            <div class="flex justify-center gap-4 mb-12">
+                <button class="px-6 py-2 rounded-full bg-brand-red text-white font-bold text-sm"
+                    data-lang-key="resources.tab_all">전체</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm"
+                    data-lang-key="resources.tab_catalog">카탈로그</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm"
+                    data-lang-key="resources.tab_manual">매뉴얼</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm"
+                    data-lang-key="resources.tab_tech">기술자료</button>
+            </div>
+
+            <!-- List -->
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div
+                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors"
+                                data-lang-key="resources.item_1_title">[CATALOG]
+                                2025 종합 제품 소개서</h3>
+                            <p class="text-gray-500 text-sm" data-lang-key="resources.item_1_meta">2025-01-15 | 5.2MB
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
+                    </button>
+                </div>
+                <!-- Item 2 -->
+                <div
+                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-blue-400">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors"
+                                data-lang-key="resources.item_2_title">[MANUAL]
+                                Fiber Laser Operation Guide</h3>
+                            <p class="text-gray-500 text-sm" data-lang-key="resources.item_2_meta">2024-12-10 | 12.8MB
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
+                    </button>
+                </div>
+                <!-- Item 3 -->
+                <div
+                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-green-400">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors"
+                                data-lang-key="resources.item_3_title">[TECH]
+                                SUS304 Cutting Parameters</h3>
+                            <p class="text-gray-500 text-sm" data-lang-key="resources.item_3_meta">2024-11-05 | 1.5MB
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Dynamic) -->
+    <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10">
+        <!-- Content injected by components.js -->
+    </footer>
+
+    <script src="assets/js/components.js"></script>
+
+    <script src="assets/js/lang.js"></script>
+</body>
+
+</html>

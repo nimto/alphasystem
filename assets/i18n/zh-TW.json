@@ -1,0 +1,110 @@
+{
+    "common": {
+        "nav_company": "公司簡介",
+        "nav_equipment": "設備現狀",
+        "nav_support": "客戶支援",
+        "nav_data": "資料室",
+        "btn_quote": "線上報價",
+        "footer_rights": "© 2025 ALPHA LASER SYSTEM. All Rights Reserved.",
+        "footer_design": "Designed with Tailwind CSS 3.4 & Dark Premium Theme",
+        "btn_view_all": "查看全部",
+        "btn_download": "下載"
+    },
+    "hero": {
+        "subtitle": "ULTRA PRECISION CUTTING",
+        "desc": "體驗阿爾法激光壓倒性的激光加工技術。<br>以極限的精度和速度最大化貴公司的生產力。",
+        "btn_products": "查看產品",
+        "btn_gallery": "施工案例",
+        "title_mobile": "ALPHA LASER"
+    },
+    "features": {
+        "title": "Core Competitiveness",
+        "subtitle": "SYSTEM & QUALITY",
+        "feat_1_title": "超精密加工",
+        "feat_1_desc": "以無誤差的完美切割技術保證最高品質。",
+        "feat_2_title": "一站式系統",
+        "feat_2_desc": "從設計到加工、焊接、交付一次性解決。",
+        "feat_3_title": "政府採購註冊",
+        "feat_3_desc": "值得信賴的合作夥伴，執行各種公共機構項目。",
+        "feat_4_title": "全球合作夥伴",
+        "feat_4_desc": "與國內外優秀企業共同成長。"
+    },
+    "gallery": {
+        "title": "Premium Gallery",
+        "desc": "阿爾法激光創造的最佳成果",
+        "card_1_category": "METAL WORK",
+        "card_1_title": "精密零件加工",
+        "card_1_desc": "即使是複雜的形狀也能完美實現。",
+        "card_2_category": "QUALITY",
+        "card_2_title": "質量認證",
+        "card_2_desc": "遵守國際標準的質量管理體系。",
+        "card_3_category": "FACILITY",
+        "card_3_title": "擁有尖端設備",
+        "card_3_desc": "擁有多台最新型激光機。"
+    },
+    "company": {
+        "page_title": "COMPANY",
+        "page_desc": "介紹阿爾法激光系統。",
+        "about_title": "CEO致辭",
+        "about_desc": "您好，我是阿爾法激光系統的代表理事。<br><br>自創立以來，我們通過不斷的得技術創新和質量提升，確立了在激光加工領域的領先地位。得益於各位客戶的支持，現在正超越國內，向世界市場飛躍。<br><br>今後也將忠實於基本，成為實現客戶感動的企業。謝謝。",
+        "history_title": "沿革",
+        "hist_2025": "進軍全球市場及設立第二工廠",
+        "hist_2023": "獲得ISO 9001質量管理體系認證",
+        "hist_2020": "轉換為阿爾法激光系統法人",
+        "hist_2018": "設立激光加工研究所"
+    },
+    "equipment": {
+        "page_title": "EQUIPMENT",
+        "page_desc": "為了最高品質的尖端設備現狀。",
+        "eq_1_name": "High Power Fiber Laser 12kW",
+        "eq_1_desc": "最大12kW輸出，可高速精密通過厚金屬（搭載德國Trumpf振盪器）",
+        "eq_2_name": "CO2 Laser Cutting Machine",
+        "eq_2_desc": "專門用於亞克力、木材等非金屬材料加工的高精密CO2激光",
+        "eq_3_name": "CNC Bending Machine",
+        "eq_3_desc": "完美實現複雜折彎形狀的多軸控制CNC折彎機"
+    },
+    "support": {
+        "page_title": "SUPPORT",
+        "page_desc": "為了您的成功，隨時為您敞開。",
+        "contact_center": "客戶諮詢中心",
+        "contact_time": "平日 09:00 - 18:00 (週末/節假日休息)",
+        "email_inquiry": "郵件諮詢",
+        "email_desc": "24小時可接收 (依次回答)",
+        "faq_title": "常見問題",
+        "faq_1_q": "Q. 報價需要多長時間？",
+        "faq_2_q": "Q. 有最小訂購數量嗎？"
+    },
+    "resources": {
+        "page_title": "RESOURCES",
+        "page_desc": "請下載產品目錄及技術資料。",
+        "tab_all": "全部",
+        "tab_catalog": "目錄",
+        "tab_manual": "手冊",
+        "tab_tech": "技術資料",
+        "item_1_title": "[CATALOG] 2025 綜合產品介紹書",
+        "item_1_meta": "2025-01-15 | 5.2MB",
+        "item_2_title": "[MANUAL] Fiber Laser Operation Guide",
+        "item_2_meta": "2024-12-10 | 12.8MB",
+        "item_3_title": "[TECH] SUS304 Cutting Parameters",
+        "item_3_meta": "2024-11-05 | 1.5MB"
+    },
+    "quote": {
+        "page_title": "QUOTE",
+        "page_desc": "提供快速準確的報價服務。",
+        "form_title": "報價諮詢表",
+        "label_company": "公司名稱",
+        "label_name": "負責人姓名",
+        "label_email": "電子郵件",
+        "label_phone": "聯繫方式",
+        "label_type": "加工形狀",
+        "label_message": "諮詢內容",
+        "opt_select": "請選擇",
+        "opt_cutting_plate": "激光切割（平板）",
+        "opt_cutting_pipe": "激光切割（管材）",
+        "opt_bending": "折彎/彎曲",
+        "opt_welding": "焊接",
+        "opt_other": "其他",
+        "privacy_agree": "同意收集和使用個人信息。",
+        "btn_submit": "發送報價請求"
+    }
+}

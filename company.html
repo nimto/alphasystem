@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA LASER - Company</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'brand-red': '#FF0000', 'brand-dark': '#0a0a0a', 'brand-darker': '#050505', 'brand-gray': '#1a1a1a', },
+                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], montserrat: ['Montserrat', 'sans-serif'], },
+                    boxShadow: { 'glow': '0 0 20px rgba(255, 0, 0, 0.5)', }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+        }
+
+        .clip-text-image {
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
+
+    <!-- Header (Dynamic) -->
+    <header id="header-container" class="fixed top-0 left-0 w-full z-50 bg-black/95 border-b border-white/5">
+        <!-- Content injected by components.js -->
+    </header>
+
+    <!-- Page Header -->
+    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0"><img src="assets/img/hero-bg.jpg"
+                class="w-full h-full object-cover opacity-30"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-lang-key="company.page_title">COMPANY
+            </h1>
+            <p class="text-gray-400" data-lang-key="company.page_desc">알파레이저시스템을 소개합니다.</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <!-- CEO Message -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8 border-l-4 border-brand-red pl-4"
+                    data-lang-key="company.about_title">CEO 인사말</h2>
+                <div class="bg-brand-gray p-8 rounded-xl border border-white/5 leading-relaxed text-gray-300"
+                    data-lang-key="company.about_desc">
+                    안녕하십니까, 알파레이저시스템 대표이사입니다.<br><br>
+                    저희는 창립 이래 끊임없는 기술 혁신과 품질 향상을 통해 레이저 가공 분야의 선두주자로 자리매김했습니다.
+                    고객 여러분의 성원에 힘입어, 이제는 국내를 넘어 세계 시장으로 도약하고 있습니다.<br><br>
+                    앞으로도 기본에 충실하며, 고객 감동을 실현하는 기업이 되겠습니다. 감사합니다.
+                </div>
+            </div>
+
+            <!-- History -->
+            <div>
+                <h2 class="text-3xl font-bold mb-8 border-l-4 border-brand-red pl-4"
+                    data-lang-key="company.history_title">연혁</h2>
+                <div class="space-y-8 border-l border-white/10 ml-2 pl-8 relative">
+                    <!-- Item -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[39px] top-1 w-5 h-5 bg-brand-red rounded-full border-4 border-brand-dark">
+                        </div>
+                        <span class="text-brand-red font-bold block mb-1">2025</span>
+                        <p class="text-lg" data-lang-key="company.hist_2025">글로벌 시장 진출 및 제2공장 설립</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[39px] top-1 w-5 h-5 bg-gray-600 rounded-full border-4 border-brand-dark">
+                        </div>
+                        <span class="text-gray-500 font-bold block mb-1">2023</span>
+                        <p class="text-gray-300" data-lang-key="company.hist_2023">ISO 9001 품질경영시스템 인증 획득</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[39px] top-1 w-5 h-5 bg-gray-600 rounded-full border-4 border-brand-dark">
+                        </div>
+                        <span class="text-gray-500 font-bold block mb-1">2020</span>
+                        <p class="text-gray-300" data-lang-key="company.hist_2020">알파레이저시스템 법인 전환</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[39px] top-1 w-5 h-5 bg-gray-600 rounded-full border-4 border-brand-dark">
+                        </div>
+                        <span class="text-gray-500 font-bold block mb-1">2018</span>
+                        <p class="text-gray-300" data-lang-key="company.hist_2018">레이저 가공 연구소 설립</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Dynamic) -->
+    <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10">
+        <!-- Content injected by components.js -->
+    </footer>
+
+    <script src="assets/js/components.js"></script>
+
+    <script src="assets/js/lang.js"></script>
+</body>
+
+</html>

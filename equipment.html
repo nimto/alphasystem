@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA LASER - Equipment</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'brand-red': '#FF0000', 'brand-dark': '#0a0a0a', 'brand-darker': '#050505', 'brand-gray': '#1a1a1a', },
+                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], montserrat: ['Montserrat', 'sans-serif'], },
+                    boxShadow: { 'glow': '0 0 20px rgba(255, 0, 0, 0.5)', }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
+
+    <!-- Header (Dynamic) -->
+    <header id="header-container" class="fixed top-0 left-0 w-full z-50 bg-black/95 border-b border-white/5">
+        <!-- Content injected by components.js -->
+    </header>
+
+    <!-- Page Header -->
+    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0"><img src="assets/img/hero-bg.jpg"
+                class="w-full h-full object-cover opacity-30"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-lang-key="equipment.page_title">
+                EQUIPMENT</h1>
+            <p class="text-gray-400" data-lang-key="equipment.page_desc">최고의 품질을 위한 최첨단 장비 현황입니다.</p>
+        </div>
+    </section>
+
+    <!-- Content (Grid) -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div
+                    class="bg-brand-gray rounded-2xl overflow-hidden border border-white/5 hover:border-brand-red transition-all group">
+                    <div class="h-64 bg-black/50 relative">
+                        <!-- Placeholder Image -->
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-700">
+                            <i class="fa-solid fa-image text-4xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-brand-red transition-colors"
+                            data-lang-key="equipment.eq_1_name">High Power Fiber Laser 12kW</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="equipment.eq_1_desc">최대 12kW
+                            출력으로 두꺼운 금속도 고속 정밀 절단 가능 (독일 Trumpf 발진기 탑재)</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div
+                    class="bg-brand-gray rounded-2xl overflow-hidden border border-white/5 hover:border-brand-red transition-all group">
+                    <div class="h-64 bg-black/50 relative">
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-700">
+                            <i class="fa-solid fa-image text-4xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-brand-red transition-colors"
+                            data-lang-key="equipment.eq_2_name">CO2 Laser Cutting Machine</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="equipment.eq_2_desc">아크릴, 목재 등
+                            비금속 소재 가공에 특화된 고정밀 CO2 레이저</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div
+                    class="bg-brand-gray rounded-2xl overflow-hidden border border-white/5 hover:border-brand-red transition-all group">
+                    <div class="h-64 bg-black/50 relative">
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-700">
+                            <i class="fa-solid fa-image text-4xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-brand-red transition-colors"
+                            data-lang-key="equipment.eq_3_name">CNC Bending Machine</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="equipment.eq_3_desc">복잡한 절곡 형상을
+                            완벽하게 구현하는 다축 제어 CNC 절곡기</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Dynamic) -->
+    <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10">
+        <!-- Content injected by components.js -->
+    </footer>
+
+    <script src="assets/js/components.js"></script>
+
+    <script src="assets/js/lang.js"></script>
+</body>
+
+</html>

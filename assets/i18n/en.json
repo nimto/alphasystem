@@ -1,0 +1,110 @@
+{
+    "common": {
+        "nav_company": "Company",
+        "nav_equipment": "Equipment",
+        "nav_support": "Support",
+        "nav_data": "Resources",
+        "btn_quote": "Get Quote",
+        "footer_rights": "© 2025 ALPHA LASER SYSTEM. All Rights Reserved.",
+        "footer_design": "Designed with Tailwind CSS 3.4 & Dark Premium Theme",
+        "btn_view_all": "View All",
+        "btn_download": "Download"
+    },
+    "hero": {
+        "subtitle": "ULTRA PRECISION CUTTING",
+        "desc": "Experience Alpha Laser's overwhelming laser processing technology.<br>Maximize your productivity with extreme precision and speed.",
+        "btn_products": "View Products",
+        "btn_gallery": "Case Studies",
+        "title_mobile": "ALPHA LASER"
+    },
+    "features": {
+        "title": "Core Competitiveness",
+        "subtitle": "SYSTEM & QUALITY",
+        "feat_1_title": "Ultra Precision",
+        "feat_1_desc": "Guarantees the best quality with error-free perfect cutting technology.",
+        "feat_2_title": "One-Stop System",
+        "feat_2_desc": "Solve everything from design, processing, welding, to delivery at once.",
+        "feat_3_title": "Procurement",
+        "feat_3_desc": "A trusted partner performing various public institution projects.",
+        "feat_4_title": "Global Partner",
+        "feat_4_desc": "Growing together with leading domestic and international companies."
+    },
+    "gallery": {
+        "title": "Premium Gallery",
+        "desc": "Alpha Laser's High Quality Works",
+        "card_1_category": "METAL WORK",
+        "card_1_title": "Precision Parts",
+        "card_1_desc": "Perfectly implements even complex shapes.",
+        "card_2_category": "QUALITY",
+        "card_2_title": "Quality Certification",
+        "card_2_desc": "Quality management system complying with international standards.",
+        "card_3_category": "FACILITY",
+        "card_3_title": "Advanced Equipment",
+        "card_3_desc": "We possess a large number of the latest laser machines."
+    },
+    "company": {
+        "page_title": "COMPANY",
+        "page_desc": "Introducing Alpha Laser System.",
+        "about_title": "CEO Message",
+        "about_desc": "Hello, this is the CEO of Alpha Laser System.<br><br>Since our founding, we have established ourselves as a leader in the laser processing field through continuous technological innovation and quality improvement. Thanks to your support, we are now leaping beyond the domestic market to the global market.<br><br>We will continue to be a company that realizes customer impressions by sticking to the basics. Thank you.",
+        "history_title": "History",
+        "hist_2025": "Global Market Entry & 2nd Factory Establishment",
+        "hist_2023": "Acquired ISO 9001 Quality Management System Certification",
+        "hist_2020": "Converted to Alpha Laser System Corp.",
+        "hist_2018": "Established Laser Processing Research Institute"
+    },
+    "equipment": {
+        "page_title": "EQUIPMENT",
+        "page_desc": "State-of-the-art equipment status for the best quality.",
+        "eq_1_name": "High Power Fiber Laser 12kW",
+        "eq_1_desc": "High-speed precision cutting of thick metals with max 12kW output (equipped with German Trumpf oscillator)",
+        "eq_2_name": "CO2 Laser Cutting Machine",
+        "eq_2_desc": "High-precision CO2 laser specialized for non-metal materials like acrylic and wood",
+        "eq_3_name": "CNC Bending Machine",
+        "eq_3_desc": "Multi-axis control CNC bending machine that perfectly implements complex bending shapes"
+    },
+    "support": {
+        "page_title": "SUPPORT",
+        "page_desc": "We are always open for your success.",
+        "contact_center": "Contact Center",
+        "contact_time": "Weekdays 09:00 - 18:00 (Closed on weekends/holidays)",
+        "email_inquiry": "Email Inquiry",
+        "email_desc": "Available 24/7 (Sequential response)",
+        "faq_title": "FAQ",
+        "faq_1_q": "Q. How long does a quote take?",
+        "faq_2_q": "Q. Is there a minimum order quantity?"
+    },
+    "resources": {
+        "page_title": "RESOURCES",
+        "page_desc": "Check out technical data and catalogs.",
+        "tab_all": "All",
+        "tab_catalog": "Catalog",
+        "tab_manual": "Manual",
+        "tab_tech": "Tech Data",
+        "item_1_title": "[CATALOG] 2025 Comprehensive Product Guide",
+        "item_1_meta": "2025-01-15 | 5.2MB",
+        "item_2_title": "[MANUAL] Fiber Laser Operation Guide",
+        "item_2_meta": "2024-12-10 | 12.8MB",
+        "item_3_title": "[TECH] SUS304 Cutting Parameters",
+        "item_3_meta": "2024-11-05 | 1.5MB"
+    },
+    "quote": {
+        "page_title": "QUOTE",
+        "page_desc": "Get a fast and accurate quote.",
+        "form_title": "Quote Request Form",
+        "label_company": "Company Name",
+        "label_name": "Contact Person",
+        "label_email": "Email",
+        "label_phone": "Phone Number",
+        "label_type": "Processing Type",
+        "label_message": "Inquiry Details",
+        "opt_select": "Please Select",
+        "opt_cutting_plate": "Laser Cutting (Plate)",
+        "opt_cutting_pipe": "Laser Cutting (Pipe)",
+        "opt_bending": "Bending",
+        "opt_welding": "Welding",
+        "opt_other": "Other",
+        "privacy_agree": "I agree to the collection and use of personal information.",
+        "btn_submit": "Send Request"
+    }
+}

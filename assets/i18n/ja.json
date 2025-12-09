@@ -1,0 +1,110 @@
+{
+    "common": {
+        "nav_company": "会社紹介",
+        "nav_equipment": "設備状況",
+        "nav_support": "顧客サポート",
+        "nav_data": "資料室",
+        "btn_quote": "オンライン見積",
+        "footer_rights": "© 2025 ALPHA LASER SYSTEM. All Rights Reserved.",
+        "footer_design": "Designed with Tailwind CSS 3.4 & Dark Premium Theme",
+        "btn_view_all": "すべて見る",
+        "btn_download": "ダウンロード"
+    },
+    "hero": {
+        "subtitle": "ULTRA PRECISION CUTTING",
+        "desc": "アルファーレーザーの圧倒的なレーザー加工技術をご体験ください。<br>極限の精度と速度で貴社の生産性を最大化します。",
+        "btn_products": "製品を見る",
+        "btn_gallery": "施工事例",
+        "title_mobile": "ALPHA LASER"
+    },
+    "features": {
+        "title": "Core Competitiveness",
+        "subtitle": "SYSTEM & QUALITY",
+        "feat_1_title": "超精密加工",
+        "feat_1_desc": "誤差のない完璧なカッティング技術で最高の品質を保証します。",
+        "feat_2_title": "ワンストップシステム",
+        "feat_2_desc": "設計から加工、溶接、納品まで一度に解決します。",
+        "feat_3_title": "調達庁登録",
+        "feat_3_desc": "信頼できるパートナー、公共機関の様々なプロジェクトを遂行。",
+        "feat_4_title": "グローバルパートナー",
+        "feat_4_desc": "国内外の有数企業と共に成長しています。"
+    },
+    "gallery": {
+        "title": "Premium Gallery",
+        "desc": "アルファーレーザーが作り出した最高の結果物",
+        "card_1_category": "METAL WORK",
+        "card_1_title": "精密部品加工",
+        "card_1_desc": "複雑な形状も完璧に実現します。",
+        "card_2_category": "QUALITY",
+        "card_2_title": "品質認証",
+        "card_2_desc": "国際標準に準拠した品質経営システム。",
+        "card_3_category": "FACILITY",
+        "card_3_title": "最先端設備保有",
+        "card_3_desc": "最新型レーザーマシンを多数保有しています。"
+    },
+    "company": {
+        "page_title": "COMPANY",
+        "page_desc": "アルファーレーザーシステムをご紹介します。",
+        "about_title": "CEOご挨拶",
+        "about_desc": "こんにちは、アルファーレーザーシステムの代表取締役です。<br><br>当社は創業以来、絶え間ない技術革新と品質向上を通じてレーザー加工分野のリーダーとして位置づけられました。皆様のご声援のおかげで、今は国内を超えて世界市場へと跳躍しています。<br><br>これからも基本に忠実であり、顧客感動を実現する企業になります。ありがとうございます。",
+        "history_title": "沿革",
+        "hist_2025": "グローバル市場進出および第2工場設立",
+        "hist_2023": "ISO 9001品質経営システム認証取得",
+        "hist_2020": "アルファーレーザーシステム法人転換",
+        "hist_2018": "レーザー加工研究所設立"
+    },
+    "equipment": {
+        "page_title": "EQUIPMENT",
+        "page_desc": "最高の品質のための最先端設備状況です。",
+        "eq_1_name": "High Power Fiber Laser 12kW",
+        "eq_1_desc": "最大12kW出力で厚い金属も高速精密切断可能（ドイツTrumpf発振器搭載）",
+        "eq_2_name": "CO2 Laser Cutting Machine",
+        "eq_2_desc": "アクリル、木材など非金属素材加工に特化した高精密CO2レーザー",
+        "eq_3_name": "CNC Bending Machine",
+        "eq_3_desc": "複雑な曲げ形状を完璧に実現する多軸制御CNC曲げ機"
+    },
+    "support": {
+        "page_title": "SUPPORT",
+        "page_desc": "お客様の成功のためにいつでも開かれています。",
+        "contact_center": "顧客相談センター",
+        "contact_time": "平日 09:00 - 18:00 (週末/祝日休み)",
+        "email_inquiry": "メールお問い合わせ",
+        "email_desc": "24時間受付可能 (順次回答)",
+        "faq_title": "よくある質問",
+        "faq_1_q": "Q. 見積もりはどれくらいかかりますか？",
+        "faq_2_q": "Q. 最小注文数量はありますか？"
+    },
+    "resources": {
+        "page_title": "RESOURCES",
+        "page_desc": "製品カタログおよび技術資料をダウンロードしてください。",
+        "tab_all": "すべて",
+        "tab_catalog": "カタログ",
+        "tab_manual": "マニュアル",
+        "tab_tech": "技術資料",
+        "item_1_title": "[CATALOG] 2025 総合製品紹介書",
+        "item_1_meta": "2025-01-15 | 5.2MB",
+        "item_2_title": "[MANUAL] Fiber Laser Operation Guide",
+        "item_2_meta": "2024-12-10 | 12.8MB",
+        "item_3_title": "[TECH] SUS304 Cutting Parameters",
+        "item_3_meta": "2024-11-05 | 1.5MB"
+    },
+    "quote": {
+        "page_title": "QUOTE",
+        "page_desc": "迅速かつ正確な見積もりサービスを提供します。",
+        "form_title": "見積もりお問い合わせフォーム",
+        "label_company": "会社名",
+        "label_name": "担当者名",
+        "label_email": "メール",
+        "label_phone": "連絡先",
+        "label_type": "加工形状",
+        "label_message": "お問い合わせ内容",
+        "opt_select": "選択してください",
+        "opt_cutting_plate": "レーザー切断（平板）",
+        "opt_cutting_pipe": "レーザー切断（パイプ）",
+        "opt_bending": "曲げ/ベンディング",
+        "opt_welding": "溶接",
+        "opt_other": "その他",
+        "privacy_agree": "個人情報の収集および利用に同意します。",
+        "btn_submit": "見積もり依頼を送信"
+    }
+}

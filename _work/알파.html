@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA LASER - Premium Tech</title>
+    <!-- 구글 웹폰트: Montserrat(로고/영문용), Noto Sans KR(본문용) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- [System Variables: RED THEME] --- */
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-white: #ffffff;
+            --laser-red: #FF0000;
+            --laser-orange: #FF4500;
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--primary-white);
+            background-color: var(--primary-black);
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s; }
+        ul { list-style: none; }
+
+        /* --- [Header] --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%; height: var(--nav-height);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.15);
+        }
+        header:hover { background: rgba(10, 10, 10, 0.95); }
+
+        /* [로고 영역: 이미지를 완전히 삭제하고 텍스트로만 구성] */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900; /* 아주 두꺼운 폰트 */
+            font-size: 1.8rem;
+            color: var(--primary-white);
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+        
+        .logo-text span {
+            color: var(--laser-red); /* LASER 부분만 빨간색 포인트 */
+        }
+
+        /* 메뉴 스타일 */
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-menu a {
+            font-weight: 600; font-size: 1rem; color: #ddd;
+            position: relative;
+        }
+        .nav-menu a:hover { color: var(--laser-red); text-shadow: 0 0 10px var(--laser-red); }
+
+        .contact-btn {
+            padding: 10px 28px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid var(--laser-red);
+            color: var(--laser-red);
+            border-radius: 30px; font-weight: 700;
+        }
+        .contact-btn:hover {
+            background: var(--laser-red); color: #fff;
+            box-shadow: 0 0 20px var(--laser-red);
+        }
+
+        /* --- [Hero Section] --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 5%;
+            overflow: hidden;
+        }
+
+        /* 배경 이미지 */
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1612051677486-1014433276c2?q=80&w=2070&auto=format&fit=crop') center/cover;
+            z-index: 1;
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 0, 0, 0.1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 90%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative; z-index: 10;
+            max-width: 1000px;
+            text-align: center;
+            display: flex; flex-direction: column; align-items: center;
+            margin-bottom: 60px;
+        }
+
+        /* 레이저 글씨 효과 */
+        .laser-writing-box {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        svg.writing-svg { width: 100%; height: auto; max-height: 160px; }
+        svg text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 110px; }
+
+        .text-stroke tspan {
+            fill: none; stroke: var(--laser-red); stroke-width: 2px;
+            stroke-dasharray: 1000; stroke-dashoffset: 1000;
+            animation: writeStroke 0.4s linear forwards;
+            filter: drop-shadow(0 0 10px var(--laser-red));
+            opacity: 0;
+        }
+        /* 글자 순서 딜레이 */
+        .text-stroke tspan:nth-child(1) { animation-delay: 0s; opacity: 1; }
+        .text-stroke tspan:nth-child(2) { animation-delay: 0.3s; }
+        .text-stroke tspan:nth-child(3) { animation-delay: 0.6s; }
+        .text-stroke tspan:nth-child(4) { animation-delay: 0.9s; }
+        .text-stroke tspan:nth-child(5) { animation-delay: 1.2s; }
+        .text-stroke tspan:nth-child(6) { animation-delay: 1.5s; }
+        .text-stroke tspan:nth-child(7) { animation-delay: 1.5s; }
+        .text-stroke tspan:nth-child(8) { animation-delay: 1.8s; }
+        .text-stroke tspan:nth-child(9) { animation-delay: 2.1s; }
+        .text-stroke tspan:nth-child(10) { animation-delay: 2.4s; }
+        .text-stroke tspan:nth-child(11) { animation-delay: 2.7s; }
+
+        .text-fill {
+            fill: var(--laser-red); opacity: 0;
+            animation: fillText 1s linear 3.2s forwards;
+            filter: drop-shadow(0 0 30px var(--laser-red));
+        }
+
+        .scanning-laser {
+            position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: #fff;
+            box-shadow: 0 0 20px var(--laser-red), 0 0 40px var(--laser-orange);
+            opacity: 0; z-index: 5;
+            animation: scanMove 3s linear forwards;
+        }
+
+        @keyframes writeStroke { to { stroke-dashoffset: 0; opacity: 1; } }
+        @keyframes fillText { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scanMove { 0% { left: 0; opacity: 1; } 95% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .sub-title {
+            color: #fff; font-weight: 700; letter-spacing: 4px; 
+            margin-bottom: 20px; display: block; font-size: 1.2rem;
+            opacity: 0; animation: fadeIn 1s ease-out 3.5s forwards;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem; color: #ccc; margin-bottom: 40px;
+            line-height: 1.8; max-width: 700px; font-weight: 300;
+            opacity: 0; animation: fadeIn 1s ease-out 3.8s forwards;
+        }
+
+        .cta-container {
+            display: flex; gap: 20px;
+            opacity: 0; animation: fadeIn 1s ease-out 4.1s forwards;
+        }
+
+        .main-btn {
+            padding: 16px 50px;
+            background: var(--laser-red); color: #fff;
+            border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+        .main-btn:hover { background: #d00000; transform: translateY(-3px); }
+
+        .sub-btn {
+            padding: 16px 50px;
+            background: rgba(255,255,255,0.05); color: #fff;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+        .sub-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+        /* --- [Quick Menu] --- */
+        #quick-menu {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            z-index: 10;
+        }
+        .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1600px; margin: 0 auto; }
+        .menu-item { 
+            padding: 30px 20px; text-align: center; 
+            border-right: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: all 0.3s; cursor: pointer; display: block; 
+        }
+        .menu-item:last-child { border-right: none; }
+        .menu-item:hover { background: var(--laser-red); }
+        .menu-item:hover .menu-desc { color: #fff; }
+
+        .menu-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+        .menu-title { font-size: 1.1rem; font-weight: 700; display: block; margin-bottom: 5px; color: #fff;}
+        .menu-desc { font-size: 0.85rem; color: #888; transition: color 0.3s;}
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            header { padding: 0 20px; }
+            .nav-menu { display: none; }
+            svg text { font-size: 80px; }
+            .menu-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="http://alpsystem.kr/" target="_blank" class="logo">
+            <!-- [이미지 태그 완전 삭제] 텍스트로만 로고 구성 -->
+            <span class="logo-text">ALPHA <span>LASER</span></span>
+        </a>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="http://alpsystem.kr/bbs/content.php?co_id=company" target="_blank">회사소개</a></li>
+                <li><a href="http://alpsystem.kr/bbs/board.php?bo_table=pro01" target="_blank">장비현황</a></li>
+                <li><a href="http://alpsystem.kr/bbs/board.php?bo_table=gallery" target="_blank">고객지원</a></li>
+                <li><a href="http://alpsystem.kr/bbs/board.php?bo_table=notice" target="_blank">자료실</a></li>
+            </ul>
+        </nav>
+        <a href="http://alpsystem.kr/bbs/write.php?bo_table=online" target="_blank" class="contact-btn">온라인 견적</a>
+    </header>
+
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+            <div class="laser-writing-box">
+                <div class="scanning-laser"></div>
+                <svg class="writing-svg" viewBox="0 0 900 150">
+                    <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="text-fill">ALPHA LASER</text>
+                    <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="text-stroke">
+                        <tspan>A</tspan><tspan>L</tspan><tspan>P</tspan><tspan>H</tspan><tspan>A</tspan>
+                        <tspan> </tspan>
+                        <tspan>L</tspan><tspan>A</tspan><tspan>S</tspan><tspan>E</tspan><tspan>R</tspan>
+                    </text>
+                </svg>
+            </div>
+
+            <span class="sub-title">ULTRA PRECISION CUTTING</span>
+
+            <p class="hero-desc">
+                알파레이저의 압도적인 레이저 가공 기술을 경험하세요.<br>
+                극한의 정밀도와 속도로 귀사의 생산성을 극대화합니다.
+            </p>
+            <div class="cta-container">
+                <a href="http://alpsystem.kr/bbs/board.php?bo_table=pro01" target="_blank" class="main-btn">제품사진 보기 </a>
+                <a href="http://alpsystem.kr/bbs/content.php?co_id=company" target="_blank" class="sub-btn">시공사진 보기</a>
+            </div>
+        </div>
+
+        <div id="quick-menu">
+            <div class="menu-grid">
+                <a href="http://alpsystem.kr/bbs/board.php?bo_table=pro01" target="_blank" class="menu-item">
+                    <span class="menu-icon">🔥</span>
+                    <span class="menu-title">레이저 절단/가공</span>
+                    <span class="menu-desc">초정밀 금속 레이저 커팅 솔루션</span>
+                </a>
+                <a href="http://alpsystem.kr/bbs/board.php?bo_table=pro02" target="_blank" class="menu-item">
+                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-title">탭핑/펨프레스/용접</span>
+                    <span class="menu-desc">자체적인 A TO Z 원스톱 시스템</span>
+                </a>
+                <a href="http://alpsystem.kr/bbs/board.php?bo_table=gallery" target="_blank" class="menu-item">
+                    <span class="menu-icon">🏗️</span>
+                    <span class="menu-title">조달 사업부</span>
+                    <span class="menu-desc">가로수 보호판/트렌치 외</span>
+                </a>
+                <a href="http://alpsystem.kr/bbs/write.php?bo_table=online" target="_blank" class="menu-item">
+                    <span class="menu-icon">📋</span>
+                    <span class="menu-title">고객사</span>
+                    <span class="menu-desc">다양한 산업군</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

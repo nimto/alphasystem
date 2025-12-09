@@ -1,0 +1,11 @@
+{
+    "name": "alpha-laser-system",
+    "version": "1.0.0",
+    "description": "Alpha Laser System Landing Page",
+    "scripts": {
+        "dev": "npx http-server -p 8008"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
