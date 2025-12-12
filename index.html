@@ -106,7 +106,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Laser Text Effect -->
-    <link rel="stylesheet" href="assets/css/laser-text.css">
+    <link rel="stylesheet" href="assets/css/laser-text.css?v=20251212150520">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
@@ -308,6 +308,7 @@
             animation: fadeIn 1s ease-out 4.1s forwards;
         }
 
+        /* Desktop Button Styles */
         .main-btn {
             padding: 16px 50px;
             background: var(--laser-red);
@@ -319,12 +320,22 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
         .main-btn:hover {
             background: #d00000;
             transform: translateY(-3px);
+        }
+
+        .main-btn-icon,
+        .sub-btn-icon {
+            display: none;
+        }
+
+        .main-btn-arrow,
+        .sub-btn-arrow {
+            display: none;
         }
 
         .sub-btn {
@@ -337,11 +348,149 @@
             font-size: 1.1rem;
             backdrop-filter: blur(5px);
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .sub-btn:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: #fff;
+        }
+
+        /* Mobile Button Styles */
+        @media (max-width: 768px) {
+            .cta-container {
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .main-btn {
+                width: 100%;
+                padding: 0;
+                border-radius: 16px;
+                background: linear-gradient(135deg, var(--laser-red) 0%, #cc0000 100%);
+                box-shadow: 0 8px 32px rgba(255, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .main-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s ease;
+            }
+
+            .main-btn:active::before {
+                left: 100%;
+            }
+
+            .main-btn:active {
+                transform: scale(0.98);
+                box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4);
+            }
+
+            .main-btn-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 12px;
+                margin: 6px;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+            }
+
+            .main-btn-text {
+                flex: 1;
+                text-align: left;
+                font-size: 0.95rem;
+                font-weight: 600;
+                padding-right: 8px;
+            }
+
+            .main-btn-arrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                margin-right: 12px;
+                font-size: 0.75rem;
+                opacity: 0.7;
+                transition: transform 0.2s, opacity 0.2s;
+            }
+
+            .main-btn:active .main-btn-arrow {
+                transform: translateX(4px);
+                opacity: 1;
+            }
+
+            .sub-btn {
+                width: 100%;
+                padding: 0;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(20px);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .sub-btn:active {
+                transform: scale(0.98);
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .sub-btn-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                margin: 6px;
+                font-size: 1.2rem;
+                color: var(--laser-red);
+                flex-shrink: 0;
+            }
+
+            .sub-btn-text {
+                flex: 1;
+                text-align: left;
+                font-size: 0.95rem;
+                font-weight: 600;
+                padding-right: 8px;
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .sub-btn-arrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                margin-right: 12px;
+                font-size: 0.75rem;
+                opacity: 0.5;
+                transition: transform 0.2s, opacity 0.2s;
+            }
+
+            .sub-btn:active .sub-btn-arrow {
+                transform: translateX(4px);
+                opacity: 0.8;
+            }
         }
 
         /* --- [Quick Menu] --- */
@@ -492,18 +641,30 @@
                 극한의 정밀도와 속도로 귀사의 생산성을 극대화합니다.
             </p>
             <div class="cta-container">
-                <a href="gallery.html" class="main-btn multilang"
-    data-ko="제품사진 보기"
-    data-en="View Products"
-    data-ja="製品写真を見る"
-    data-zh-cn="查看产品照片"
-    data-zh-tw="查看產品照片">제품사진 보기 </a>
-                <a href="equipment.html" class="sub-btn multilang"
-    data-ko="장비/시공 보기"
-    data-en="View Equipment"
-    data-ja="設備/施工を見る"
-    data-zh-cn="查看设备/施工"
-    data-zh-tw="查看設備/施工">장비/시공 보기</a>
+                <a href="#features" class="main-btn group">
+                    <span class="main-btn-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </span>
+                    <span class="main-btn-text multilang"
+                        data-ko="핵심 경쟁력"
+                        data-en="Core Competencies"
+                        data-ja="コア・コンピタンス"
+                        data-zh-cn="核心竞争力"
+                        data-zh-tw="核心競爭力">핵심 경쟁력</span>
+                    <i class="fa-solid fa-chevron-right main-btn-arrow"></i>
+                </a>
+                <a href="gallery.html" class="sub-btn group">
+                    <span class="sub-btn-icon">
+                        <i class="fa-solid fa-images"></i>
+                    </span>
+                    <span class="sub-btn-text multilang"
+                        data-ko="제품 사진"
+                        data-en="Product Photos"
+                        data-ja="製品写真"
+                        data-zh-cn="产品照片"
+                        data-zh-tw="產品照片">제품 사진</span>
+                    <i class="fa-solid fa-chevron-right sub-btn-arrow"></i>
+                </a>
             </div>
         </div>
 
@@ -514,7 +675,7 @@
     <section id="features" class="py-24 bg-brand-darker relative overflow-hidden">
         <!-- Parallax Background -->
         <div class="absolute inset-0 z-0" id="features-parallax">
-            <img src="assets/img/hero-bg.png" class="w-full h-full object-cover opacity-10 scale-110"
+            <img src="assets/img/hero-bg.png?v=20251212150520" class="w-full h-full object-cover opacity-10 scale-110"
                 style="transform: translateY(0px);" alt="Background">
         </div>
         <div class="absolute inset-0 z-0 bg-gradient-to-b from-brand-darker via-transparent to-brand-darker"></div>
@@ -638,9 +799,9 @@
     <!-- Scripts -->
     <!-- Scripts -->
     <!-- Scripts -->
-    <script src="assets/js/components.js?v=2"></script>
-    <script src="assets/js/multilang.js"></script>
-    <script src="assets/js/laser-text.js"></script>
+    <script src="assets/js/components.js?v=20251212150520"></script>
+    <script src="assets/js/multilang.js?v=20251212150520"></script>
+    <script src="assets/js/laser-text.js?v=20251212150520"></script>
     <script>
         // Toggle Mobile Menu (Placeholder)
         const btn = document.querySelector('button.md\\:hidden');

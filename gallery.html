@@ -28,7 +28,7 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=20251212150520">
     <style>
         body {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -188,20 +188,20 @@
             }
         }
 
-        /* 이미지 스타일 */
+        /* 이미지 스타일 - 1:1 비율 썸네일 */
         .gallery-item img {
             width: 100%;
-            height: 280px;
-            object-fit: contain;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 20px;
-            background: transparent;
+            padding: 0;
+            background: #1a1a1a;
             filter: brightness(0.95);
         }
 
         .gallery-item.featured img {
-            height: 100%;
-            min-height: 400px;
+            aspect-ratio: 1 / 1;
+            min-height: auto;
         }
 
         .gallery-item:hover img {
@@ -442,7 +442,7 @@
             }
 
             .gallery-item img {
-                height: 200px;
+                aspect-ratio: 1 / 1;
             }
 
             .lightbox-nav {
@@ -470,7 +470,7 @@
             }
 
             .gallery-item img {
-                height: 250px;
+                aspect-ratio: 1 / 1;
             }
         }
 
@@ -484,7 +484,7 @@
             animation: fadeInUp 0.6s ease forwards;
         }
     </style>
-    <link rel="stylesheet" href="assets/css/laser-text.css">
+    <link rel="stylesheet" href="assets/css/laser-text.css?v=20251212150520">
 </head>
 
 <body class="min-h-screen">
@@ -493,15 +493,20 @@
     <!-- Page Header -->
     <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 z-0">
-            <img src="assets/img/hero-bg.jpg" class="w-full h-full object-cover opacity-30">
+            <img src="assets/img/hero-bg.jpg?v=20251212150520" class="w-full h-full object-cover opacity-30">
         </div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
         <div class="relative z-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="PRODUCT GALLERY"
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="PRODUCT GALLERY"
                 data-lang-key="gallery.page_title">
                 PRODUCT GALLERY
-            </h1>
-            <p class="text-gray-400" data-lang-key="gallery.page_desc">알파레이저 제품 가공 사례</p>
+            </h2>
+            <p class="text-gray-400 multilang"
+                data-ko="알파레이저 제품 가공 사례"
+                data-en="ALPHA LASER Product Processing Cases"
+                data-ja="アルファレーザー製品加工事例"
+                data-zh-cn="阿尔法激光产品加工案例"
+                data-zh-tw="阿爾法激光產品加工案例">알파레이저 제품 가공 사례</p>
         </div>
     </section>
 
@@ -521,44 +526,67 @@
 
     <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10"></footer>
 
-    <script src="assets/js/components.js?v=2"></script>
-    <script src="assets/js/multilang.js"></script>
+    <script src="assets/js/components.js?v=20251212150520"></script>
+    <script src="assets/js/multilang.js?v=20251212150520"></script>
 
 
     <script>
-        const totalImages = 58; // 실제 이미지 개수로 수정
+        // 이미지 파일 목록 (products-0020 제외)
+        const imageNumbers = [
+            '0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009', '0010',
+            '0011', '0012', '0013', '0014', '0015', '0016', '0017', '0018', '0019',
+            '0021', '0022', '0023', '0024', '0025', '0026', '0027', '0028', '0029', '0030',
+            '0031', '0032', '0033', '0034', '0035', '0036', '0037', '0038', '0039', '0040',
+            '0041', '0042', '0043', '0044', '0045', '0046', '0047', '0048', '0049', '0050',
+            '0051', '0052', '0053', '0054', '0055', '0056', '0057', '0058', '0059', '0060',
+            '0061', '0062', '0063', '0064', '0065', '0066', '0067', '0068', '0069', '0070',
+            '0071', '0072', '0073', '0074', '0075', '0076', '0077', '0078', '0079'
+        ];
+
         const galleryGrid = document.getElementById('galleryGrid');
 
-        // Featured 아이템 인덱스 설정 (큰아이템으로 표시할 이미지)
-        const featuredIndices = [5, 12, 23, 34, 45]; // 특정 제품을 featured로
+        // 다국어 텍스트
+        const viewText = {
+            ko: '보기',
+            en: 'View',
+            ja: '見る',
+            'zh-cn': '查看',
+            'zh-tw': '查看'
+        };
+        const productText = {
+            ko: '제품',
+            en: 'Product',
+            ja: '製品',
+            'zh-cn': '产品',
+            'zh-tw': '產品'
+        };
 
-        for (let i = 1; i <= totalImages; i++) {
-            const num = String(i).padStart(2, '0');
+        // 현재 언어 가져오기
+        const currentLang = localStorage.getItem('alpha_lang') || 'ko';
+
+        // 갤러리 아이템 생성
+        imageNumbers.forEach((num, index) => {
             const item = document.createElement('div');
+            item.className = 'gallery-item';
 
-            // Featured 클래스 추가
-            const isFeatured = featuredIndices.includes(i);
-            item.className = isFeatured ? 'gallery-item featured' : 'gallery-item';
-
-            item.onclick = function () { openLightbox(i - 1); };
+            item.onclick = function () { openLightbox(index); };
             item.innerHTML = `
-                <img src="products/product_${num}.jpg" alt="제품 ${i}" loading="lazy" 
-                     onerror="this.onerror=null; this.src='assets/img/products/product_${num}.jpg';">
+                <img src="products/products-${num}.webp" alt="${productText[currentLang] || productText.ko} ${num}" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="view-btn">
                         <i class="fas fa-search-plus"></i>
-                        <span>보기</span>
+                        <span class="view-text">${viewText[currentLang] || viewText.ko}</span>
                     </div>
                 </div>
             `;
             galleryGrid.appendChild(item);
-        }
+        });
 
-        const images = [];
-        for (let i = 1; i <= totalImages; i++) {
-            const num = String(i).padStart(2, '0');
-            images.push({ src: `products/product_${num}.jpg`, alt: `제품 ${i}` });
-        }
+        // 라이트박스용 이미지 배열
+        const images = imageNumbers.map(num => ({
+            src: `products/products-${num}.webp`,
+            alt: `제품 ${num}`
+        }));
 
         let currentIndex = 0;
 
@@ -588,10 +616,6 @@
             const counter = document.getElementById('lightbox-counter');
             img.src = images[currentIndex].src;
             img.alt = images[currentIndex].alt;
-            img.onerror = function () {
-                this.onerror = null;
-                this.src = 'assets/img/' + images[currentIndex].src;
-            };
             counter.textContent = `${currentIndex + 1} / ${images.length}`;
         }
 
@@ -616,7 +640,7 @@
             if (e.target === this) closeLightbox();
         });
     </script>
-    <script src="assets/js/laser-text.js"></script>
+    <script src="assets/js/laser-text.js?v=20251212150520"></script>
 </body>
 
 </html>

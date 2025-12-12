@@ -28,7 +28,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="assets/css/laser-text.css">
+    <link rel="stylesheet" href="assets/css/laser-text.css?v=20251212150520">
 
     <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -216,7 +216,7 @@
 
     <!-- Page Header -->
     <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
-        <div class="absolute inset-0 z-0"><img src="assets/img/hero-bg.jpg"
+        <div class="absolute inset-0 z-0"><img src="assets/img/hero-bg.jpg?v=20251212150520"
                 class="w-full h-full object-cover opacity-30"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
         <div class="relative z-10 text-center">
@@ -232,225 +232,137 @@
 
     <!-- Resource List -->
     <section class="py-20 px-6">
-        <div class="container mx-auto max-w-5xl">
-            <!-- Tabs -->
-            <div class="flex justify-center gap-4 mb-12">
-                <button class="px-6 py-2 rounded-full bg-brand-red text-white font-bold text-sm multilang"
-                    data-ko="전체"
-                    data-en="All"
-                    data-ja="全て"
-                    data-zh-cn="全部"
-                    data-zh-tw="全部">전체</button>
-                <button
-                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm multilang"
-                    data-ko="카탈로그"
-                    data-en="Catalog"
-                    data-ja="カタログ"
-                    data-zh-cn="产品目录"
-                    data-zh-tw="產品目錄">카탈로그</button>
-                <button
-                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm multilang"
-                    data-ko="매뉴얼"
-                    data-en="Manual"
-                    data-ja="マニュアル"
-                    data-zh-cn="手册"
-                    data-zh-tw="手冊">매뉴얼</button>
-                <button
-                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm multilang"
-                    data-ko="기술자료"
-                    data-en="Technical"
-                    data-ja="技術資料"
-                    data-zh-cn="技术资料"
-                    data-zh-tw="技術資料">기술자료</button>
+        <div class="container mx-auto max-w-6xl">
+            <!-- Search & Filter Controls -->
+            <div class="mb-8">
+                <!-- Search Bar -->
+                <div class="relative max-w-xl mx-auto mb-6">
+                    <input type="text" id="searchInput"
+                        class="w-full px-5 py-3 pl-12 bg-brand-gray border border-white/10 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors"
+                        data-placeholder-ko="검색어를 입력하세요..."
+                        data-placeholder-en="Search..."
+                        data-placeholder-ja="検索..."
+                        data-placeholder-zh-cn="搜索..."
+                        data-placeholder-zh-tw="搜索..."
+                        placeholder="검색어를 입력하세요...">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <button id="clearSearch" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white hidden">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6" id="categoryTabs">
+                    <button class="category-tab active px-4 md:px-6 py-2 rounded-full text-sm transition-all" data-category="all">
+                        <span class="multilang" data-ko="전체" data-en="All" data-ja="全て" data-zh-cn="全部" data-zh-tw="全部">전체</span>
+                        <span class="count ml-1 text-xs opacity-70">(0)</span>
+                    </button>
+                    <button class="category-tab px-4 md:px-6 py-2 rounded-full text-sm transition-all" data-category="시방서">
+                        <span class="multilang" data-ko="시방서" data-en="Specifications" data-ja="仕様書" data-zh-cn="规范" data-zh-tw="規範">시방서</span>
+                        <span class="count ml-1 text-xs opacity-70">(0)</span>
+                    </button>
+                    <button class="category-tab px-4 md:px-6 py-2 rounded-full text-sm transition-all" data-category="가로수보호판">
+                        <span class="multilang" data-ko="가로수보호판/틀" data-en="Tree Protection" data-ja="街路樹保護板/枠" data-zh-cn="行道树保护板/框" data-zh-tw="行道樹保護板/框">가로수보호판/틀</span>
+                        <span class="count ml-1 text-xs opacity-70">(0)</span>
+                    </button>
+                    <button class="category-tab px-4 md:px-6 py-2 rounded-full text-sm transition-all" data-category="트렌치">
+                        <span class="multilang" data-ko="트렌치" data-en="Trench" data-ja="トレンチ" data-zh-cn="排水沟" data-zh-tw="排水溝">트렌치</span>
+                        <span class="count ml-1 text-xs opacity-70">(0)</span>
+                    </button>
+                </div>
+
+                <!-- Sort & View Options -->
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div class="text-gray-400 text-sm">
+                        <span class="multilang" data-ko="검색결과" data-en="Results" data-ja="検索結果" data-zh-cn="搜索结果" data-zh-tw="搜索結果">검색결과</span>:
+                        <span id="resultCount" class="text-white font-bold">0</span>
+                        <span class="multilang" data-ko="건" data-en="items" data-ja="件" data-zh-cn="项" data-zh-tw="項">건</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <!-- Sort Dropdown -->
+                        <select id="sortSelect" class="bg-brand-gray border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-brand-red cursor-pointer">
+                            <option value="name-asc" data-ko="이름순 (오름차순)" data-en="Name (A-Z)" data-ja="名前順 (昇順)" data-zh-cn="名称 (升序)" data-zh-tw="名稱 (升序)">이름순 (오름차순)</option>
+                            <option value="name-desc" data-ko="이름순 (내림차순)" data-en="Name (Z-A)" data-ja="名前順 (降順)" data-zh-cn="名称 (降序)" data-zh-tw="名稱 (降序)">이름순 (내림차순)</option>
+                            <option value="size-asc" data-ko="크기순 (작은순)" data-en="Size (Small-Large)" data-ja="サイズ順 (小-大)" data-zh-cn="尺寸 (小-大)" data-zh-tw="尺寸 (小-大)">크기순 (작은순)</option>
+                            <option value="size-desc" data-ko="크기순 (큰순)" data-en="Size (Large-Small)" data-ja="サイズ順 (大-小)" data-zh-cn="尺寸 (大-小)" data-zh-tw="尺寸 (大-小)">크기순 (큰순)</option>
+                            <option value="category" data-ko="카테고리순" data-en="Category" data-ja="カテゴリ順" data-zh-cn="类别" data-zh-tw="類別">카테고리순</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <!-- List -->
-            <div class="space-y-4">
-                <!-- Item 1: 2026 AGT Product Catalog -->
-                <div
-                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div
-                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
-                                data-ko="[CATALOG] 2025 종합 제품 소개서"
-                                data-en="[CATALOG] 2025 Comprehensive Product Brochure"
-                                data-ja="[カタログ] 2025 総合製品カタログ"
-                                data-zh-cn="[目录] 2025 综合产品手册"
-                                data-zh-tw="[目錄] 2025 綜合產品手冊">[CATALOG] 2025 종합 제품 소개서</h3>
-                            <p class="text-gray-500 text-sm">2025-01-15 | 5.2MB</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="viewPDF('data/2026_AGT_Product_01.pdf', '2025 종합 제품 소개서')"
-                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i>
-                            <span class="multilang"
-                                data-ko="바로보기"
-                                data-en="View"
-                                data-ja="閲覧"
-                                data-zh-cn="查看"
-                                data-zh-tw="查看">바로보기</span>
-                        </button>
-                        <a href="data/2026_AGT_Product_01.pdf" download
-                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i>
-                            <span class="multilang"
-                                data-ko="다운로드"
-                                data-en="Download"
-                                data-ja="ダウンロード"
-                                data-zh-cn="下载"
-                                data-zh-tw="下載">다운로드</span>
-                        </a>
-                    </div>
-                </div>
+            <!-- Resource List -->
+            <div class="space-y-3" id="resourceList">
+                <!-- Dynamic content will be inserted here -->
+            </div>
 
-                <!-- Item 2: 가로수보호일체 시방서 -->
-                <div
-                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div
-                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
-                                data-ko="[시방서] 가로수보호일체 시방서"
-                                data-en="[SPEC] Tree Protection Integrated Specification"
-                                data-ja="[仕様書] 街路樹保護一体型仕様書"
-                                data-zh-cn="[规格] 行道树保护一体化规范"
-                                data-zh-tw="[規格] 行道樹保護一體化規範">[시방서] 가로수보호일체 시방서</h3>
-                            <p class="text-gray-500 text-sm multilang"
-                                data-ko="조달청 등록 제품 시방서"
-                                data-en="Public Procurement Service Registered Product Specification"
-                                data-ja="調達庁登録製品仕様書"
-                                data-zh-cn="政府采购服务注册产品规格"
-                                data-zh-tw="政府採購服務註冊產品規格">조달청 등록 제품 시방서</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="viewPDF('data/가로수보호일체 시방서.pdf', '가로수보호일체 시방서')"
-                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i>
-                            <span class="multilang"
-                                data-ko="바로보기"
-                                data-en="View"
-                                data-ja="閲覧"
-                                data-zh-cn="查看"
-                                data-zh-tw="查看">바로보기</span>
-                        </button>
-                        <a href="data/가로수보호일체 시방서.pdf" download
-                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i>
-                            <span class="multilang"
-                                data-ko="다운로드"
-                                data-en="Download"
-                                data-ja="ダウンロード"
-                                data-zh-cn="下载"
-                                data-zh-tw="下載">다운로드</span>
-                        </a>
-                    </div>
-                </div>
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-16">
+                <i class="fa-solid fa-folder-open text-6xl text-gray-600 mb-4"></i>
+                <p class="text-gray-400 text-lg multilang"
+                    data-ko="검색 결과가 없습니다."
+                    data-en="No results found."
+                    data-ja="検索結果がありません。"
+                    data-zh-cn="没有搜索结果。"
+                    data-zh-tw="沒有搜索結果。">검색 결과가 없습니다.</p>
+            </div>
 
-                <!-- Item 3: 빗물받이 시방서 -->
-                <div
-                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div
-                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
-                                data-ko="[시방서] 빗물받이 시방서"
-                                data-en="[SPEC] Storm Drain Specification"
-                                data-ja="[仕様書] 雨水桝仕様書"
-                                data-zh-cn="[规格] 雨水口规范"
-                                data-zh-tw="[規格] 雨水口規範">[시방서] 빗물받이 시방서</h3>
-                            <p class="text-gray-500 text-sm multilang"
-                                data-ko="조달청 등록 제품 시방서"
-                                data-en="Public Procurement Service Registered Product Specification"
-                                data-ja="調達庁登録製品仕様書"
-                                data-zh-cn="政府采购服务注册产品规格"
-                                data-zh-tw="政府採購服務註冊產品規格">조달청 등록 제품 시방서</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="viewPDF('data/빗물받이 시방서.pdf', '빗물받이 시방서')"
-                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i>
-                            <span class="multilang"
-                                data-ko="바로보기"
-                                data-en="View"
-                                data-ja="閲覧"
-                                data-zh-cn="查看"
-                                data-zh-tw="查看">바로보기</span>
-                        </button>
-                        <a href="data/빗물받이 시방서.pdf" download
-                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i>
-                            <span class="multilang"
-                                data-ko="다운로드"
-                                data-en="Download"
-                                data-ja="ダウンロード"
-                                data-zh-cn="下载"
-                                data-zh-tw="下載">다운로드</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Item 4: 트렌치 시방서 -->
-                <div
-                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div
-                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
-                                data-ko="[시방서] 트렌치 시방서"
-                                data-en="[SPEC] Trench Specification"
-                                data-ja="[仕様書] トレンチ仕様書"
-                                data-zh-cn="[规格] 排水沟规范"
-                                data-zh-tw="[規格] 排水溝規範">[시방서] 트렌치 시방서</h3>
-                            <p class="text-gray-500 text-sm multilang"
-                                data-ko="조달청 등록 제품 시방서"
-                                data-en="Public Procurement Service Registered Product Specification"
-                                data-ja="調達庁登録製品仕様書"
-                                data-zh-cn="政府采购服务注册产品规格"
-                                data-zh-tw="政府採購服務註冊產品規格">조달청 등록 제품 시방서</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="viewPDF('data/트렌치 시방서.pdf', '트렌치 시방서')"
-                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i>
-                            <span class="multilang"
-                                data-ko="바로보기"
-                                data-en="View"
-                                data-ja="閲覧"
-                                data-zh-cn="查看"
-                                data-zh-tw="查看">바로보기</span>
-                        </button>
-                        <a href="data/트렌치 시방서.pdf" download
-                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i>
-                            <span class="multilang"
-                                data-ko="다운로드"
-                                data-en="Download"
-                                data-ja="ダウンロード"
-                                data-zh-cn="下载"
-                                data-zh-tw="下載">다운로드</span>
-                        </a>
-                    </div>
-                </div>
+            <!-- Pagination -->
+            <div id="pagination" class="flex justify-center items-center gap-2 mt-8">
+                <!-- Dynamic pagination will be inserted here -->
             </div>
         </div>
     </section>
+
+    <style>
+        .category-tab {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #9ca3af;
+        }
+        .category-tab:hover {
+            border-color: rgba(255, 0, 0, 0.5);
+            color: white;
+        }
+        .category-tab.active {
+            background: #FF0000;
+            border-color: #FF0000;
+            color: white;
+            font-weight: bold;
+        }
+        .resource-item {
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .pagination-btn {
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #9ca3af;
+            transition: all 0.2s;
+        }
+        .pagination-btn:hover:not(:disabled) {
+            border-color: #FF0000;
+            color: white;
+        }
+        .pagination-btn.active {
+            background: #FF0000;
+            border-color: #FF0000;
+            color: white;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
 
     <!-- Certifications Section -->
     <section class="py-20 px-6 bg-brand-darker">
@@ -478,7 +390,7 @@
                 <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
                     onclick="openLightbox(0)">
                     <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/img/certs/cert_bidder.jpg" alt="조달청 경쟁입찰참가자격등록증"
+                        <img src="assets/img/certs/cert_bidder.jpg?v=20251212150520" alt="조달청 경쟁입찰참가자격등록증"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4">
@@ -505,7 +417,7 @@
                 <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
                     onclick="openLightbox(1)">
                     <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/img/certs/cert_clean.jpg" alt="클린사업장 인증서"
+                        <img src="assets/img/certs/cert_clean.jpg?v=20251212150520" alt="클린사업장 인증서"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4">
@@ -532,7 +444,7 @@
                 <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
                     onclick="openLightbox(2)">
                     <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/img/certs/cert_iso9001.jpg" alt="ISO 9001:2015 인증서"
+                        <img src="assets/img/certs/cert_iso9001.jpg?v=20251212150520" alt="ISO 9001:2015 인증서"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4">
@@ -554,7 +466,7 @@
                 <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
                     onclick="openLightbox(3)">
                     <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/img/certs/cert_rnd.jpg" alt="연구개발전담부서 인정서"
+                        <img src="assets/img/certs/cert_rnd.jpg?v=20251212150520" alt="연구개발전담부서 인정서"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4">
@@ -581,7 +493,7 @@
                 <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
                     onclick="openLightbox(4)">
                     <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/img/certs/cert_venture.jpg" alt="벤처기업확인서"
+                        <img src="assets/img/certs/cert_venture.jpg?v=20251212150520" alt="벤처기업확인서"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4">
@@ -638,9 +550,483 @@
         </div>
     </div>
 
-    <script src="assets/js/components.js?v=2"></script>
-    <script src="assets/js/multilang.js"></script>
-    <script src="assets/js/laser-text.js"></script>
+    <script src="assets/js/components.js?v=20251212150520"></script>
+    <script src="assets/js/multilang.js?v=20251212150520"></script>
+    <script src="assets/js/laser-text.js?v=20251212150520"></script>
+
+    <script>
+        // ===== 다국어 번역 데이터 =====
+        const i18n = {
+            titles: {
+                '가로수보호일체 시방서': { ko: '가로수보호일체 시방서', en: 'Street Tree Protection Specification', ja: '街路樹保護一体仕様書', 'zh-cn': '行道树保护一体规范', 'zh-tw': '行道樹保護一體規範' },
+                '2025 종합 제품 소개서': { ko: '2025 종합 제품 소개서', en: '2025 Product Catalog', ja: '2025年総合製品紹介', 'zh-cn': '2025综合产品介绍', 'zh-tw': '2025綜合產品介紹' },
+                '빗물받이 시방서': { ko: '빗물받이 시방서', en: 'Rainwater Inlet Specification', ja: '雨水受け仕様書', 'zh-cn': '雨水口规范', 'zh-tw': '雨水口規範' },
+                '트렌치 시방서': { ko: '트렌치 시방서', en: 'Trench Specification', ja: 'トレンチ仕様書', 'zh-cn': '排水沟规范', 'zh-tw': '排水溝規範' }
+            },
+            descs: {
+                '조달청 등록 제품 시방서': { ko: '조달청 등록 제품 시방서', en: 'PPS Registered Product Specification', ja: '調達庁登録製品仕様書', 'zh-cn': '采购厅注册产品规范', 'zh-tw': '採購廳註冊產品規範' },
+                'DWG 도면': { ko: 'DWG 도면', en: 'DWG Drawing', ja: 'DWG図面', 'zh-cn': 'DWG图纸', 'zh-tw': 'DWG圖紙' },
+                '도면 (DWG/PDF)': { ko: '도면 (DWG/PDF)', en: 'Drawing (DWG/PDF)', ja: '図面 (DWG/PDF)', 'zh-cn': '图纸 (DWG/PDF)', 'zh-tw': '圖紙 (DWG/PDF)' }
+            },
+            frames: {
+                '알미늄': { ko: '알미늄', en: 'Aluminum', ja: 'アルミ', 'zh-cn': '铝', 'zh-tw': '鋁' },
+                '알루미늄': { ko: '알루미늄', en: 'Aluminum', ja: 'アルミ', 'zh-cn': '铝', 'zh-tw': '鋁' },
+                '압연': { ko: '압연', en: 'Rolled Steel', ja: '圧延鋼', 'zh-cn': '轧钢', 'zh-tw': '軋鋼' },
+                '화강석': { ko: '화강석', en: 'Granite', ja: '花崗岩', 'zh-cn': '花岗岩', 'zh-tw': '花崗岩' }
+            },
+            products: {
+                '논슬립': { ko: '논슬립', en: 'Non-Slip', ja: 'ノンスリップ', 'zh-cn': '防滑', 'zh-tw': '防滑' },
+                '논슬립디자인그레이팅': { ko: '논슬립디자인그레이팅', en: 'Non-Slip Design Grating', ja: 'ノンスリップデザイングレーチング', 'zh-cn': '防滑设计格栅', 'zh-tw': '防滑設計格柵' },
+                '틀포함': { ko: '틀포함', en: 'with Frame', ja: 'フレーム付き', 'zh-cn': '含框架', 'zh-tw': '含框架' }
+            }
+        };
+
+        // ===== 자료실 데이터 (JSON) =====
+        const resourceData = [
+            // 기존 시방서 자료
+            { id: 1, category: '가로수보호판', title: '가로수보호일체 시방서', desc: '조달청 등록 제품 시방서', pdfFile: 'data/가로수보호일체 시방서.pdf', downloadFile: 'data/가로수보호일체 시방서.pdf', fileType: 'pdf' },
+            { id: 2, category: '시방서', title: '2025 종합 제품 소개서', desc: '2025-01-15 | 5.2MB', pdfFile: 'data/2026_AGT_Product_01.pdf', downloadFile: 'data/2026_AGT_Product_01.pdf', fileType: 'pdf' },
+            { id: 3, category: '시방서', title: '빗물받이 시방서', desc: '조달청 등록 제품 시방서', pdfFile: 'data/빗물받이 시방서.pdf', downloadFile: 'data/빗물받이 시방서.pdf', fileType: 'pdf' },
+            { id: 4, category: '트렌치', title: '트렌치 시방서', desc: '조달청 등록 제품 시방서', pdfFile: 'data/트렌치 시방서.pdf', downloadFile: 'data/트렌치 시방서.pdf', fileType: 'pdf' },
+
+            // 논슬립디자인그레이팅 (트렌치) - DWG Only
+            { id: 50, category: '트렌치', title: '논슬립디자인그레이팅 300X300X50X6T', desc: 'DWG 도면', size: '300X300', dwgFile: 'data/논슬립디자인그레이팅300X300X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 51, category: '트렌치', title: '논슬립디자인그레이팅 400X400X50X6T', desc: 'DWG 도면', size: '400X400', dwgFile: 'data/논슬립디자인그레이팅400X400X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 52, category: '트렌치', title: '논슬립디자인그레이팅 500X400X50X6T', desc: 'DWG 도면', size: '500X400', dwgFile: 'data/논슬립디자인그레이팅500X400X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 53, category: '트렌치', title: '논슬립디자인그레이팅 500X500X50X6T', desc: 'DWG 도면', size: '500X500', dwgFile: 'data/논슬립디자인그레이팅500X500X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 54, category: '트렌치', title: '논슬립디자인그레이팅 600X500X50X6T', desc: 'DWG 도면', size: '600X500', dwgFile: 'data/논슬립디자인그레이팅600X500X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 55, category: '트렌치', title: '논슬립디자인그레이팅 600X600X50X6T', desc: 'DWG 도면', size: '600X600', dwgFile: 'data/논슬립디자인그레이팅600X600X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 56, category: '트렌치', title: '논슬립디자인그레이팅 700X700X50X6T', desc: 'DWG 도면', size: '700X700', dwgFile: 'data/논슬립디자인그레이팅700X700X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 57, category: '트렌치', title: '논슬립디자인그레이팅 800X800X50X6T', desc: 'DWG 도면', size: '800X800', dwgFile: 'data/논슬립디자인그레이팅800X800X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 58, category: '트렌치', title: '논슬립디자인그레이팅 1000X200X50X6T', desc: 'DWG 도면', size: '1000X200', dwgFile: 'data/논슬립디자인그레이팅1000X200X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 59, category: '트렌치', title: '논슬립디자인그레이팅 1000X300X50X6T', desc: 'DWG 도면', size: '1000X300', dwgFile: 'data/논슬립디자인그레이팅1000X300X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 60, category: '트렌치', title: '논슬립디자인그레이팅 1000X400X50X6T', desc: 'DWG 도면', size: '1000X400', dwgFile: 'data/논슬립디자인그레이팅1000X400X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 61, category: '트렌치', title: '논슬립디자인그레이팅 1000X450X50X6T', desc: 'DWG 도면', size: '1000X450', dwgFile: 'data/논슬립디자인그레이팅1000X450X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 62, category: '트렌치', title: '논슬립디자인그레이팅 1000X500X50X6T', desc: 'DWG 도면', size: '1000X500', dwgFile: 'data/논슬립디자인그레이팅1000X500X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 63, category: '트렌치', title: '논슬립디자인그레이팅 1000X600X50X6T', desc: 'DWG 도면', size: '1000X600', dwgFile: 'data/논슬립디자인그레이팅1000X600X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 64, category: '트렌치', title: '논슬립디자인그레이팅 1000X700X50X6T', desc: 'DWG 도면', size: '1000X700', dwgFile: 'data/논슬립디자인그레이팅1000X700X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 65, category: '트렌치', title: '논슬립디자인그레이팅 1000X1000X50X6T', desc: 'DWG 도면', size: '1000X1000', dwgFile: 'data/논슬립디자인그레이팅1000X1000X50X6T.dwg', fileType: 'dwg-only' },
+            { id: 66, category: '트렌치', title: '논슬립디자인그레이팅 1400X300X50X6T', desc: 'DWG 도면', size: '1400X300', dwgFile: 'data/논슬립디자인그레이팅1400X300X50X6T.dwg', fileType: 'dwg-only' },
+
+            // 논슬립 도면 자료 (PDF 바로보기, DWG 다운로드) - 가로수보호판 분류
+            // 850X850
+            { id: 100, category: '가로수보호판', title: '논슬립 850X850 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '850X850', frame: '알미늄', pdfFile: 'data/논슬립850X850_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립850X850_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 101, category: '가로수보호판', title: '논슬립 850X850 압연틀포함', desc: '도면 (DWG/PDF)', size: '850X850', frame: '압연', pdfFile: 'data/논슬립850X850_압연틀포함-모형.pdf', downloadFile: 'data/논슬립850X850_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 102, category: '가로수보호판', title: '논슬립 850X850 화강석틀포함', desc: '도면 (DWG/PDF)', size: '850X850', frame: '화강석', pdfFile: 'data/논슬립850X850_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립850X850_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1000X800
+            { id: 103, category: '가로수보호판', title: '논슬립 1000X800 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1000X800', frame: '알미늄', pdfFile: 'data/논슬립1000X800_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1000X800_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 104, category: '가로수보호판', title: '논슬립 1000X800 압연틀포함', desc: '도면 (DWG/PDF)', size: '1000X800', frame: '압연', pdfFile: 'data/논슬립1000X800_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1000X800_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 105, category: '가로수보호판', title: '논슬립 1000X800 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1000X800', frame: '화강석', pdfFile: 'data/논슬립1000X800_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1000X800_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1000X1000
+            { id: 106, category: '가로수보호판', title: '논슬립 1000X1000 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1000X1000', frame: '알미늄', pdfFile: 'data/논슬립1000X1000_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1000X1000_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 107, category: '가로수보호판', title: '논슬립 1000X1000 압연틀포함', desc: '도면 (DWG/PDF)', size: '1000X1000', frame: '압연', pdfFile: 'data/논슬립1000X1000_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1000X1000_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 108, category: '가로수보호판', title: '논슬립 1000X1000 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1000X1000', frame: '화강석', pdfFile: 'data/논슬립1000X1000_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1000X1000_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1200X800
+            { id: 109, category: '가로수보호판', title: '논슬립 1200X800 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1200X800', frame: '알미늄', pdfFile: 'data/논슬립1200X800_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1200X800_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 110, category: '가로수보호판', title: '논슬립 1200X800 압연틀포함', desc: '도면 (DWG/PDF)', size: '1200X800', frame: '압연', pdfFile: 'data/논슬립1200X800_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1200X800_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 111, category: '가로수보호판', title: '논슬립 1200X800 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1200X800', frame: '화강석', pdfFile: 'data/논슬립1200X800_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1200X800_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1200X1000
+            { id: 112, category: '가로수보호판', title: '논슬립 1200X1000 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1200X1000', frame: '알미늄', pdfFile: 'data/논슬립1200X1000_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1200X1000_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 113, category: '가로수보호판', title: '논슬립 1200X1000 압연틀포함', desc: '도면 (DWG/PDF)', size: '1200X1000', frame: '압연', pdfFile: 'data/논슬립1200X1000_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1200X1000_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 114, category: '가로수보호판', title: '논슬립 1200X1000 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1200X1000', frame: '화강석', pdfFile: 'data/논슬립1200X1000_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1200X1000_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1200X1200
+            { id: 115, category: '가로수보호판', title: '논슬립 1200X1200 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1200X1200', frame: '알미늄', pdfFile: 'data/논슬립1200X1200_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1200X1200_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 116, category: '가로수보호판', title: '논슬립 1200X1200 압연틀포함', desc: '도면 (DWG/PDF)', size: '1200X1200', frame: '압연', pdfFile: 'data/논슬립1200X1200_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1200X1200_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 117, category: '가로수보호판', title: '논슬립 1200X1200 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1200X1200', frame: '화강석', pdfFile: 'data/논슬립1200X1200_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1200X1200_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1400X1000
+            { id: 118, category: '가로수보호판', title: '논슬립 1400X1000 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1400X1000', frame: '알미늄', pdfFile: 'data/논슬립1400X1000_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1000_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 119, category: '가로수보호판', title: '논슬립 1400X1000 압연틀포함', desc: '도면 (DWG/PDF)', size: '1400X1000', frame: '압연', pdfFile: 'data/논슬립1400X1000_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1000_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 120, category: '가로수보호판', title: '논슬립 1400X1000 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1400X1000', frame: '화강석', pdfFile: 'data/논슬립1400X1000_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1000_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1400X1200
+            { id: 121, category: '가로수보호판', title: '논슬립 1400X1200 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1400X1200', frame: '알미늄', pdfFile: 'data/논슬립1400X1200_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1200_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 122, category: '가로수보호판', title: '논슬립 1400X1200 압연틀포함', desc: '도면 (DWG/PDF)', size: '1400X1200', frame: '압연', pdfFile: 'data/논슬립1400X1200_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1200_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 123, category: '가로수보호판', title: '논슬립 1400X1200 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1400X1200', frame: '화강석', pdfFile: 'data/논슬립1400X1200_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1200_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1400X1400
+            { id: 124, category: '가로수보호판', title: '논슬립 1400X1400 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1400X1400', frame: '알미늄', pdfFile: 'data/논슬립1400X1400_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1400_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 125, category: '가로수보호판', title: '논슬립 1400X1400 압연틀포함', desc: '도면 (DWG/PDF)', size: '1400X1400', frame: '압연', pdfFile: 'data/논슬립1400X1400_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1400_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 126, category: '가로수보호판', title: '논슬립 1400X1400 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1400X1400', frame: '화강석', pdfFile: 'data/논슬립1400X1400_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1400X1400_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1500X1000
+            { id: 127, category: '가로수보호판', title: '논슬립 1500X1000 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1500X1000', frame: '알미늄', pdfFile: 'data/논슬립1500X1000_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1000_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 128, category: '가로수보호판', title: '논슬립 1500X1000 압연틀포함', desc: '도면 (DWG/PDF)', size: '1500X1000', frame: '압연', pdfFile: 'data/논슬립1500X1000_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1000_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 129, category: '가로수보호판', title: '논슬립 1500X1000 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1500X1000', frame: '화강석', pdfFile: 'data/논슬립1500X1000_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1000_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1500X1200
+            { id: 130, category: '가로수보호판', title: '논슬립 1500X1200 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1500X1200', frame: '알미늄', pdfFile: 'data/논슬립1500X1200_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1200_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 131, category: '가로수보호판', title: '논슬립 1500X1200 압연틀포함', desc: '도면 (DWG/PDF)', size: '1500X1200', frame: '압연', pdfFile: 'data/논슬립1500X1200_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1200_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 132, category: '가로수보호판', title: '논슬립 1500X1200 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1500X1200', frame: '화강석', pdfFile: 'data/논슬립1500X1200_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1200_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1500X1500
+            { id: 133, category: '가로수보호판', title: '논슬립 1500X1500 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1500X1500', frame: '알미늄', pdfFile: 'data/논슬립1500X1500_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1500_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 134, category: '가로수보호판', title: '논슬립 1500X1500 압연틀포함', desc: '도면 (DWG/PDF)', size: '1500X1500', frame: '압연', pdfFile: 'data/논슬립1500X1500_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1500_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 135, category: '가로수보호판', title: '논슬립 1500X1500 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1500X1500', frame: '화강석', pdfFile: 'data/논슬립1500X1500_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1500X1500_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1800X1200
+            { id: 136, category: '가로수보호판', title: '논슬립 1800X1200 알루미늄틀포함', desc: '도면 (DWG/PDF)', size: '1800X1200', frame: '알루미늄', pdfFile: 'data/논슬립1800X1200_알루미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1200_알루미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 137, category: '가로수보호판', title: '논슬립 1800X1200 압연틀포함', desc: '도면 (DWG/PDF)', size: '1800X1200', frame: '압연', pdfFile: 'data/논슬립1800X1200_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1200_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 138, category: '가로수보호판', title: '논슬립 1800X1200 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1800X1200', frame: '화강석', pdfFile: 'data/논슬립1800X1200_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1200_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1800X1400
+            { id: 139, category: '가로수보호판', title: '논슬립 1800X1400 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1800X1400', frame: '알미늄', pdfFile: 'data/논슬립1800X1400_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1400_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 140, category: '가로수보호판', title: '논슬립 1800X1400 압연틀포함', desc: '도면 (DWG/PDF)', size: '1800X1400', frame: '압연', pdfFile: 'data/논슬립1800X1400_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1400_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 141, category: '가로수보호판', title: '논슬립 1800X1400 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1800X1400', frame: '화강석', pdfFile: 'data/논슬립1800X1400_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1400_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1800X1500
+            { id: 142, category: '가로수보호판', title: '논슬립 1800X1500 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1800X1500', frame: '알미늄', pdfFile: 'data/논슬립1800X1500_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1500_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 143, category: '가로수보호판', title: '논슬립 1800X1500 압연틀포함', desc: '도면 (DWG/PDF)', size: '1800X1500', frame: '압연', pdfFile: 'data/논슬립1800X1500_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1500_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 144, category: '가로수보호판', title: '논슬립 1800X1500 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1800X1500', frame: '화강석', pdfFile: 'data/논슬립1800X1500_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1500_화강석틀포함.dwg', fileType: 'dwg' },
+            // 1800X1800
+            { id: 145, category: '가로수보호판', title: '논슬립 1800X1800 알미늄틀포함', desc: '도면 (DWG/PDF)', size: '1800X1800', frame: '알미늄', pdfFile: 'data/논슬립1800X1800_알미늄틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1800_알미늄틀포함.dwg', fileType: 'dwg' },
+            { id: 146, category: '가로수보호판', title: '논슬립 1800X1800 압연틀포함', desc: '도면 (DWG/PDF)', size: '1800X1800', frame: '압연', pdfFile: 'data/논슬립1800X1800_압연틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1800_압연틀포함.dwg', fileType: 'dwg' },
+            { id: 147, category: '가로수보호판', title: '논슬립 1800X1800 화강석틀포함', desc: '도면 (DWG/PDF)', size: '1800X1800', frame: '화강석', pdfFile: 'data/논슬립1800X1800_화강석틀포함-모형.pdf', downloadFile: 'data/논슬립1800X1800_화강석틀포함.dwg', fileType: 'dwg' },
+        ];
+
+        // ===== 상태 관리 =====
+        let currentCategory = 'all';
+        let currentSearch = '';
+        let currentSort = 'name-asc';
+        let currentPage = 1;
+        const itemsPerPage = 15;
+
+        // ===== 초기화 =====
+        document.addEventListener('DOMContentLoaded', function() {
+            initCategoryTabs();
+            initSearch();
+            initSort();
+            updateCategoryCounts();
+            renderResources();
+            applyResourceLang();
+
+            // 언어 변경 감지
+            const observer = new MutationObserver(() => applyResourceLang());
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        });
+
+        // ===== 다국어 처리 =====
+        function applyResourceLang() {
+            const lang = localStorage.getItem('alpha_lang') || 'ko';
+
+            // 검색 placeholder
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                const placeholder = searchInput.dataset[`placeholder${lang.charAt(0).toUpperCase() + lang.slice(1).replace('-', '')}`]
+                    || searchInput.dataset.placeholderKo;
+                searchInput.placeholder = placeholder;
+            }
+
+            // 정렬 옵션
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) {
+                Array.from(sortSelect.options).forEach(option => {
+                    const text = option.dataset[lang.replace('-', '')] || option.dataset.ko;
+                    if (text) option.textContent = text;
+                });
+            }
+        }
+
+        // ===== 카테고리 탭 =====
+        function initCategoryTabs() {
+            const tabs = document.querySelectorAll('.category-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    currentPage = 1;
+                    renderResources();
+                });
+            });
+        }
+
+        // ===== 카테고리별 개수 업데이트 =====
+        function updateCategoryCounts() {
+            const categories = ['all', '시방서', '가로수보호판', '트렌치'];
+            categories.forEach(cat => {
+                const count = cat === 'all'
+                    ? resourceData.length
+                    : resourceData.filter(r => r.category === cat).length;
+                const tab = document.querySelector(`[data-category="${cat}"] .count`);
+                if (tab) tab.textContent = `(${count})`;
+            });
+        }
+
+        // ===== 검색 =====
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearch');
+
+            searchInput.addEventListener('input', function() {
+                currentSearch = this.value.toLowerCase();
+                clearBtn.classList.toggle('hidden', !this.value);
+                currentPage = 1;
+                renderResources();
+            });
+
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                currentSearch = '';
+                this.classList.add('hidden');
+                currentPage = 1;
+                renderResources();
+            });
+        }
+
+        // ===== 정렬 =====
+        function initSort() {
+            const sortSelect = document.getElementById('sortSelect');
+            sortSelect.addEventListener('change', function() {
+                currentSort = this.value;
+                renderResources();
+            });
+        }
+
+        // ===== 필터링 & 정렬 =====
+        function getFilteredData() {
+            let filtered = [...resourceData];
+
+            // 카테고리 필터
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(r => r.category === currentCategory);
+            }
+
+            // 검색 필터
+            if (currentSearch) {
+                filtered = filtered.filter(r =>
+                    r.title.toLowerCase().includes(currentSearch) ||
+                    r.desc.toLowerCase().includes(currentSearch) ||
+                    r.category.toLowerCase().includes(currentSearch) ||
+                    (r.size && r.size.toLowerCase().includes(currentSearch)) ||
+                    (r.frame && r.frame.toLowerCase().includes(currentSearch))
+                );
+            }
+
+            // 정렬
+            filtered.sort((a, b) => {
+                switch(currentSort) {
+                    case 'name-asc':
+                        return a.title.localeCompare(b.title, 'ko');
+                    case 'name-desc':
+                        return b.title.localeCompare(a.title, 'ko');
+                    case 'size-asc':
+                        return (a.size || '').localeCompare(b.size || '', 'ko');
+                    case 'size-desc':
+                        return (b.size || '').localeCompare(a.size || '', 'ko');
+                    case 'category':
+                        return a.category.localeCompare(b.category, 'ko');
+                    default:
+                        return 0;
+                }
+            });
+
+            return filtered;
+        }
+
+        // ===== 렌더링 =====
+        function renderResources() {
+            const container = document.getElementById('resourceList');
+            const noResults = document.getElementById('noResults');
+            const resultCount = document.getElementById('resultCount');
+
+            const filtered = getFilteredData();
+            const totalPages = Math.ceil(filtered.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const paginatedData = filtered.slice(startIndex, startIndex + itemsPerPage);
+
+            resultCount.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                noResults.classList.remove('hidden');
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            const lang = localStorage.getItem('alpha_lang') || 'ko';
+            const viewText = { ko: '바로보기', en: 'View', ja: '閲覧', 'zh-cn': '查看', 'zh-tw': '查看' };
+            const categoryNames = {
+                '시방서': { ko: '시방서', en: 'Spec', ja: '仕様書', 'zh-cn': '规范', 'zh-tw': '規範' },
+                '가로수보호판': { ko: '가로수보호판', en: 'Tree Protection', ja: '街路樹保護板', 'zh-cn': '行道树保护板', 'zh-tw': '行道樹保護板' },
+                '트렌치': { ko: '트렌치', en: 'Trench', ja: 'トレンチ', 'zh-cn': '排水沟', 'zh-tw': '排水溝' },
+                '논슬립': { ko: '논슬립', en: 'Non-Slip', ja: 'ノンスリップ', 'zh-cn': '防滑', 'zh-tw': '防滑' }
+            };
+
+            // 제목/설명 번역 함수
+            const translateTitle = (title) => {
+                // 시방서 등 고정 제목 번역
+                if (i18n.titles[title]) {
+                    return i18n.titles[title][lang] || title;
+                }
+                // 논슬립 + 크기 + 틀포함 형식 번역
+                if (title.includes('논슬립디자인그레이팅')) {
+                    const size = title.match(/\d+X\d+X?\d*X?\d*T?/)?.[0] || '';
+                    const product = i18n.products['논슬립디자인그레이팅'][lang] || '논슬립디자인그레이팅';
+                    return `${product} ${size}`;
+                }
+                if (title.includes('논슬립') && title.includes('틀포함')) {
+                    const size = title.match(/\d+X\d+/)?.[0] || '';
+                    const frameMatch = title.match(/(알미늄|알루미늄|압연|화강석)/);
+                    const frameKo = frameMatch ? frameMatch[0] : '';
+                    const frame = i18n.frames[frameKo]?.[lang] || frameKo;
+                    const product = i18n.products['논슬립'][lang] || '논슬립';
+                    const withFrame = i18n.products['틀포함'][lang] || '틀포함';
+                    return `${product} ${size} ${frame} ${withFrame}`;
+                }
+                return title;
+            };
+
+            const translateDesc = (desc) => {
+                return i18n.descs[desc]?.[lang] || desc;
+            };
+
+            const translateFrame = (frame) => {
+                return i18n.frames[frame]?.[lang] || frame;
+            };
+
+            container.innerHTML = paginatedData.map((item, index) => {
+                // 파일 타입에 따른 버튼 렌더링
+                let actionButtons = '';
+                if (item.fileType === 'dwg-only') {
+                    // DWG 전용 파일: DWG 뷰어 + DWG 다운로드
+                    actionButtons = `
+                        <button onclick="viewDWG('${item.dwgFile}', '${item.title}')"
+                            class="px-4 md:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2 text-xs md:text-sm">
+                            <i class="fa-solid fa-drafting-compass"></i>
+                            <span>${viewText[lang] || viewText.ko}</span>
+                        </button>
+                        <a href="${item.dwgFile}" download
+                            class="px-4 md:px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-xs md:text-sm">
+                            <i class="fa-solid fa-download"></i>
+                            <span>DWG</span>
+                        </a>
+                    `;
+                } else if (item.fileType === 'dwg') {
+                    // PDF + DWG 파일: PDF 바로보기 + DWG 다운로드
+                    actionButtons = `
+                        <button onclick="viewPDF('${item.pdfFile}', '${item.title}')"
+                            class="px-4 md:px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-xs md:text-sm">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>${viewText[lang] || viewText.ko}</span>
+                        </button>
+                        <a href="${item.downloadFile}" download
+                            class="px-4 md:px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-xs md:text-sm">
+                            <i class="fa-solid fa-download"></i>
+                            <span>DWG</span>
+                        </a>
+                    `;
+                } else {
+                    // PDF 파일: PDF 바로보기 + PDF 다운로드
+                    actionButtons = `
+                        <button onclick="viewPDF('${item.pdfFile}', '${item.title}')"
+                            class="px-4 md:px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-xs md:text-sm">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>${viewText[lang] || viewText.ko}</span>
+                        </button>
+                        <a href="${item.downloadFile}" download
+                            class="px-4 md:px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-xs md:text-sm">
+                            <i class="fa-solid fa-download"></i>
+                            <span>PDF</span>
+                        </a>
+                    `;
+                }
+
+                const iconColor = (item.fileType === 'dwg' || item.fileType === 'dwg-only') ? 'text-blue-400' : 'text-red-400';
+                const iconClass = (item.fileType === 'dwg' || item.fileType === 'dwg-only') ? 'fa-drafting-compass' : 'fa-file-pdf';
+
+                // 번역된 텍스트
+                const translatedTitle = translateTitle(item.title);
+                const translatedDesc = translateDesc(item.desc);
+                const translatedFrame = item.frame ? translateFrame(item.frame) : '';
+
+                return `
+                <div class="resource-item bg-brand-gray p-4 md:p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 hover:border-brand-red transition-colors group" style="animation-delay: ${index * 0.05}s">
+                    <div class="flex items-center gap-4 md:gap-6 w-full md:w-auto">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/5 rounded-lg flex items-center justify-center text-xl md:text-2xl ${iconColor} flex-shrink-0">
+                            <i class="fa-solid ${iconClass}"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                <span class="px-2 py-0.5 bg-brand-red/20 text-brand-red text-xs rounded-full">${categoryNames[item.category]?.[lang] || item.category}</span>
+                                ${item.size ? `<span class="px-2 py-0.5 bg-white/10 text-gray-400 text-xs rounded-full">${item.size}</span>` : ''}
+                                ${translatedFrame ? `<span class="px-2 py-0.5 bg-white/10 text-gray-400 text-xs rounded-full">${translatedFrame}</span>` : ''}
+                            </div>
+                            <h3 class="text-sm md:text-lg font-bold mb-1 group-hover:text-brand-red transition-colors truncate">${translatedTitle}</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">${translatedDesc}</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 w-full md:w-auto justify-end flex-shrink-0">
+                        ${actionButtons}
+                    </div>
+                </div>
+            `}).join('');
+
+            renderPagination(totalPages);
+        }
+
+        // ===== 페이지네이션 =====
+        function renderPagination(totalPages) {
+            const container = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            `;
+
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            if (startPage > 1) {
+                html += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
+                if (startPage > 2) html += `<span class="text-gray-500 px-2">...</span>`;
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) html += `<span class="text-gray-500 px-2">...</span>`;
+                html += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+            }
+
+            html += `
+                <button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            const filtered = getFilteredData();
+            const totalPages = Math.ceil(filtered.length / itemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderResources();
+                document.getElementById('resourceList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // ===== DWG 뷰어 =====
+        function viewDWG(dwgUrl, title) {
+            // 현재 페이지의 절대 URL 생성
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
+            const absoluteUrl = baseUrl + dwgUrl;
+
+            // ShareCAD 온라인 뷰어 사용 (무료 온라인 DWG 뷰어)
+            const viewerUrl = `https://sharecad.org/cadframe/load?url=${encodeURIComponent(absoluteUrl)}`;
+
+            // 새 탭에서 열기
+            window.open(viewerUrl, '_blank', 'noopener,noreferrer');
+        }
+    </script>
 
     <script>
         // PDF.js Worker 설정
