@@ -28,6 +28,69 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="assets/css/laser-text.css">
+
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        /* PDF Modal Styles */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+
+        .pdf-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pdf-modal-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pdf-modal-body {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .pdf-canvas-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 100%;
+        }
+
+        .pdf-canvas {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 
 <body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
@@ -43,8 +106,7 @@
                 class="w-full h-full object-cover opacity-30"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
         <div class="relative z-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-lang-key="resources.page_title">
-                RESOURCES</h1>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="RESOURCES"></h2>
             <p class="text-gray-400" data-lang-key="resources.page_desc">제품 카탈로그 및 기술 자료를 다운로드하세요.</p>
         </div>
     </section>
@@ -132,6 +194,87 @@
                         <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
                     </button>
                 </div>
+
+                <!-- Item 4: 가로수보호일체 시방서 -->
+                <div
+                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors">
+                                [시방서] 가로수보호일체 시방서
+                            </h3>
+                            <p class="text-gray-500 text-sm">조달청 등록 제품 시방서</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="viewPDF('data/가로수보호일체 시방서.pdf', '가로수보호일체 시방서')"
+                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-eye"></i> <span>바로보기</span>
+                        </button>
+                        <a href="data/가로수보호일체 시방서.pdf" download
+                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-download"></i> <span>다운로드</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 5: 빗물받이 시방서 -->
+                <div
+                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors">
+                                [시방서] 빗물받이 시방서
+                            </h3>
+                            <p class="text-gray-500 text-sm">조달청 등록 제품 시방서</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="viewPDF('data/빗물받이 시방서.pdf', '빗물받이 시방서')"
+                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-eye"></i> <span>바로보기</span>
+                        </button>
+                        <a href="data/빗물받이 시방서.pdf" download
+                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-download"></i> <span>다운로드</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 6: 트렌치 시방서 -->
+                <div
+                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div
+                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-red-400">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors">
+                                [시방서] 트렌치 시방서
+                            </h3>
+                            <p class="text-gray-500 text-sm">조달청 등록 제품 시방서</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="viewPDF('data/트렌치 시방서.pdf', '트렌치 시방서')"
+                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-eye"></i> <span>바로보기</span>
+                        </button>
+                        <a href="data/트렌치 시방서.pdf" download
+                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-download"></i> <span>다운로드</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -141,9 +284,85 @@
         <!-- Content injected by components.js -->
     </footer>
 
-    <script src="assets/js/components.js"></script>
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="pdf-modal">
+        <div class="pdf-modal-header">
+            <div class="pdf-modal-controls">
+                <h3 id="pdfTitle" class="text-white text-lg font-bold"></h3>
+            </div>
+            <button onclick="closePDF()" class="text-white hover:text-brand-red transition-colors text-2xl px-4">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        <div class="pdf-modal-body">
+            <div id="pdfCanvasContainer" class="pdf-canvas-container"></div>
+        </div>
+    </div>
 
-    <script src="assets/js/lang.js"></script>
+    <script src="assets/js/components.js?v=2"></script>
+    <script src="assets/js/multilang.js"></script>
+    <script src="assets/js/laser-text.js"></script>
+
+    <script>
+        // PDF.js Worker 설정
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        // PDF 보기 함수
+        async function viewPDF(pdfUrl, title) {
+            const modal = document.getElementById('pdfModal');
+            const titleEl = document.getElementById('pdfTitle');
+            const container = document.getElementById('pdfCanvasContainer');
+
+            // 초기화
+            titleEl.textContent = title;
+            container.innerHTML = '';
+            modal.classList.add('active');
+
+            try {
+                // PDF 로드
+                const loadingTask = pdfjsLib.getDocument(pdfUrl);
+                const pdf = await loadingTask.promise;
+
+                // 모든 페이지 렌더링
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const viewport = page.getViewport({ scale: 1.5 });
+
+                    // 캔버스 생성
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    canvas.className = 'pdf-canvas';
+
+                    container.appendChild(canvas);
+
+                    // 렌더링
+                    const renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    await page.render(renderContext).promise;
+                }
+            } catch (error) {
+                console.error('PDF 로드 실패:', error);
+                container.innerHTML = '<p class="text-white text-center">PDF를 로드하는데 실패했습니다.</p>';
+            }
+        }
+
+        // PDF 모달 닫기
+        function closePDF() {
+            const modal = document.getElementById('pdfModal');
+            modal.classList.remove('active');
+        }
+
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePDF();
+            }
+        });
+    </script>
 </body>
 
 </html>

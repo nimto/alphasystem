@@ -12,9 +12,13 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="icon" href="assets/img/logo.png?v=2" type="image/png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -28,6 +32,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="assets/css/laser-text.css">
 </head>
 
 <body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
@@ -43,76 +48,187 @@
                 class="w-full h-full object-cover opacity-30"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
         <div class="relative z-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-lang-key="quote.page_title">QUOTE</h1>
-            <p class="text-gray-400" data-lang-key="quote.page_desc">빠르고 정확한 견적 서비스를 제공해 드립니다.</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="QUOTE">QUOTE</h2>
+            <p class="text-gray-400 multilang"
+                data-ko="빠르고 정확한 견적 서비스를 제공해 드립니다."
+                data-en="We provide fast and accurate quotation services."
+                data-ja="迅速かつ正確な見積もりサービスを提供いたします。"
+                data-zh-cn="我们提供快速准确的报价服务。"
+                data-zh-tw="我們提供快速準確的報價服務。">빠르고 정확한 견적 서비스를 제공해 드립니다.</p>
         </div>
     </section>
 
     <!-- Quote Form -->
     <section class="py-20 px-6">
-        <div class="container mx-auto max-w-3xl">
-            <div class="bg-brand-gray p-8 md:p-12 rounded-2xl border border-white/5 shadow-2xl">
-                <h2 class="text-2xl font-bold mb-8 text-center" data-lang-key="quote.form_title">견적 문의 양식</h2>
-                <form class="space-y-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="bg-gradient-to-br from-brand-gray to-brand-darker p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
+                <!-- 배경 데코레이션 -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-brand-red/3 rounded-full blur-2xl"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-3 text-center multilang"
+                        data-ko="견적 문의 양식"
+                        data-en="Request a Quote"
+                        data-ja="見積もり依頼フォーム"
+                        data-zh-cn="询价表"
+                        data-zh-tw="詢價表">견적 문의 양식</h2>
+                    <p class="text-gray-400 text-center mb-10 multilang"
+                        data-ko="프로젝트에 대한 정보를 입력해 주시면 빠르게 답변 드리겠습니다."
+                        data-en="Please provide your project details and we'll respond quickly."
+                        data-ja="プロジェクトの詳細をご記入ください。迅速に対応いたします。"
+                        data-zh-cn="请提供您的项目详情，我们将快速回复您。"
+                        data-zh-tw="請提供您的項目詳情，我們將快速回覆您。">프로젝트에 대한 정보를 입력해 주시면 빠르게 답변 드리겠습니다.</p>
+
+                    <form id="quote-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2"
-                                data-lang-key="quote.label_company">회사명</label>
-                            <input type="text"
-                                class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors">
+                            <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                                data-ko="회사명"
+                                data-en="Company Name"
+                                data-ja="会社名"
+                                data-zh-cn="公司名称"
+                                data-zh-tw="公司名稱">회사명</label>
+                            <input type="text" name="company" required
+                                class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2"
-                                data-lang-key="quote.label_name">담당자명</label>
-                            <input type="text"
-                                class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors">
+                            <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                                data-ko="담당자명"
+                                data-en="Contact Person"
+                                data-ja="担当者名"
+                                data-zh-cn="联系人"
+                                data-zh-tw="聯絡人">담당자명</label>
+                            <input type="text" name="name" required
+                                class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2"
-                                data-lang-key="quote.label_email">이메일</label>
-                            <input type="email"
-                                class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors">
+                            <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                                data-ko="이메일"
+                                data-en="Email"
+                                data-ja="メールアドレス"
+                                data-zh-cn="电子邮箱"
+                                data-zh-tw="電子郵箱">이메일</label>
+                            <input type="email" name="email" required
+                                class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2"
-                                data-lang-key="quote.label_phone">연락처</label>
-                            <input type="tel"
-                                class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors">
+                            <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                                data-ko="연락처"
+                                data-en="Phone Number"
+                                data-ja="電話番号"
+                                data-zh-cn="联系电话"
+                                data-zh-tw="聯絡電話">연락처</label>
+                            <input type="tel" name="phone" required
+                                class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2" data-lang-key="quote.label_type">가공 형상</label>
-                        <select
-                            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors">
-                            <option data-lang-key="quote.opt_select">선택해주세요</option>
-                            <option data-lang-key="quote.opt_cutting_plate">레이저 커팅 (평판)</option>
-                            <option data-lang-key="quote.opt_cutting_pipe">레이저 커팅 (파이프)</option>
-                            <option data-lang-key="quote.opt_bending">절곡/벤딩</option>
-                            <option data-lang-key="quote.opt_welding">용접</option>
-                            <option data-lang-key="quote.opt_other">기타</option>
+                        <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                            data-ko="가공 형상"
+                            data-en="Processing Type"
+                            data-ja="加工タイプ"
+                            data-zh-cn="加工类型"
+                            data-zh-tw="加工類型">가공 형상</label>
+                        <select id="service-type" name="service_type" required
+                            class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all">
+                            <option value="" class="multilang"
+                                data-ko="선택해주세요"
+                                data-en="Please Select"
+                                data-ja="選択してください"
+                                data-zh-cn="请选择"
+                                data-zh-tw="請選擇">선택해주세요</option>
+                            <option value="laser-cutting-plate" class="multilang"
+                                data-ko="레이저 커팅 (평판)"
+                                data-en="Laser Cutting (Plate)"
+                                data-ja="レーザーカッティング（平板）"
+                                data-zh-cn="激光切割（平板）"
+                                data-zh-tw="雷射切割（平板）">레이저 커팅 (평판)</option>
+                            <option value="bending" class="multilang"
+                                data-ko="절곡/벤딩"
+                                data-en="Bending"
+                                data-ja="曲げ/ベンディング"
+                                data-zh-cn="折弯"
+                                data-zh-tw="折彎">절곡/벤딩</option>
+                            <option value="welding" class="multilang"
+                                data-ko="용접"
+                                data-en="Welding"
+                                data-ja="溶接"
+                                data-zh-cn="焊接"
+                                data-zh-tw="銲接">용접</option>
+                            <option value="other" class="multilang"
+                                data-ko="기타 (직접 입력)"
+                                data-en="Other (Custom Input)"
+                                data-ja="その他（直接入力）"
+                                data-zh-cn="其他（自定义输入）"
+                                data-zh-tw="其他（自訂輸入）">기타 (직접 입력)</option>
                         </select>
                     </div>
+
+                    <!-- 기타 선택시 나타나는 직접 입력 필드 -->
+                    <div id="custom-service-field" class="hidden">
+                        <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                            data-ko="가공 형상 상세 (직접 입력)"
+                            data-en="Service Details (Custom)"
+                            data-ja="加工タイプ詳細（直接入力）"
+                            data-zh-cn="加工类型详情（自定义）"
+                            data-zh-tw="加工類型詳情（自訂）">가공 형상 상세 (직접 입력)</label>
+                        <input type="text" id="custom-service-input" name="custom_service"
+                            class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all">
+                    </div>
+
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2" data-lang-key="quote.label_message">문의
-                            내용</label>
-                        <textarea rows="5"
-                            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-brand-red focus:outline-none transition-colors"></textarea>
+                        <label class="block text-sm font-medium text-gray-300 mb-2 multilang"
+                            data-ko="문의 내용"
+                            data-en="Message"
+                            data-ja="お問い合わせ内容"
+                            data-zh-cn="询问内容"
+                            data-zh-tw="詢問內容">문의 내용</label>
+                        <textarea name="message" rows="6" required
+                            class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none transition-all resize-none"></textarea>
                     </div>
 
-                    <div class="flex items-center gap-2 text-sm text-gray-500">
-                        <input type="checkbox" id="privacy"
-                            class="rounded border-gray-600 bg-transparent text-brand-red focus:ring-brand-red">
-                        <label for="privacy" data-lang-key="quote.privacy_agree">개인정보 수집 및 이용에 동의합니다.</label>
+                    <div class="flex items-start gap-3 p-4 bg-black/30 rounded-xl border border-white/5">
+                        <input type="checkbox" id="privacy" name="privacy" required
+                            class="mt-1 w-5 h-5 rounded border-gray-600 bg-transparent text-brand-red focus:ring-brand-red focus:ring-offset-0">
+                        <label for="privacy" class="text-sm text-gray-400 multilang cursor-pointer"
+                            data-ko="개인정보 수집 및 이용에 동의합니다."
+                            data-en="I agree to the collection and use of personal information."
+                            data-ja="個人情報の収集と利用に同意します。"
+                            data-zh-cn="我同意收集和使用个人信息。"
+                            data-zh-tw="我同意收集和使用個人資訊。">개인정보 수집 및 이용에 동의합니다.</label>
                     </div>
 
-                    <div class="pt-4 text-center">
+                    <div class="pt-6 text-center space-y-4">
                         <button type="submit"
-                            class="bg-brand-red text-white font-bold py-4 px-12 rounded-full hover:bg-red-700 hover:shadow-glow transition-all">
-                            <i class="fa-solid fa-paper-plane mr-2"></i> <span data-lang-key="quote.btn_submit">견적요청
-                                보내기</span>
+                            class="group bg-brand-red text-white font-bold py-5 px-16 rounded-full hover:bg-red-700 hover:shadow-glow hover:scale-105 transition-all duration-300 relative overflow-hidden">
+                            <span class="relative z-10 flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span class="multilang"
+                                    data-ko="견적요청 보내기"
+                                    data-en="Send Quote Request"
+                                    data-ja="見積もりリクエストを送信"
+                                    data-zh-cn="发送询价请求"
+                                    data-zh-tw="發送詢價請求">견적요청 보내기</span>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </button>
+
+                        <button type="button" onclick="showQuoteHistory()"
+                            class="group bg-transparent text-white font-bold py-4 px-12 rounded-full border-2 border-white/20 hover:border-brand-red hover:bg-brand-red/10 transition-all duration-300">
+                            <span class="flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <span class="multilang"
+                                    data-ko="견적 요청 내역"
+                                    data-en="Quote History"
+                                    data-ja="見積もり履歴"
+                                    data-zh-cn="询价历史"
+                                    data-zh-tw="詢價歷史">견적 요청 내역</span>
+                            </span>
                         </button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </section>
@@ -122,9 +238,783 @@
         <!-- Content injected by components.js -->
     </footer>
 
-    <script src="assets/js/components.js"></script>
+    <script src="assets/js/components.js?v=2"></script>
+    <script src="assets/js/multilang.js"></script>
+    <script src="assets/js/laser-text.js"></script>
 
-    <script src="assets/js/lang.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Quote Form Handler -->
+    <script>
+        // 로컬 스토리지 키
+        const FORM_STORAGE_KEY = 'alpha_quote_form_draft';
+        const HISTORY_STORAGE_KEY = 'alpha_quote_history';
+
+        // 폼 데이터 로컬 스토리지에 저장
+        function saveFormToLocalStorage() {
+            const quoteForm = document.getElementById('quote-form');
+            if (!quoteForm) return;
+
+            const formData = new FormData(quoteForm);
+            const data = Object.fromEntries(formData.entries());
+
+            // 체크박스는 별도 처리
+            data.privacy = document.getElementById('privacy')?.checked || false;
+
+            localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(data));
+            console.log('폼 데이터 자동 저장됨');
+        }
+
+        // 로컬 스토리지에서 폼 데이터 복원
+        function restoreFormFromLocalStorage() {
+            const savedData = localStorage.getItem(FORM_STORAGE_KEY);
+            if (!savedData) return;
+
+            try {
+                const data = JSON.parse(savedData);
+
+                // 각 필드에 값 복원
+                if (data.company) document.querySelector('input[name="company"]').value = data.company;
+                if (data.name) document.querySelector('input[name="name"]').value = data.name;
+                if (data.email) document.querySelector('input[name="email"]').value = data.email;
+                if (data.phone) document.querySelector('input[name="phone"]').value = data.phone;
+                if (data.service_type) document.getElementById('service-type').value = data.service_type;
+                if (data.message) document.querySelector('textarea[name="message"]').value = data.message;
+                if (data.privacy) document.getElementById('privacy').checked = data.privacy;
+
+                // "기타" 선택된 경우 직접 입력 필드 표시 및 복원
+                if (data.service_type === 'other') {
+                    const customField = document.getElementById('custom-service-field');
+                    const customInput = document.getElementById('custom-service-input');
+                    if (customField && customInput) {
+                        customField.classList.remove('hidden');
+                        customInput.setAttribute('required', 'required');
+                        if (data.custom_service) {
+                            customInput.value = data.custom_service;
+                        }
+                    }
+                }
+
+                console.log('저장된 폼 데이터 복원됨');
+
+                // 복원 알림
+                Swal.fire({
+                    icon: 'info',
+                    title: '작성 중인 내용 복원',
+                    text: '이전에 작성하던 견적 요청서를 불러왔습니다.',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    background: '#1a1a1a',
+                    color: '#ffffff',
+                    iconColor: '#FF0000',
+                    customClass: {
+                        popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                        title: 'text-xl font-bold'
+                    }
+                });
+
+            } catch (error) {
+                console.error('폼 데이터 복원 실패:', error);
+            }
+        }
+
+        // 로컬 스토리지 삭제
+        function clearFormLocalStorage() {
+            localStorage.removeItem(FORM_STORAGE_KEY);
+            console.log('폼 데이터 삭제됨');
+        }
+
+        // 견적 내역에 저장
+        function saveQuoteToHistory(data) {
+            try {
+                const history = getQuoteHistory();
+                const quoteRecord = {
+                    ...data,
+                    timestamp: new Date().toISOString(),
+                    id: Date.now() // 고유 ID
+                };
+                history.unshift(quoteRecord); // 최신 순으로 추가
+                localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
+                console.log('견적 내역 저장됨:', quoteRecord);
+            } catch (error) {
+                console.error('견적 내역 저장 실패:', error);
+            }
+        }
+
+        // 견적 내역 조회
+        function getQuoteHistory() {
+            try {
+                const historyJson = localStorage.getItem(HISTORY_STORAGE_KEY);
+                return historyJson ? JSON.parse(historyJson) : [];
+            } catch (error) {
+                console.error('견적 내역 조회 실패:', error);
+                return [];
+            }
+        }
+
+        // 견적 내역 삭제
+        function deleteQuoteFromHistory(id) {
+            try {
+                let history = getQuoteHistory();
+                history = history.filter(item => item.id !== id);
+                localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
+                console.log('견적 내역 삭제됨:', id);
+                return true;
+            } catch (error) {
+                console.error('견적 내역 삭제 실패:', error);
+                return false;
+            }
+        }
+
+        // 견적 내역 UI 표시
+        async function showQuoteHistory() {
+            const history = getQuoteHistory();
+
+            if (history.length === 0) {
+                Swal.fire({
+                    icon: 'info',
+                    title: '견적 요청 내역',
+                    text: '저장된 견적 요청 내역이 없습니다.',
+                    confirmButtonText: '확인',
+                    background: '#1a1a1a',
+                    color: '#ffffff',
+                    confirmButtonColor: '#FF0000',
+                    iconColor: '#FF0000',
+                    customClass: {
+                        popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                        title: 'text-2xl font-bold',
+                        confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-all'
+                    }
+                });
+                return;
+            }
+
+            // 내역 목록 HTML 생성
+            const historyListHTML = history.map((item, index) => {
+                const date = new Date(item.timestamp);
+                const dateStr = date.toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                const serviceTypeText = item.service_type === 'other' ? item.custom_service :
+                    getServiceTypeLabel(item.service_type);
+
+                return `
+                    <div class="quote-history-item" style="
+                        background: #0a0a0a;
+                        border: 1px solid rgba(255,255,255,0.1);
+                        border-radius: 12px;
+                        padding: 20px;
+                        margin-bottom: 15px;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.borderColor='rgba(255,0,0,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                            <div>
+                                <div style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px;">
+                                    ${item.company}
+                                </div>
+                                <div style="font-size: 14px; color: #999;">
+                                    ${dateStr}
+                                </div>
+                            </div>
+                            <button onclick="event.stopPropagation(); deleteQuote(${item.id})" style="
+                                background: rgba(255,0,0,0.1);
+                                color: #FF0000;
+                                border: 1px solid rgba(255,0,0,0.3);
+                                border-radius: 8px;
+                                padding: 6px 12px;
+                                font-size: 13px;
+                                cursor: pointer;
+                                transition: all 0.2s;
+                            " onmouseover="this.style.background='rgba(255,0,0,0.2)'" onmouseout="this.style.background='rgba(255,0,0,0.1)'">
+                                <i class="fa-solid fa-trash"></i> 삭제
+                            </button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 14px;">
+                            <div style="color: #999;">
+                                <span style="color: #666;">담당자:</span> ${item.name}
+                            </div>
+                            <div style="color: #999;">
+                                <span style="color: #666;">가공형상:</span>
+                                <span style="
+                                    display: inline-block;
+                                    background: rgba(255,0,0,0.1);
+                                    color: #FF0000;
+                                    padding: 2px 10px;
+                                    border-radius: 12px;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                ">${serviceTypeText}</span>
+                            </div>
+                        </div>
+                        <div style="
+                            margin-top: 12px;
+                            padding-top: 12px;
+                            border-top: 1px solid rgba(255,255,255,0.05);
+                            color: #999;
+                            font-size: 13px;
+                            line-height: 1.5;
+                            max-height: 40px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        ">
+                            ${item.message.substring(0, 100)}${item.message.length > 100 ? '...' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // SweetAlert2로 내역 표시
+            const result = await Swal.fire({
+                title: '견적 요청 내역',
+                html: `
+                    <div style="max-height: 600px; overflow-y: auto; text-align: left; padding: 10px;">
+                        ${historyListHTML}
+                    </div>
+                `,
+                width: '900px',
+                showConfirmButton: true,
+                confirmButtonText: '닫기',
+                background: '#1a1a1a',
+                color: '#ffffff',
+                confirmButtonColor: '#666',
+                customClass: {
+                    popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                    title: 'text-2xl font-bold mb-4',
+                    htmlContainer: 'text-gray-300',
+                    confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-gray-700 transition-all'
+                },
+                didOpen: () => {
+                    // 각 항목 클릭 시 상세보기
+                    document.querySelectorAll('.quote-history-item').forEach((item, index) => {
+                        item.addEventListener('click', () => {
+                            showQuoteDetail(history[index]);
+                        });
+                    });
+                }
+            });
+        }
+
+        // 견적 상세보기
+        async function showQuoteDetail(item) {
+            const date = new Date(item.timestamp);
+            const dateStr = date.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const serviceTypeText = item.service_type === 'other' ? item.custom_service :
+                getServiceTypeLabel(item.service_type);
+
+            await Swal.fire({
+                title: '견적 요청 상세',
+                html: `
+                    <div style="text-align: left;">
+                        <table style="width: 100%; border-top: 2px solid #FF0000;">
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 16px 0; color: #999; font-size: 14px; font-weight: 600; width: 140px;">전송 일시</td>
+                                <td style="padding: 16px 0; color: #fff; font-size: 14px;">${dateStr}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 16px 0; color: #999; font-size: 14px; font-weight: 600;">회사명</td>
+                                <td style="padding: 16px 0; color: #fff; font-size: 14px;">${item.company}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 16px 0; color: #999; font-size: 14px; font-weight: 600;">담당자명</td>
+                                <td style="padding: 16px 0; color: #fff; font-size: 14px;">${item.name}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 16px 0; color: #999; font-size: 14px; font-weight: 600;">이메일</td>
+                                <td style="padding: 16px 0; color: #fff; font-size: 14px;">
+                                    <a href="mailto:${item.email}" style="color: #FF0000; text-decoration: none;">${item.email}</a>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 16px 0; color: #999; font-size: 14px; font-weight: 600;">연락처</td>
+                                <td style="padding: 16px 0; color: #fff; font-size: 14px;">
+                                    <a href="tel:${item.phone}" style="color: #FF0000; text-decoration: none;">${item.phone}</a>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 16px 0; color: #999; font-size: 14px; font-weight: 600;">가공 형상</td>
+                                <td style="padding: 16px 0; color: #fff; font-size: 14px;">
+                                    <span style="
+                                        display: inline-block;
+                                        background: rgba(255,0,0,0.1);
+                                        color: #FF0000;
+                                        padding: 6px 14px;
+                                        border-radius: 20px;
+                                        font-weight: 600;
+                                    ">${serviceTypeText}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding: 16px 0;">
+                                    <div style="color: #999; font-size: 14px; font-weight: 600; margin-bottom: 12px;">문의 내용</div>
+                                    <div style="
+                                        background: #0a0a0a;
+                                        border: 1px solid rgba(255,255,255,0.1);
+                                        border-radius: 8px;
+                                        padding: 20px;
+                                        color: #fff;
+                                        font-size: 14px;
+                                        line-height: 1.8;
+                                        white-space: pre-wrap;
+                                    ">${item.message}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                `,
+                width: '700px',
+                showCancelButton: true,
+                confirmButtonText: '목록으로',
+                cancelButtonText: '삭제',
+                background: '#1a1a1a',
+                color: '#ffffff',
+                confirmButtonColor: '#666',
+                cancelButtonColor: '#FF0000',
+                customClass: {
+                    popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                    title: 'text-2xl font-bold mb-4',
+                    htmlContainer: 'text-gray-300',
+                    confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-gray-700 transition-all',
+                    cancelButton: 'px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-all'
+                }
+            }).then((result) => {
+                if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+                    // 삭제 버튼 클릭
+                    deleteQuote(item.id);
+                } else if (result.isConfirmed) {
+                    // 목록으로 버튼 클릭
+                    showQuoteHistory();
+                }
+            });
+        }
+
+        // 견적 삭제 (확인 후)
+        async function deleteQuote(id) {
+            const result = await Swal.fire({
+                title: '견적 삭제',
+                text: '이 견적 요청 내역을 삭제하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소',
+                background: '#1a1a1a',
+                color: '#ffffff',
+                confirmButtonColor: '#FF0000',
+                cancelButtonColor: '#666',
+                iconColor: '#FF0000',
+                customClass: {
+                    popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                    title: 'text-2xl font-bold',
+                    confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-all',
+                    cancelButton: 'px-8 py-3 rounded-full font-bold hover:bg-gray-700 transition-all'
+                }
+            });
+
+            if (result.isConfirmed) {
+                const success = deleteQuoteFromHistory(id);
+                if (success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '삭제 완료',
+                        text: '견적 요청 내역이 삭제되었습니다.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        background: '#1a1a1a',
+                        color: '#ffffff',
+                        iconColor: '#FF0000',
+                        customClass: {
+                            popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                        }
+                    }).then(() => {
+                        showQuoteHistory(); // 목록 새로고침
+                    });
+                }
+            }
+        }
+
+        // 가공 형상 레이블 가져오기
+        function getServiceTypeLabel(value) {
+            const labels = {
+                'laser-cutting-plate': '레이저 커팅 (평판)',
+                'bending': '절곡/벤딩',
+                'welding': '용접'
+            };
+            return labels[value] || value;
+        }
+
+        // "기타" 선택시 직접 입력 필드 표시/숨김
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceType = document.getElementById('service-type');
+            const customField = document.getElementById('custom-service-field');
+            const customInput = document.getElementById('custom-service-input');
+
+            // 저장된 폼 데이터 복원
+            restoreFormFromLocalStorage();
+
+            if (serviceType) {
+                serviceType.addEventListener('change', (e) => {
+                    if (e.target.value === 'other') {
+                        customField.classList.remove('hidden');
+                        customInput.setAttribute('required', 'required');
+                    } else {
+                        customField.classList.add('hidden');
+                        customInput.removeAttribute('required');
+                        customInput.value = '';
+                    }
+                    // 변경 시 저장
+                    saveFormToLocalStorage();
+                });
+            }
+
+            // 폼 제출 처리
+            const quoteForm = document.getElementById('quote-form');
+            if (quoteForm) {
+                // 모든 입력 필드에 자동 저장 이벤트 추가
+                const formInputs = quoteForm.querySelectorAll('input, select, textarea');
+                formInputs.forEach(input => {
+                    input.addEventListener('input', saveFormToLocalStorage);
+                    input.addEventListener('change', saveFormToLocalStorage);
+                });
+                quoteForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const formData = new FormData(quoteForm);
+                    const data = Object.fromEntries(formData.entries());
+
+                    // 전문적인 HTML 이메일 템플릿 생성
+                    const emailBody = generateProfessionalEmailTemplate(data);
+
+                    // 여러 수신자에게 이메일 전송
+                    // const recipients = ['alpha@alphasystem.kr', 'nimtos@gmail.com'];
+                    const recipients = ['nimtos@gmail.com'];
+
+                    // 이메일 미리보기 표시
+                    const result = await Swal.fire({
+                        title: '견적 요청서 미리보기',
+                        html: `
+                            <div style="max-height: 500px; overflow-y: auto; text-align: left;">
+                                ${emailBody}
+                            </div>
+                            <p style="margin-top: 20px; color: #999; font-size: 14px;">
+                                수신: ${recipients.join(', ')}
+                            </p>
+                        `,
+                        width: '800px',
+                        showCancelButton: true,
+                        confirmButtonText: '전송하기',
+                        cancelButtonText: '취소',
+                        background: '#1a1a1a',
+                        color: '#ffffff',
+                        confirmButtonColor: '#FF0000',
+                        cancelButtonColor: '#666',
+                        customClass: {
+                            popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                            title: 'text-2xl font-bold mb-4',
+                            htmlContainer: 'text-gray-300',
+                            confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-all',
+                            cancelButton: 'px-8 py-3 rounded-full font-bold hover:bg-gray-700 transition-all'
+                        }
+                    });
+
+                    // 사용자가 취소하면 전송하지 않음
+                    if (!result.isConfirmed) {
+                        return;
+                    }
+
+                    // 전송 중 로딩 표시
+                    Swal.fire({
+                        title: '전송 중...',
+                        html: '견적 요청을 전송하고 있습니다.',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        background: '#1a1a1a',
+                        color: '#ffffff',
+                        customClass: {
+                            popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                        }
+                    });
+
+                    try {
+                        await sendEmail(recipients, emailBody, data);
+
+                        // 견적 내역에 저장
+                        saveQuoteToHistory(data);
+
+                        // 성공 메시지 (SweetAlert2 다크모드)
+                        Swal.fire({
+                            icon: 'success',
+                            title: '견적 요청 완료!',
+                            html: '견적 요청이 성공적으로 전송되었습니다.<br>빠른 시일 내에 답변 드리겠습니다.',
+                            confirmButtonText: '확인',
+                            background: '#1a1a1a',
+                            color: '#ffffff',
+                            confirmButtonColor: '#FF0000',
+                            iconColor: '#FF0000',
+                            customClass: {
+                                popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                                title: 'text-2xl font-bold',
+                                htmlContainer: 'text-gray-300',
+                                confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-all'
+                            }
+                        });
+
+                        // 전송 성공 시에만 폼 초기화 및 로컬 스토리지 삭제
+                        quoteForm.reset();
+                        customField.classList.add('hidden');
+                        clearFormLocalStorage();
+                    } catch (error) {
+                        console.error('Email send error:', error);
+
+                        // 에러 메시지 (SweetAlert2 다크모드)
+                        Swal.fire({
+                            icon: 'error',
+                            title: '전송 실패',
+                            text: '전송 중 오류가 발생했습니다. 다시 시도해 주세요.',
+                            confirmButtonText: '확인',
+                            background: '#1a1a1a',
+                            color: '#ffffff',
+                            confirmButtonColor: '#FF0000',
+                            iconColor: '#FF0000',
+                            customClass: {
+                                popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                                title: 'text-2xl font-bold',
+                                htmlContainer: 'text-gray-300',
+                                confirmButton: 'px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-all'
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        // 전문적인 HTML 이메일 템플릿 생성
+        function generateProfessionalEmailTemplate(data) {
+            const serviceTypeText = data.service_type === 'other' ? data.custom_service :
+                document.querySelector(`#service-type option[value="${data.service_type}"]`).textContent;
+
+            return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; padding: 40px 0;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%); padding: 40px 30px; text-align: center;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: 1px;">
+                                ALPHA LASER
+                            </h1>
+                            <p style="margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 400;">
+                                견적 요청서
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <p style="margin: 0 0 30px 0; color: #333; font-size: 16px; line-height: 1.6;">
+                                새로운 견적 요청이 도착했습니다.
+                            </p>
+
+                            <!-- Info Table -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top: 2px solid #FF0000;">
+                                <tr>
+                                    <td style="padding: 20px 0; border-bottom: 1px solid #e5e5e5;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="140" style="color: #666; font-size: 14px; font-weight: 600;">회사명</td>
+                                                <td style="color: #333; font-size: 14px;">${data.company}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px 0; border-bottom: 1px solid #e5e5e5;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="140" style="color: #666; font-size: 14px; font-weight: 600;">담당자명</td>
+                                                <td style="color: #333; font-size: 14px;">${data.name}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px 0; border-bottom: 1px solid #e5e5e5;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="140" style="color: #666; font-size: 14px; font-weight: 600;">이메일</td>
+                                                <td style="color: #333; font-size: 14px;"><a href="mailto:${data.email}" style="color: #FF0000; text-decoration: none;">${data.email}</a></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px 0; border-bottom: 1px solid #e5e5e5;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="140" style="color: #666; font-size: 14px; font-weight: 600;">연락처</td>
+                                                <td style="color: #333; font-size: 14px;"><a href="tel:${data.phone}" style="color: #FF0000; text-decoration: none;">${data.phone}</a></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px 0; border-bottom: 1px solid #e5e5e5;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="140" style="color: #666; font-size: 14px; font-weight: 600;">가공 형상</td>
+                                                <td style="color: #333; font-size: 14px;">
+                                                    <span style="display: inline-block; padding: 6px 14px; background-color: #FFF0F0; color: #FF0000; border-radius: 20px; font-weight: 600;">
+                                                        ${serviceTypeText}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px 0;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td colspan="2" style="color: #666; font-size: 14px; font-weight: 600; padding-bottom: 12px;">문의 내용</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="color: #333; font-size: 14px; line-height: 1.8; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+                                                    ${data.message.replace(/\n/g, '<br>')}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f9f9f9; padding: 30px; text-align: center; border-top: 1px solid #e5e5e5;">
+                            <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">
+                                © 2025 ALPHA LASER. All rights reserved.
+                            </p>
+                            <p style="margin: 0; color: #999; font-size: 12px;">
+                                이 이메일은 alphasystem.kr의 견적 요청 시스템에서 자동으로 발송되었습니다.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+            `;
+        }
+
+        // EmailJS 초기화
+        (function() {
+            // EmailJS Public Key - https://dashboard.emailjs.com/admin/account 에서 확인
+            const EMAILJS_PUBLIC_KEY = '6a1nObFUPtlrjTlHQ';  // Public Key (올바른 값)
+
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init(EMAILJS_PUBLIC_KEY);
+                console.log('EmailJS 초기화 완료');
+            } else {
+                console.warn('EmailJS 라이브러리가 로드되지 않았습니다.');
+            }
+        })();
+
+        // 이메일 전송 (EmailJS 사용)
+        async function sendEmail(recipients, emailBody, data) {
+            const serviceTypeText = data.service_type === 'other' ? data.custom_service :
+                document.querySelector(`#service-type option[value="${data.service_type}"]`).textContent;
+
+            // EmailJS 설정값
+            const EMAILJS_SERVICE_ID = 'service_kggbcdq';  // Gmail 서비스 ID (nimtos@gmail.com)
+            const EMAILJS_TEMPLATE_ID = 'template_yt2hjrq';  // 템플릿 ID
+            const EMAILJS_PUBLIC_KEY = '6a1nObFUPtlrjTlHQ';  // Public Key (올바른 값)
+
+            // EmailJS가 설정되지 않았으면 mailto 사용
+            if (EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
+                EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID' ||
+                EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' ||
+                typeof emailjs === 'undefined') {
+                console.warn('EmailJS가 설정되지 않았습니다. mailto 링크를 사용합니다.');
+
+                const subject = `[ALPHA LASER] 견적 요청 - ${data.company}`;
+                const plainText = `
+회사명: ${data.company}
+담당자: ${data.name}
+이메일: ${data.email}
+연락처: ${data.phone}
+가공형상: ${serviceTypeText}
+문의내용:
+${data.message}
+                `.trim();
+
+                const mailtoLink = `mailto:${recipients.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(plainText)}`;
+                window.location.href = mailtoLink;
+                return Promise.resolve();
+            }
+
+            // EmailJS로 실제 이메일 전송
+            try {
+                // 각 수신자에게 개별 전송
+                const sendPromises = recipients.map(recipient => {
+                    const templateParams = {
+                        to_email: recipient,
+                        from_name: data.name,
+                        from_company: data.company,
+                        from_email: data.email,
+                        from_phone: data.phone,
+                        service_type: serviceTypeText,
+                        message: data.message,
+                        reply_to: data.email,
+
+                        // HTML 이메일 본문
+                        html_body: emailBody
+                    };
+
+                    return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+                });
+
+                await Promise.all(sendPromises);
+                console.log('이메일 전송 성공:', recipients);
+                return Promise.resolve();
+
+            } catch (error) {
+                console.error('EmailJS 전송 실패:', error);
+                throw error;
+            }
+        }
+    </script>
 </body>
 
 </html>

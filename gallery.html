@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 사진 - 알파레이저시스템</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#0a0a0a',
+                        'brand-red': '#FF0000'
+                    },
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 개선된 그리드 레이아웃 - 가변 크기 항목 지원 */
+        #galleryGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            padding: 0;
+        }
+
+        /* Featured 아이템 (큰 사이즈) */
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* 갤러리 아이템 - Glassmorphism 디자인 */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Glassmorphism 효과 */
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            /* 그라데이션 테두리 */
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+            /* 3D transform 준비 */
+            transform-style: preserve-3d;
+            perspective: 1000px;
+
+            /* Stagger 애니메이션을 위한 초기 상태 */
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Stagger 애니메이션 딜레이 */
+        .gallery-item:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .gallery-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .gallery-item:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery-item:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .gallery-item:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .gallery-item:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .gallery-item:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
+        .gallery-item:nth-child(9) {
+            animation-delay: 0.45s;
+        }
+
+        .gallery-item:nth-child(10) {
+            animation-delay: 0.5s;
+        }
+
+        .gallery-item:nth-child(n+11) {
+            animation-delay: 0.55s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 그라데이션 테두리 애니메이션 효과 */
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg,
+                    rgba(255, 0, 0, 0.3),
+                    rgba(255, 100, 100, 0.1),
+                    rgba(255, 0, 0, 0.3));
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        /* Hover 상태 */
+        .gallery-item:hover {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow:
+                0 20px 40px rgba(255, 0, 0, 0.25),
+                0 0 0 1px rgba(255, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+            animation: rotateBorder 3s linear infinite;
+        }
+
+        @keyframes rotateBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 이미지 스타일 */
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: contain;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            background: transparent;
+            filter: brightness(0.95);
+        }
+
+        .gallery-item.featured img {
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1) contrast(1.05);
+            transform: scale(1.05);
+        }
+
+        /* 오버레이 개선 */
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.95) 0%,
+                    rgba(0, 0, 0, 0.85) 50%,
+                    transparent 100%);
+            padding: 24px 16px 16px;
+            transform: translateY(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* View 버튼 개선 */
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 4px 15px rgba(255, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .view-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow:
+                0 8px 25px rgba(255, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #FF1a1a 0%, #DD0000 100%);
+        }
+
+        .view-btn i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .view-btn:hover i {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .view-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Lightbox 개선 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.97);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox img {
+            max-width: 92%;
+            max-height: 87vh;
+            object-fit: contain;
+            border-radius: 8px;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 25px;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 0, 0, 0.3);
+            animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-close:hover {
+            color: #FF0000;
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 35px;
+            color: white;
+            padding: 18px 22px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(255, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 0, 0, 0.9);
+            border-color: rgba(255, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 25px;
+        }
+
+        .lightbox-next {
+            right: 25px;
+        }
+
+        .lightbox-counter {
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            #galleryGrid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 16px;
+            }
+
+            .gallery-item.featured {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .gallery-item.featured img {
+                height: 280px;
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #galleryGrid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .lightbox-nav {
+                padding: 12px 16px;
+                font-size: 24px;
+            }
+
+            .lightbox-prev {
+                left: 15px;
+            }
+
+            .lightbox-next {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #galleryGrid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .gallery-item {
+                border-radius: 12px;
+            }
+
+            .gallery-item img {
+                height: 250px;
+            }
+        }
+
+        /* 스크롤 애니메이션 준비 */
+        .gallery-item.lazy-load {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .gallery-item.lazy-load.visible {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/laser-text.css">
+</head>
+
+<body class="min-h-screen">
+    <header id="header-container"></header>
+
+    <!-- Page Header -->
+    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="assets/img/hero-bg.jpg" class="w-full h-full object-cover opacity-30">
+        </div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="PRODUCT GALLERY"
+                data-lang-key="gallery.page_title">
+                PRODUCT GALLERY
+            </h1>
+            <p class="text-gray-400" data-lang-key="gallery.page_desc">알파레이저 제품 가공 사례</p>
+        </div>
+    </section>
+
+    <main class="py-16">
+        <div class="gallery-container px-5">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="galleryGrid"></div>
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
+        <img id="lightbox-img" src="" alt="">
+        <span class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</span>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10"></footer>
+
+    <script src="assets/js/components.js?v=2"></script>
+    <script src="assets/js/multilang.js"></script>
+
+
+    <script>
+        const totalImages = 58; // 실제 이미지 개수로 수정
+        const galleryGrid = document.getElementById('galleryGrid');
+
+        // Featured 아이템 인덱스 설정 (큰아이템으로 표시할 이미지)
+        const featuredIndices = [5, 12, 23, 34, 45]; // 특정 제품을 featured로
+
+        for (let i = 1; i <= totalImages; i++) {
+            const num = String(i).padStart(2, '0');
+            const item = document.createElement('div');
+
+            // Featured 클래스 추가
+            const isFeatured = featuredIndices.includes(i);
+            item.className = isFeatured ? 'gallery-item featured' : 'gallery-item';
+
+            item.onclick = function () { openLightbox(i - 1); };
+            item.innerHTML = `
+                <img src="products/product_${num}.jpg" alt="제품 ${i}" loading="lazy" 
+                     onerror="this.onerror=null; this.src='assets/img/products/product_${num}.jpg';">
+                <div class="gallery-overlay">
+                    <div class="view-btn">
+                        <i class="fas fa-search-plus"></i>
+                        <span>보기</span>
+                    </div>
+                </div>
+            `;
+            galleryGrid.appendChild(item);
+        }
+
+        const images = [];
+        for (let i = 1; i <= totalImages; i++) {
+            const num = String(i).padStart(2, '0');
+            images.push({ src: `products/product_${num}.jpg`, alt: `제품 ${i}` });
+        }
+
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            history.pushState({ lightboxOpen: true }, '');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            if (history.state && history.state.lightboxOpen) history.back();
+        }
+
+        function changeImage(direction) {
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = images[currentIndex].src;
+            img.alt = images[currentIndex].alt;
+            img.onerror = function () {
+                this.onerror = null;
+                this.src = 'assets/img/' + images[currentIndex].src;
+            };
+            counter.textContent = `${currentIndex + 1} / ${images.length}`;
+        }
+
+        window.addEventListener('popstate', function () {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                history.pushState({ lightboxOpen: false }, '');
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft') changeImage(-1);
+            else if (e.key === 'ArrowRight') changeImage(1);
+        });
+
+        document.getElementById('lightbox').addEventListener('click', function (e) {
+            if (e.target === this) closeLightbox();
+        });
+    </script>
+    <script src="assets/js/laser-text.js"></script>
+</body>
+
+</html>

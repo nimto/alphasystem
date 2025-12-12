@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조달사업 | ALPHA LASER - 알파레이저</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="알파레이저 조달사업 안내. 공공기관 프로젝트, 조달청 등록 제품 및 납품 이력을 확인하세요.">
+    <meta name="keywords" content="알파레이저, 조달사업, 조달청, 공공기관, 납품이력, 가로수보호판">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://alphasystem.kr/procurement.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="조달사업 | ALPHA LASER">
+    <meta property="og:description" content="조달청 등록 제품 및 공공기관 납품 이력. 친환경 가로수 보호 제품.">
+    <meta property="og:image" content="https://alphasystem.kr/assets/img/og-image.jpg">
+    <meta property="og:url" content="https://alphasystem.kr/procurement.html">
+
+    <!-- Language Alternates -->
+    <link rel="alternate" hreflang="ko" href="https://alphasystem.kr/procurement.html?lang=ko">
+    <link rel="alternate" hreflang="en" href="https://alphasystem.kr/procurement.html?lang=en">
+    <link rel="alternate" hreflang="ja" href="https://alphasystem.kr/procurement.html?lang=ja">
+    <link rel="alternate" hreflang="x-default" href="https://alphasystem.kr/procurement.html">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/logo.png?v=2" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'brand-red': '#FF0000', 'brand-dark': '#0a0a0a', 'brand-darker': '#050505', 'brand-gray': '#1a1a1a', },
+                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], montserrat: ['Montserrat', 'sans-serif'], },
+                    boxShadow: { 'glow': '0 0 20px rgba(255, 0, 0, 0.5)', }
+                }
+            }
+        }
+    </script>
+
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        /* PDF Modal Styles */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+
+        .pdf-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pdf-modal-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pdf-modal-body {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            background-color: #2a2a2a;
+        }
+
+        .pdf-sidebar {
+            width: 200px;
+            background-color: #1a1a1a;
+            border-right: 1px solid #333;
+            overflow-y: auto;
+            padding: 10px;
+            /* Hide scrollbar */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        .pdf-sidebar::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .pdf-sidebar h3 {
+            color: #dc2626;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        .page-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-list-item {
+            padding: 5px;
+            margin-bottom: 10px;
+            background-color: #2a2a2a;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .page-list-item:hover {
+            background-color: #333;
+            border-color: #dc2626;
+        }
+
+        .page-list-item.active {
+            background-color: #dc2626;
+            border-color: #dc2626;
+        }
+
+        .page-thumbnail {
+            width: 100%;
+            height: auto;
+            border: 1px solid #444;
+            border-radius: 2px;
+            background: white;
+        }
+
+        .page-number {
+            font-size: 11px;
+            color: #999;
+            font-weight: normal;
+        }
+
+        .page-list-item.active .page-number {
+            color: white;
+            font-weight: bold;
+        }
+
+        .pdf-content {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            /* Hide scrollbar */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        .pdf-content::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .pdf-canvas-container {
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        #pdfCanvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .pdf-btn {
+            background-color: #dc2626;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+
+        .pdf-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        .pdf-btn:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        .close-pdf {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-pdf:hover {
+            color: #dc2626;
+        }
+
+        .page-info {
+            color: white;
+            font-size: 12px;
+        }
+
+        .product-feature {
+            transition: all 0.3s ease;
+        }
+
+        .product-feature:hover {
+            transform: translateX(5px);
+        }
+
+        .zoom-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-sidebar {
+                width: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/laser-text.css">
+</head>
+
+<body class="bg-brand-dark text-white">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="assets/img/hero-bg.jpg" class="w-full h-full object-cover opacity-30">
+        </div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+        <div class="relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="PROCUREMENT"
+                data-lang-key="procurement.page_title">PROCUREMENT
+            </h2>
+            <p class="text-gray-400" data-lang-key="procurement.page_desc">공공기관 프로젝트 및 납품 이력</p>
+        </div>
+    </section>
+
+    <!-- 조달청 등록 안내 -->
+    <section class="py-16 bg-brand-darker px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="bg-brand-red/10 border border-brand-red/30 rounded-2xl p-8">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <i class="fa-solid fa-certificate text-4xl text-brand-red"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3" data-lang-key="procurement.cert_title">조달청 우수제품 인증</h3>
+                        <p class="text-gray-300 mb-4" data-lang-key="procurement.cert_desc">
+                            조달청 우수제품으로 인증받아 공공기관 및 지자체에 안정적으로 제품을 공급하고 있습니다.
+                            친환경 가로수 보호 제품으로 도심 녹화 및 환경 개선에 기여하고 있습니다.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-brand-red/20 text-brand-red rounded-lg text-sm font-bold">
+                                <i class="fa-solid fa-check mr-2"></i><span data-lang-key="procurement.cert_badge1">조달청
+                                    등록 업체</span>
+                            </span>
+                            <span class="px-4 py-2 bg-brand-red/20 text-brand-red rounded-lg text-sm font-bold">
+                                <i class="fa-solid fa-check mr-2"></i><span data-lang-key="procurement.cert_badge2">친환경
+                                    인증</span>
+                            </span>
+                            <span class="px-4 py-2 bg-brand-red/20 text-brand-red rounded-lg text-sm font-bold">
+                                <i class="fa-solid fa-check mr-2"></i><span data-lang-key="procurement.cert_badge3">품질
+                                    보증</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details Grid -->
+    <section class="py-24 bg-brand-dark px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4" data-lang-key="procurement.products_title">조달 등록 제품</h2>
+                <p class="text-gray-400" data-lang-key="procurement.products_desc">친환경 가로수 보호 제품</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Product 1: 가로수보호판 -->
+                <div
+                    class="bg-brand-gray border border-white/10 rounded-2xl p-8 hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-20 h-20 bg-brand-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-tree text-3xl text-brand-red"></i>
+                        </div>
+                        <div>
+                            <span class="px-3 py-1 bg-brand-red text-white text-xs font-bold rounded-full">01</span>
+                            <h3 class="text-2xl font-bold mt-2">친환경 가로수 보호판</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        도심 내 가로수를 보호하고 미관을 향상시키는 친환경 보호판입니다.
+                        재활용 가능한 소재로 제작되어 환경 보호에 기여합니다.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-red mt-1"></i>
+                            <div>
+                                <p class="font-semibold">친환경 소재</p>
+                                <p class="text-sm text-gray-400">재활용 가능한 친환경 소재 사용</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-red mt-1"></i>
+                            <div>
+                                <p class="font-semibold">내구성 우수</p>
+                                <p class="text-sm text-gray-400">장기간 사용 가능한 견고한 구조</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-red mt-1"></i>
+                            <div>
+                                <p class="font-semibold">설치 용이</p>
+                                <p class="text-sm text-gray-400">간편한 설치 및 유지보수</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 페이지 번호: data-pdf-page 값을 수정하세요 (예: data-pdf-page="10") -->
+                    <button data-pdf-page="3" onclick="openPDFViewer(this.getAttribute('data-pdf-page'))"
+                        class="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>제품 카탈로그 보기</span>
+                    </button>
+                </div>
+
+                <!-- Product 2: 투수화단 -->
+                <div
+                    class="bg-brand-gray border border-white/10 rounded-2xl p-8 hover:border-green-600/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-20 h-20 bg-green-600/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-seedling text-3xl text-green-500"></i>
+                        </div>
+                        <div>
+                            <span class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full">02</span>
+                            <h3 class="text-2xl font-bold mt-2">가로정원 투수화단</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        빗물을 흡수하여 도심 열섬 현상을 완화하고 녹화를 촉진하는 친환경 화단입니다.
+                        자연 배수 시스템으로 침수를 방지합니다.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">빗물 투수 기능</p>
+                                <p class="text-sm text-gray-400">자연 배수 시스템으로 침수 방지</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">도심 녹화</p>
+                                <p class="text-sm text-gray-400">도심 속 녹색 공간 조성</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">환경 개선</p>
+                                <p class="text-sm text-gray-400">미세먼지 저감 및 공기 정화</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 페이지 번호: data-pdf-page 값을 수정하세요 (예: data-pdf-page="10") -->
+                    <button data-pdf-page="21" onclick="openPDFViewer(this.getAttribute('data-pdf-page'))"
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>제품 카탈로그 보기</span>
+                    </button>
+                </div>
+
+                <!-- Product 3: 화단엣지 -->
+                <div
+                    class="bg-brand-gray border border-white/10 rounded-2xl p-8 hover:border-blue-600/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-20 h-20 bg-blue-600/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-border-all text-3xl text-blue-500"></i>
+                        </div>
+                        <div>
+                            <span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">03</span>
+                            <h3 class="text-2xl font-bold mt-2">화단엣지</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        화단의 경계를 명확히하여 미관을 향상시키고 관리를 용이하게 합니다.
+                        세련된 디자인으로 도시 경관을 개선합니다.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">화단 경계 정리</p>
+                                <p class="text-sm text-gray-400">명확한 구획으로 깔끔한 정리</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">미관 향상</p>
+                                <p class="text-sm text-gray-400">세련된 디자인으로 경관 개선</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">유지보수 편리</p>
+                                <p class="text-sm text-gray-400">관리가 쉬운 내구성 소재</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 페이지 번호: data-pdf-page 값을 수정하세요 (예: data-pdf-page="10") -->
+                    <button data-pdf-page="27" onclick="openPDFViewer(this.getAttribute('data-pdf-page'))"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>제품 카탈로그 보기</span>
+                    </button>
+                </div>
+
+                <!-- Product 4: 세이프가드 -->
+                <div
+                    class="bg-brand-gray border border-white/10 rounded-2xl p-8 hover:border-orange-600/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-20 h-20 bg-orange-600/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-shield-halved text-3xl text-orange-500"></i>
+                        </div>
+                        <div>
+                            <span class="px-3 py-1 bg-orange-600 text-white text-xs font-bold rounded-full">04</span>
+                            <h3 class="text-2xl font-bold mt-2">세이프가드 화분대</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        보행자와 차량을 안전하게 분리하는 화분 겸 안전 시설물입니다.
+                        충격에 강한 튼튼한 설계로 안전을 확보합니다.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-orange-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">안전 보호 기능</p>
+                                <p class="text-sm text-gray-400">보행자 안전 확보 및 차량 진입 방지</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-orange-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">견고한 구조</p>
+                                <p class="text-sm text-gray-400">충격에 강한 튼튼한 설계</p>
+                            </div>
+                        </div>
+                        <div class="product-feature flex items-start gap-3">
+                            <i class="fa-solid fa-check text-orange-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold">다양한 사이즈</p>
+                                <p class="text-sm text-gray-400">설치 환경에 맞는 맞춤형 제작</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF 페이지 번호: data-pdf-page 값을 수정하세요 (예: data-pdf-page="10") -->
+                    <button data-pdf-page="31" onclick="openPDFViewer(this.getAttribute('data-pdf-page'))"
+                        class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>제품 카탈로그 보기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Construction Cases -->
+    <section class="py-24 bg-brand-darker px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4" data-lang-key="procurement.history_title">시공 사례</h2>
+                <p class="text-gray-400 mb-8">다양한 공공기관 및 지자체 납품 실적</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="bg-brand-gray border border-white/10 rounded-2xl p-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-building text-2xl text-brand-red"></i>
+                            </div>
+                            <p class="text-3xl font-bold text-brand-red mb-1">100+</p>
+                            <p class="text-gray-400 text-sm">프로젝트</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-handshake text-2xl text-brand-red"></i>
+                            </div>
+                            <p class="text-3xl font-bold text-brand-red mb-1">50+</p>
+                            <p class="text-gray-400 text-sm">협력 기관</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-calendar-check text-2xl text-brand-red"></i>
+                            </div>
+                            <p class="text-3xl font-bold text-brand-red mb-1">10년+</p>
+                            <p class="text-gray-400 text-sm">경력</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-award text-2xl text-brand-red"></i>
+                            </div>
+                            <p class="text-3xl font-bold text-brand-red mb-1">100%</p>
+                            <p class="text-gray-400 text-sm">품질 보증</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <!-- PDF 페이지 번호: data-pdf-page 값을 수정하세요 (예: data-pdf-page="10") -->
+                        <button data-pdf-page="37" onclick="openPDFViewer(this.getAttribute('data-pdf-page'))"
+                            class="bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition-colors inline-flex items-center gap-2">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>시공 사례 카탈로그 보기</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="text-center">
+                <p class="text-gray-400 mb-6">더 자세한 납품 이력이 궁금하신가요?</p>
+                <a href="quote.html"
+                    class="inline-block bg-white hover:bg-gray-200 text-brand-dark font-bold py-3 px-8 rounded-lg transition-colors">
+                    <span data-lang-key="common.btn_contact">문의하기</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="pdf-modal">
+        <div class="pdf-modal-header">
+            <div class="page-info">
+                <span id="currentPage">1</span> / <span id="totalPages">-</span>
+            </div>
+            <div class="pdf-modal-controls">
+                <div class="zoom-controls">
+                    <button class="pdf-btn" onclick="zoomOut()"><i class="fa-solid fa-search-minus"></i></button>
+                    <button class="pdf-btn" onclick="zoomIn()"><i class="fa-solid fa-search-plus"></i></button>
+                    <button class="pdf-btn" onclick="resetZoom()"><i class="fa-solid fa-compress"></i></button>
+                </div>
+                <button class="pdf-btn" onclick="prevPage()"><i class="fa-solid fa-chevron-left"></i> 이전</button>
+                <button class="pdf-btn" onclick="nextPage()">다음 <i class="fa-solid fa-chevron-right"></i></button>
+                <button class="pdf-btn" onclick="downloadPDF()"><i class="fa-solid fa-download"></i> 다운로드</button>
+            </div>
+            <span class="close-pdf" onclick="closePDFViewer()">&times;</span>
+        </div>
+        <div class="pdf-modal-body">
+            <!-- Left Sidebar with Page List -->
+            <div class="pdf-sidebar">
+                <h3><i class="fa-solid fa-list"></i> 페이지 목록</h3>
+                <ul class="page-list" id="pageList">
+                    <!-- Pages will be dynamically generated -->
+                </ul>
+            </div>
+            <!-- Main PDF Content Area -->
+            <div class="pdf-content">
+                <div class="pdf-canvas-container">
+                    <canvas id="pdfCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10"></footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/components.js?v=2"></script>
+    <script src="assets/js/multilang.js"></script>
+
+    <script>
+        // PDF.js configuration
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        let scale = 1.5;
+
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function showLoading() {
+            const container = document.querySelector('.pdf-canvas-container');
+            if (!document.getElementById('pdfLoading')) {
+                const loading = document.createElement('div');
+                loading.id = 'pdfLoading';
+                loading.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#dc2626;font-size:24px;';
+                loading.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 로딩 중...';
+                container.style.position = 'relative';
+                container.appendChild(loading);
+            }
+        }
+
+        function hideLoading() {
+            const loading = document.getElementById('pdfLoading');
+            if (loading) {
+                loading.remove();
+            }
+        }
+
+        function generatePageList() {
+            if (!pdfDoc) return;
+
+            const pageList = document.getElementById('pageList');
+            pageList.innerHTML = '';
+
+            // Show loading message
+            const loadingItem = document.createElement('li');
+            loadingItem.textContent = '썸네일 생성 중...';
+            loadingItem.style.color = '#999';
+            loadingItem.style.textAlign = 'center';
+            loadingItem.style.padding = '10px';
+            pageList.appendChild(loadingItem);
+
+            // Generate thumbnails for all pages
+            for (let i = 1; i <= pdfDoc.numPages; i++) {
+                (function (pageNumber) {
+                    pdfDoc.getPage(pageNumber).then(function (page) {
+                        const li = document.createElement('li');
+                        li.className = 'page-list-item';
+
+                        // Create thumbnail canvas
+                        const thumbnailCanvas = document.createElement('canvas');
+                        thumbnailCanvas.className = 'page-thumbnail';
+
+                        const thumbnailScale = 0.3; // Small scale for thumbnail
+                        const viewport = page.getViewport({ scale: thumbnailScale });
+
+                        thumbnailCanvas.width = viewport.width;
+                        thumbnailCanvas.height = viewport.height;
+
+                        const thumbnailCtx = thumbnailCanvas.getContext('2d');
+
+                        const renderContext = {
+                            canvasContext: thumbnailCtx,
+                            viewport: viewport
+                        };
+
+                        page.render(renderContext).promise.then(function () {
+                            // Remove loading message on first thumbnail
+                            if (pageNumber === 1 && loadingItem.parentNode) {
+                                loadingItem.remove();
+                            }
+                        });
+
+                        // Create page number label
+                        const pageLabel = document.createElement('div');
+                        pageLabel.className = 'page-number';
+                        pageLabel.textContent = `페이지 ${pageNumber}`;
+
+                        li.appendChild(thumbnailCanvas);
+                        li.appendChild(pageLabel);
+
+                        li.onclick = function () {
+                            pageNum = pageNumber;
+                            queueRenderPage(pageNum);
+                            updatePageList();
+                        };
+
+                        if (pageNumber === pageNum) {
+                            li.classList.add('active');
+                        }
+
+                        pageList.appendChild(li);
+                    });
+                })(i);
+            }
+        }
+
+        function updatePageList() {
+            const items = document.querySelectorAll('.page-list-item');
+            items.forEach((item, index) => {
+                if (index + 1 === pageNum) {
+                    item.classList.add('active');
+                    // Scroll to active item
+                    item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function renderPage(num) {
+            if (!pdfDoc) {
+                console.error('PDF document not loaded');
+                return;
+            }
+
+            pageRendering = true;
+            showLoading();
+
+            pdfDoc.getPage(num).then(function (page) {
+                const viewport = page.getViewport({ scale: scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                const renderTask = page.render(renderContext);
+                renderTask.promise.then(function () {
+                    pageRendering = false;
+                    hideLoading();
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                }).catch(function (error) {
+                    console.error('Error rendering page:', error);
+                    hideLoading();
+                    pageRendering = false;
+                    alert('페이지 렌더링 중 오류가 발생했습니다: ' + error.message);
+                });
+            }).catch(function (error) {
+                console.error('Error getting page:', error);
+                hideLoading();
+                pageRendering = false;
+                alert('페이지를 가져오는 중 오류가 발생했습니다: ' + error.message);
+            });
+
+            document.getElementById('currentPage').textContent = num;
+            updatePageList();
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        function prevPage() {
+            if (!pdfDoc || pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        function nextPage() {
+            if (!pdfDoc || pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        function zoomIn() {
+            scale += 0.25;
+            queueRenderPage(pageNum);
+        }
+
+        function zoomOut() {
+            if (scale <= 0.5) return;
+            scale -= 0.25;
+            queueRenderPage(pageNum);
+        }
+
+        function resetZoom() {
+            scale = 1.5;
+            queueRenderPage(pageNum);
+        }
+
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = 'data/2026_AGT_Product_01.pdf';
+            link.download = '2026_AGT_Product_01.pdf';
+            link.click();
+        }
+
+        let modalOpenHistoryLength = 0;
+
+        function openPDFViewer(productPage) {
+            // Convert to integer
+            const targetPage = parseInt(productPage, 10);
+
+            if (isNaN(targetPage) || targetPage < 1) {
+                alert('유효하지 않은 페이지 번호입니다.');
+                return;
+            }
+
+            const pdfPath = 'data/2026_AGT_Product_01.pdf';
+
+            // Show modal immediately
+            const modal = document.getElementById('pdfModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showLoading();
+
+            // Add TWO history states to block back button
+            // This ensures that when user presses back, we can intercept and stay on page
+            history.pushState({ modalOpen: true, timestamp: Date.now() }, '');
+            history.pushState({ modalOpen: true, timestamp: Date.now() }, '');
+            modalOpenHistoryLength = 2;
+
+            // Load PDF if not already loaded
+            if (!pdfDoc) {
+                const loadingTask = pdfjsLib.getDocument(pdfPath);
+                loadingTask.promise.then(function (pdf) {
+                    pdfDoc = pdf;
+                    document.getElementById('totalPages').textContent = pdf.numPages;
+
+                    // Generate page list
+                    generatePageList();
+
+                    // Validate page number
+                    if (targetPage > pdf.numPages) {
+                        alert(`유효하지 않은 페이지 번호입니다. PDF는 ${pdf.numPages} 페이지입니다.`);
+                        pageNum = 1;
+                    } else {
+                        pageNum = targetPage;
+                    }
+
+                    renderPage(pageNum);
+                }).catch(function (error) {
+                    console.error('Error loading PDF:', error);
+                    hideLoading();
+                    closePDFViewer();
+                    alert('PDF 파일을 로드하는 중 오류가 발생했습니다.\n\n오류 내용: ' + error.message + '\n\n파일 경로를 확인해주세요: ' + pdfPath);
+                });
+            } else {
+                // PDF already loaded, just navigate to page
+                if (targetPage > pdfDoc.numPages) {
+                    alert(`유효하지 않은 페이지 번호입니다. PDF는 ${pdfDoc.numPages} 페이지입니다.`);
+                    pageNum = 1;
+                } else {
+                    pageNum = targetPage;
+                }
+                renderPage(pageNum);
+            }
+        }
+
+        function closePDFViewer() {
+            const modal = document.getElementById('pdfModal');
+
+            if (!modal.classList.contains('active')) {
+                return; // Already closed
+            }
+
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            // Remove the history states we added
+            if (modalOpenHistoryLength > 0) {
+                for (let i = 0; i < modalOpenHistoryLength; i++) {
+                    history.back();
+                }
+                modalOpenHistoryLength = 0;
+            }
+        }
+
+        // Handle browser back button
+        window.addEventListener('popstate', function (event) {
+            const modal = document.getElementById('pdfModal');
+
+            // If modal is open, prevent going back by going forward again
+            if (modal.classList.contains('active')) {
+                // Close the modal
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+
+                // Immediately go forward to cancel the back navigation
+                history.pushState({ modalOpen: false }, '');
+                modalOpenHistoryLength = 0;
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            const modal = document.getElementById('pdfModal');
+            if (!modal.classList.contains('active')) return;
+
+            if (event.key === 'Escape') {
+                closePDFViewer();
+            }
+            if (event.key === 'ArrowLeft') {
+                prevPage();
+            }
+            if (event.key === 'ArrowRight') {
+                nextPage();
+            }
+        });
+    </script>
+    <script src="assets/js/laser-text.js"></script>
+</body>
+
+</html>

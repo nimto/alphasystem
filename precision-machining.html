@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초정밀 가공 | ALPHA LASER - 알파레이저</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/logo.png?v=2" type="image/png">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'brand-red': '#FF0000', 'brand-dark': '#0a0a0a', 'brand-darker': '#050505', 'brand-gray': '#1a1a1a', },
+                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], montserrat: ['Montserrat', 'sans-serif'], },
+                    boxShadow: { 'glow': '0 0 20px rgba(255, 0, 0, 0.5)', }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/laser-text.css">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
+
+    <!-- Header (Dynamic) -->
+    <header id="header-container" class="fixed top-0 left-0 w-full z-50 bg-black/95 border-b border-white/5">
+        <!-- Content injected by components.js -->
+    </header>
+
+    <!-- Page Header -->
+    <section class="relative h-[50vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-brand-red/10 to-transparent"></div>
+        </div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+        <div class="relative z-10 text-center px-6">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 font-montserrat" data-laser-text="PRECISION MACHINING">
+                PRECISION MACHINING
+            </h1>
+            <p class="text-2xl md:text-3xl font-bold text-white mb-4">초정밀 가공</p>
+            <p class="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed">
+                알파레이저는 고정밀 금속가공 및 맞춤 제작 서비스를 제공하기 위해<br>
+                세계적 수준의 장비들을 체계적으로 구축하고 있습니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- 소개 섹션 -->
+    <section class="py-16 px-6 bg-gradient-to-b from-brand-dark to-brand-darker">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <p class="text-xl text-gray-300 leading-relaxed">
+                    정밀 절단, 절곡, 용접, 탭 가공까지 모든 공정에 최적화된 설비를 갖추어<br>
+                    다양한 산업군에서 요구하는 <span class="text-brand-red font-bold">고품질 제품</span>을 안정적으로 생산하고 있습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 장비 소개 섹션 -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+
+            <!-- 레이저 가공 장비 -->
+            <div class="mb-24">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-800 rounded-2xl flex items-center justify-center text-3xl">
+                        <i class="fa-solid fa-industry"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2">레이저 가공 장비</h2>
+                        <p class="text-gray-400">독일 TRUMPF(트럼프) 레이저 가공기 2대</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-gray to-brand-darker p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        저희 알파레이저의 핵심 장비인 독일 TRUMPF 레이저 가공기는
+                        세계적으로 인정받는 최고급 정밀 장비로, 복잡한 형상의 절단에서도
+                        탁월한 품질과 균일한 절삭면을 구현합니다.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        고출력 파이버 레이저 기술과 효율적인 에너지 전달 시스템을 기반으로
+                        철, 스테인리스, 알루미늄 등 다양한 금속 소재를 고속·정밀하게 절단할 수 있으며,
+                        대량 생산부터 소량 다품종 제작까지 안정적으로 대응이 가능합니다.
+                    </p>
+                    <button onclick="showEquipmentDetail('laser')"
+                        class="group bg-brand-red text-white font-bold py-4 px-8 rounded-full hover:bg-red-700 hover:shadow-glow transition-all duration-300 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>장비 상세 정보</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 절곡 장비 -->
+            <div class="mb-24">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center text-3xl">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2">절곡 장비</h2>
+                        <p class="text-gray-400">일본 AMADA(아마다) 절곡기 3대</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-gray to-brand-darker p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        아마다 절곡기는 정밀한 벤딩 능력과 안정성을 가진 장비로 유명합니다.
+                        최신 NC 제어 시스템을 기반으로 복잡한 형상의 절곡도
+                        높은 정확도로 재현할 수 있어 반복 생산에서도 편차가 거의 없습니다.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        저희는 대형 패널부터 미세한 부품까지 다양한 절곡 작업을
+                        고품질로 대응할 수 있는 능력과 경험을 보유하고 있습니다.
+                    </p>
+                    <button onclick="showEquipmentDetail('bending')"
+                        class="group bg-brand-red text-white font-bold py-4 px-8 rounded-full hover:bg-red-700 hover:shadow-glow transition-all duration-300 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>장비 상세 정보</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 펀칭 / 압축 가공 장비 -->
+            <div class="mb-24">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-600 to-green-800 rounded-2xl flex items-center justify-center text-3xl">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2">펀칭 / 압축 가공 장비</h2>
+                        <p class="text-gray-400">펨프레스기 1대</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-gray to-brand-darker p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        고속 반복 펀칭에 최적화된 펨프레스기는
+                        정밀한 구멍 가공 및 패턴 작업에 강점을 가지고 있습니다.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        규격화된 제품뿐 아니라 고객 요청에 맞춘 맞춤형 금형 작업에도 활용되며,
+                        복잡한 펀칭 작업을 빠르고 일관된 품질로 처리할 수 있습니다.
+                    </p>
+                    <button onclick="showEquipmentDetail('punching')"
+                        class="group bg-brand-red text-white font-bold py-4 px-8 rounded-full hover:bg-red-700 hover:shadow-glow transition-all duration-300 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>장비 상세 정보</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 탭 가공 장비 -->
+            <div class="mb-24">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-2xl flex items-center justify-center text-3xl">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2">탭 가공 장비</h2>
+                        <p class="text-gray-400">자동 탭핑머신 5대</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-gray to-brand-darker p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        각종 산업용 제품 제조에 필수적인 탭 가공을
+                        신속하고 정확하게 수행할 수 있는 자동 탭핑머신을 다수 보유하고 있습니다.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        정밀한 나사 가공이 필요한 부품을 안정적으로 생산할 수 있어
+                        대량 생산 시에도 높은 생산성을 유지합니다.
+                    </p>
+                    <button onclick="showEquipmentDetail('tapping')"
+                        class="group bg-brand-red text-white font-bold py-4 px-8 rounded-full hover:bg-red-700 hover:shadow-glow transition-all duration-300 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>장비 상세 정보</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 용접 장비 -->
+            <div class="mb-24">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center text-3xl">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2">용접 장비</h2>
+                        <p class="text-gray-400">CO₂ / 알곤(TIG) / 파이버 용접기 등 다수</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-gray to-brand-darker p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        용접 공정은 제품의 내구성과 완성도를 결정하는 핵심 공정입니다.
+                        알파레이저는 다양한 용접 방식에 대응하기 위해
+                        CO₂ 용접, 알곤(TIG) 용접, 파이버 용접 설비를 모두 자체 보유하고 있으며,
+                        소재 종류와 두께, 제품 용도에 맞춰 최적의 용접 솔루션을 제공합니다.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        특히 숙련된 사내 용접 전문 인력과 함께
+                        정밀 용접·디자인 용접·강구조물 용접까지
+                        폭넓은 용접 퀄리티를 구현할 수 있습니다.
+                    </p>
+                    <button onclick="showEquipmentDetail('welding')"
+                        class="group bg-brand-red text-white font-bold py-4 px-8 rounded-full hover:bg-red-700 hover:shadow-glow transition-all duration-300 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>장비 상세 정보</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 결론 섹션 -->
+    <section class="py-20 px-6 bg-gradient-to-br from-brand-red/10 to-transparent">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold mb-8">설비력 기반의 높은 품질과 납기 대응력</h2>
+            <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                알파레이저는 레이저 절단, 절곡, 펀칭, 탭, 용접 등<br>
+                모든 공정을 자체 설비로 처리함으로써<br>
+                <span class="text-brand-red font-bold">높은 품질 관리·신속한 생산·유연한 대응력</span>을 확보하고 있습니다.
+            </p>
+            <p class="text-lg text-gray-400 leading-relaxed">
+                앞으로도 지속적인 설비 업그레이드와 기술력 강화를 통해<br>
+                고객 요구에 부합하는 최상의 제품을 제공하기 위해 노력하겠습니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer (Dynamic) -->
+    <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10">
+        <!-- Content injected by components.js -->
+    </footer>
+
+    <script src="assets/js/components.js?v=2"></script>
+    <script src="assets/js/multilang.js"></script>
+    <script src="assets/js/laser-text.js"></script>
+
+    <script>
+        // 장비 상세 정보 표시
+        function showEquipmentDetail(type) {
+            const details = {
+                laser: {
+                    title: '독일 TRUMPF 레이저 가공기',
+                    icon: 'fa-industry',
+                    color: '#dc2626',
+                    html: `
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold mb-4 text-white">주요 특징</h4>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-red-500 mt-1"></i>
+                                    <span><strong>고출력 파이버 레이저:</strong> 철, 스테인리스, 알루미늄 고속 절단</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-red-500 mt-1"></i>
+                                    <span><strong>정밀 절삭:</strong> 복잡한 형상도 탁월한 품질로 구현</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-red-500 mt-1"></i>
+                                    <span><strong>유연한 생산:</strong> 대량 생산부터 소량 다품종 제작까지 대응</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-red-500 mt-1"></i>
+                                    <span><strong>에너지 효율:</strong> 효율적인 에너지 전달 시스템</span>
+                                </li>
+                            </ul>
+                            <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                                <p class="text-sm text-gray-300">
+                                    <i class="fa-solid fa-info-circle text-red-500 mr-2"></i>
+                                    세계적으로 인정받는 최고급 정밀 장비로 균일한 절삭면을 보장합니다.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                bending: {
+                    title: '일본 AMADA 절곡기',
+                    icon: 'fa-cube',
+                    color: '#2563eb',
+                    html: `
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold mb-4 text-white">주요 특징</h4>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                                    <span><strong>NC 제어 시스템:</strong> 복잡한 형상도 높은 정확도로 재현</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                                    <span><strong>반복 정밀도:</strong> 반복 생산에서도 편차 최소화</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                                    <span><strong>다양한 대응:</strong> 대형 패널부터 미세 부품까지</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                                    <span><strong>풍부한 경험:</strong> 고품질 절곡 작업 능력 보유</span>
+                                </li>
+                            </ul>
+                            <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                                <p class="text-sm text-gray-300">
+                                    <i class="fa-solid fa-info-circle text-blue-500 mr-2"></i>
+                                    정밀한 벤딩 능력과 안정성으로 유명한 장비입니다.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                punching: {
+                    title: '펨프레스기',
+                    icon: 'fa-gears',
+                    color: '#16a34a',
+                    html: `
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold mb-4 text-white">주요 특징</h4>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span><strong>고속 펀칭:</strong> 빠른 반복 펀칭 작업 최적화</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span><strong>정밀 가공:</strong> 정밀한 구멍 가공 및 패턴 작업</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span><strong>맞춤형 금형:</strong> 고객 요청에 맞춘 금형 작업 가능</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span><strong>일관된 품질:</strong> 복잡한 펀칭도 균일한 품질 유지</span>
+                                </li>
+                            </ul>
+                            <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                                <p class="text-sm text-gray-300">
+                                    <i class="fa-solid fa-info-circle text-green-500 mr-2"></i>
+                                    규격화 제품과 맞춤형 금형 작업 모두 대응 가능합니다.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                tapping: {
+                    title: '자동 탭핑머신',
+                    icon: 'fa-screwdriver-wrench',
+                    color: '#ca8a04',
+                    html: `
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold mb-4 text-white">주요 특징</h4>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-yellow-500 mt-1"></i>
+                                    <span><strong>자동화 시스템:</strong> 신속하고 정확한 탭 가공</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-yellow-500 mt-1"></i>
+                                    <span><strong>정밀 나사 가공:</strong> 필수 부품 안정적 생산</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-yellow-500 mt-1"></i>
+                                    <span><strong>대량 생산:</strong> 높은 생산성 유지</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-yellow-500 mt-1"></i>
+                                    <span><strong>다수 보유:</strong> 5대 설비로 안정적 공급</span>
+                                </li>
+                            </ul>
+                            <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                                <p class="text-sm text-gray-300">
+                                    <i class="fa-solid fa-info-circle text-yellow-500 mr-2"></i>
+                                    산업용 제품 제조에 필수적인 탭 가공 전문 장비입니다.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                welding: {
+                    title: '용접 장비',
+                    icon: 'fa-fire',
+                    color: '#9333ea',
+                    html: `
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold mb-4 text-white">주요 특징</h4>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-purple-500 mt-1"></i>
+                                    <span><strong>다양한 방식:</strong> CO₂, 알곤(TIG), 파이버 용접 모두 보유</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-purple-500 mt-1"></i>
+                                    <span><strong>최적 솔루션:</strong> 소재와 용도에 맞춘 용접 방식 선택</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-purple-500 mt-1"></i>
+                                    <span><strong>전문 인력:</strong> 숙련된 사내 용접 전문가</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-purple-500 mt-1"></i>
+                                    <span><strong>폭넓은 퀄리티:</strong> 정밀/디자인/강구조물 용접까지</span>
+                                </li>
+                            </ul>
+                            <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+                                <p class="text-sm text-gray-300">
+                                    <i class="fa-solid fa-info-circle text-purple-500 mr-2"></i>
+                                    제품의 내구성과 완성도를 결정하는 핵심 공정입니다.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+
+            const detail = details[type];
+            if (!detail) return;
+
+            Swal.fire({
+                title: detail.title,
+                html: detail.html,
+                width: '700px',
+                showCloseButton: true,
+                showConfirmButton: false,
+                background: '#1a1a1a',
+                color: '#ffffff',
+                customClass: {
+                    popup: 'border border-white/10 rounded-2xl shadow-2xl',
+                    title: 'text-3xl font-bold mb-6 flex items-center justify-center gap-3',
+                    htmlContainer: 'text-gray-300',
+                    closeButton: 'text-white hover:text-brand-red text-2xl'
+                },
+                didOpen: () => {
+                    const titleEl = Swal.getTitle();
+                    titleEl.innerHTML = `
+                        <i class="fa-solid ${detail.icon}" style="color: ${detail.color}"></i>
+                        <span>${detail.title}</span>
+                    `;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,366 @@
+/* 레이저 글씨 효과 */
+.laser-writing-box {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    margin: 0 auto 20px;
+}
+
+/* H1용 더 큰 컨테이너 */
+h1 .laser-writing-box {
+    max-width: 1400px;
+}
+
+/* H2용 컨테이너 */
+h2 .laser-writing-box {
+    max-width: 1200px;
+}
+
+/* H3~H6용 컨테이너 */
+h3 .laser-writing-box {
+    max-width: 1000px;
+}
+
+h4 .laser-writing-box {
+    max-width: 900px;
+}
+
+h5 .laser-writing-box {
+    max-width: 800px;
+}
+
+h6 .laser-writing-box {
+    max-width: 700px;
+}
+
+svg.writing-svg {
+    width: 100%;
+    height: auto;
+    max-height: none;
+}
+
+/* H1용 더 큰 SVG 높이 */
+h1 svg.writing-svg {
+    max-height: none;
+    min-height: 200px;
+}
+
+/* H2용 SVG 높이 */
+h2 svg.writing-svg {
+    max-height: none;
+    min-height: 150px;
+}
+
+/* H3~H6용 SVG 높이 */
+h3 svg.writing-svg {
+    max-height: none;
+    min-height: 120px;
+}
+
+h4 svg.writing-svg {
+    max-height: none;
+    min-height: 100px;
+}
+
+h5 svg.writing-svg {
+    max-height: none;
+    min-height: 80px;
+}
+
+h6 svg.writing-svg {
+    max-height: none;
+    min-height: 70px;
+}
+
+/* H1~H6 크기별 폰트 사이즈 */
+h1 svg text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 90px;
+}
+
+h2 svg text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 75px;
+}
+
+h3 svg text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 60px;
+}
+
+h4 svg text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+h5 svg text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+}
+
+h6 svg text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 35px;
+}
+
+/* 빨간색 외곽선 (각인 패스) */
+.text-stroke tspan {
+    fill: none;
+    stroke: var(--laser-red, #FF0000);
+    stroke-width: 2px;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: writeStroke 0.4s linear forwards;
+    filter: drop-shadow(0 0 10px var(--laser-red, #FF0000));
+    opacity: 0;
+}
+
+/* 글자 순서 딜레이 */
+.text-stroke tspan:nth-child(1) { animation-delay: 0s; opacity: 1; }
+.text-stroke tspan:nth-child(2) { animation-delay: 0.3s; }
+.text-stroke tspan:nth-child(3) { animation-delay: 0.6s; }
+.text-stroke tspan:nth-child(4) { animation-delay: 0.9s; }
+.text-stroke tspan:nth-child(5) { animation-delay: 1.2s; }
+.text-stroke tspan:nth-child(6) { animation-delay: 1.5s; }
+.text-stroke tspan:nth-child(7) { animation-delay: 1.5s; }
+.text-stroke tspan:nth-child(8) { animation-delay: 1.8s; }
+.text-stroke tspan:nth-child(9) { animation-delay: 2.1s; }
+.text-stroke tspan:nth-child(10) { animation-delay: 2.4s; }
+.text-stroke tspan:nth-child(11) { animation-delay: 2.7s; }
+.text-stroke tspan:nth-child(12) { animation-delay: 3.0s; }
+.text-stroke tspan:nth-child(13) { animation-delay: 3.3s; }
+.text-stroke tspan:nth-child(14) { animation-delay: 3.6s; }
+.text-stroke tspan:nth-child(15) { animation-delay: 3.9s; }
+.text-stroke tspan:nth-child(16) { animation-delay: 4.2s; }
+.text-stroke tspan:nth-child(17) { animation-delay: 4.5s; }
+.text-stroke tspan:nth-child(18) { animation-delay: 4.8s; }
+.text-stroke tspan:nth-child(19) { animation-delay: 5.1s; }
+.text-stroke tspan:nth-child(20) { animation-delay: 5.4s; }
+
+/* 흰색 채우기 (레이저 빔 따라가는 효과) */
+.text-white-fill {
+    fill: #ffffff;
+    opacity: 0;
+    filter: drop-shadow(0 0 20px #ffffff) drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+    clip-path: inset(0 100% 0 0);
+    animation: whiteTrail 3s linear forwards, fadeOutWhite 0.5s linear 3s forwards;
+}
+
+/* 빨간색 최종 채우기 */
+.text-fill {
+    fill: var(--laser-red, #FF0000);
+    opacity: 0;
+    animation: fillText 1s linear 3.2s forwards;
+    filter: drop-shadow(0 0 30px var(--laser-red, #FF0000));
+}
+
+/* 세로 레이저 빔 */
+.scanning-laser {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 4px;
+    height: 50%;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        #ffffff 20%,
+        #ffffff 80%,
+        transparent 100%);
+    box-shadow:
+        0 0 10px #ffffff,
+        0 0 20px var(--laser-red, #FF0000),
+        0 0 40px var(--laser-orange, #FF4500),
+        0 0 60px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    z-index: 5;
+    animation: scanMove 3s linear forwards;
+}
+
+@keyframes writeStroke {
+    to {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+/* 흰색이 왼쪽에서 오른쪽으로 채워지는 효과 */
+@keyframes whiteTrail {
+    0% {
+        opacity: 1;
+        clip-path: inset(0 100% 0 0);
+    }
+    5% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* 흰색이 사라지는 효과 */
+@keyframes fadeOutWhite {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* 빨간색 채우기 */
+@keyframes fillText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 레이저 빔 이동 */
+@keyframes scanMove {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    h1 svg text {
+        font-size: 180px;
+    }
+    h2 svg text {
+        font-size: 135px;
+    }
+    h3 svg text {
+        font-size: 104px;
+    }
+    h4 svg text {
+        font-size: 86px;
+    }
+    h5 svg text {
+        font-size: 63px;
+    }
+    h6 svg text {
+        font-size: 50px;
+    }
+    svg.writing-svg {
+        max-height: none;
+    }
+    h1 .laser-writing-box {
+        max-width: 1800px;
+    }
+    h1 svg.writing-svg {
+        max-height: none;
+        min-height: 180px;
+    }
+    h2 .laser-writing-box {
+        max-width: 1600px;
+    }
+    h2 svg.writing-svg {
+        max-height: none;
+        min-height: 140px;
+    }
+    h3 .laser-writing-box {
+        max-width: 1500px;
+    }
+    h3 svg.writing-svg {
+        max-height: 240px;
+    }
+    h4 .laser-writing-box {
+        max-width: 1400px;
+    }
+    h4 svg.writing-svg {
+        max-height: 210px;
+    }
+    h5 .laser-writing-box {
+        max-width: 1300px;
+    }
+    h5 svg.writing-svg {
+        max-height: 175px;
+    }
+    h6 .laser-writing-box {
+        max-width: 1200px;
+    }
+    h6 svg.writing-svg {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 svg text {
+        font-size: 160px;
+    }
+    h2 svg text {
+        font-size: 120px;
+    }
+    h3 svg text {
+        font-size: 92px;
+    }
+    h4 svg text {
+        font-size: 76px;
+    }
+    h5 svg text {
+        font-size: 56px;
+    }
+    h6 svg text {
+        font-size: 44px;
+    }
+    svg.writing-svg {
+        max-height: none;
+    }
+    h1 .laser-writing-box {
+        max-width: 100%;
+    }
+    h1 svg.writing-svg {
+        max-height: none;
+        min-height: 160px;
+    }
+    h2 .laser-writing-box {
+        max-width: 100%;
+    }
+    h2 svg.writing-svg {
+        max-height: none;
+        min-height: 120px;
+    }
+    h3 .laser-writing-box {
+        max-width: 100%;
+    }
+    h3 svg.writing-svg {
+        max-height: 220px;
+    }
+    h4 .laser-writing-box {
+        max-width: 100%;
+    }
+    h4 svg.writing-svg {
+        max-height: 190px;
+    }
+    h5 .laser-writing-box {
+        max-width: 100%;
+    }
+    h5 svg.writing-svg {
+        max-height: 160px;
+    }
+    h6 .laser-writing-box {
+        max-width: 100%;
+    }
+    h6 svg.writing-svg {
+        max-height: 135px;
+    }
+}
