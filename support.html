@@ -33,6 +33,30 @@
         }
     </script>
     <link rel="stylesheet" href="assets/css/laser-text.css">
+
+    <style>
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
 
 <body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden">
@@ -43,59 +67,372 @@
     </header>
 
     <!-- Page Header -->
-    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden pt-20">
-        <div class="absolute inset-0 z-0"><img src="assets/img/hero-bg.jpg"
-                class="w-full h-full object-cover opacity-30"></div>
+    <section class="relative h-[50vh] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-gradient-to-br from-brand-red/10 to-transparent"></div>
+        </div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
-        <div class="relative z-10 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="SUPPORT"
-                data-lang-key="nav_support">SUPPORT</h2>
-            <p class="text-gray-400" data-lang-key="support.page_desc">고객님의 성공을 위해 언제나 열려있습니다.</p>
+        <div class="relative z-10 text-center px-6">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6 font-montserrat" data-laser-text="SUPPORT">SUPPORT</h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-4 multilang"
+                data-ko="고객 지원"
+                data-en="Customer Support"
+                data-ja="カスタマーサポート"
+                data-zh-cn="客户支持"
+                data-zh-tw="客戶支持">고객 지원</p>
+            <p class="text-gray-400 max-w-2xl mx-auto multilang"
+                data-ko="고객님의 성공을 위해 언제나 열려있습니다."
+                data-en="Always open for your success."
+                data-ja="お客様の成功のために常にオープンしています。"
+                data-zh-cn="始终为您的成功而开放。"
+                data-zh-tw="始終為您的成功而開放。">고객님의 성공을 위해 언제나 열려있습니다.</p>
         </div>
     </section>
 
-    <!-- Support Content (FAQ/Contact Info) -->
-    <section class="py-20 px-6">
-        <div class="container mx-auto max-w-4xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <!-- Info Card -->
-                <div class="bg-brand-gray p-8 rounded-xl border border-white/5">
-                    <h3 class="text-xl font-bold mb-6 text-brand-red"><i class="fa-solid fa-headset mr-2"></i> <span
-                            data-lang-key="support.contact_center">고객상담센터</span>
-                    </h3>
-                    <p class="text-3xl font-bold mb-2">0505-540-3000</p>
-                    <p class="text-gray-400 text-sm" data-lang-key="support.contact_time">평일 09:00 - 18:00 (주말/공휴일 휴무)
-                    </p>
+    <!-- Contact Cards -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Phone Card -->
+                <div class="group bg-gradient-to-br from-brand-gray to-brand-darker p-8 rounded-2xl border border-white/10 hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-brand-red/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors text-brand-red text-3xl">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 multilang"
+                        data-ko="전화 문의"
+                        data-en="Phone Inquiry"
+                        data-ja="電話お問い合わせ"
+                        data-zh-cn="电话咨询"
+                        data-zh-tw="電話諮詢">전화 문의</h3>
+                    <a href="tel:0505-540-3000" class="text-3xl font-bold mb-3 block group-hover:text-brand-red transition-colors">
+                        0505-540-3000
+                    </a>
+                    <p class="text-gray-400 text-sm multilang"
+                        data-ko="평일 09:00 - 18:00<br>(주말/공휴일 휴무)"
+                        data-en="Weekdays 09:00 - 18:00<br>(Closed on weekends/holidays)"
+                        data-ja="平日 09:00 - 18:00<br>(週末・祝日休業)"
+                        data-zh-cn="工作日 09:00 - 18:00<br>(周末/节假日休息)"
+                        data-zh-tw="工作日 09:00 - 18:00<br>(週末/節假日休息)">평일 09:00 - 18:00<br>(주말/공휴일 휴무)</p>
                 </div>
+
                 <!-- Email Card -->
-                <div class="bg-brand-gray p-8 rounded-xl border border-white/5">
-                    <h3 class="text-xl font-bold mb-6 text-brand-red"><i class="fa-solid fa-envelope mr-2"></i> <span
-                            data-lang-key="support.email_inquiry">이메일 문의</span>
-                    </h3>
-                    <p class="text-2xl font-bold mb-2">alpha@alphasystem.kr</p>
-                    <p class="text-gray-400 text-sm" data-lang-key="support.email_desc">24시간 접수 가능 (순차 답변)</p>
+                <div class="group bg-gradient-to-br from-brand-gray to-brand-darker p-8 rounded-2xl border border-white/10 hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-brand-red/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors text-brand-red text-3xl">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 multilang"
+                        data-ko="이메일 문의"
+                        data-en="Email Inquiry"
+                        data-ja="メールお問い合わせ"
+                        data-zh-cn="电子邮件咨询"
+                        data-zh-tw="電子郵件諮詢">이메일 문의</h3>
+                    <a href="mailto:alpha@alphasystem.kr" class="text-2xl font-bold mb-3 block group-hover:text-brand-red transition-colors break-all">
+                        alpha@alphasystem.kr
+                    </a>
+                    <p class="text-gray-400 text-sm multilang"
+                        data-ko="24시간 접수 가능<br>(순차 답변 드립니다)"
+                        data-en="24/7 Submission<br>(Sequential response)"
+                        data-ja="24時間受付可能<br>(順次回答いたします)"
+                        data-zh-cn="24小时接受<br>(按顺序回复)"
+                        data-zh-tw="24小時接受<br>(按順序回覆)">24시간 접수 가능<br>(순차 답변 드립니다)</p>
+                </div>
+
+                <!-- Quote Card -->
+                <div class="group bg-gradient-to-br from-brand-red/20 to-brand-darker p-8 rounded-2xl border border-brand-red/30 hover:border-brand-red transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-brand-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors text-brand-red text-3xl">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 multilang"
+                        data-ko="온라인 견적"
+                        data-en="Online Quote"
+                        data-ja="オンライン見積もり"
+                        data-zh-cn="在线报价"
+                        data-zh-tw="線上報價">온라인 견적</h3>
+                    <a href="quote.html" class="inline-block bg-brand-red text-white font-bold py-3 px-8 rounded-full hover:bg-red-700 transition-all text-sm">
+                        <span class="multilang"
+                            data-ko="견적 요청하기"
+                            data-en="Request Quote"
+                            data-ja="見積もりを依頼する"
+                            data-zh-cn="请求报价"
+                            data-zh-tw="請求報價">견적 요청하기</span>
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <p class="text-gray-400 text-sm mt-4 multilang"
+                        data-ko="빠른 견적을 위해<br>온라인 폼을 이용하세요"
+                        data-en="Use online form<br>for quick quote"
+                        data-ja="迅速な見積もりのために<br>オンラインフォームをご利用ください"
+                        data-zh-cn="使用在线表格<br>快速报价"
+                        data-zh-tw="使用線上表格<br>快速報價">빠른 견적을 위해<br>온라인 폼을 이용하세요</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- FAQ List (Simple) -->
-            <div>
-                <h2 class="text-2xl font-bold mb-6" data-lang-key="support.faq_title">자주 묻는 질문</h2>
-                <div class="space-y-4">
-                    <div
-                        class="bg-brand-gray p-6 rounded-lg border border-white/5 hover:border-brand-red transition-colors cursor-pointer">
-                        <div class="flex justify-between items-center">
-                            <h4 class="font-bold" data-lang-key="support.faq_1_q">Q. 견적은 얼마나 걸리나요?</h4>
-                            <i class="fa-solid fa-chevron-down text-gray-500"></i>
+    <!-- FAQ Section -->
+    <section class="py-20 px-6 bg-gradient-to-b from-transparent to-brand-darker">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 multilang"
+                    data-ko="자주 묻는 질문"
+                    data-en="Frequently Asked Questions"
+                    data-ja="よくある質問"
+                    data-zh-cn="常见问题"
+                    data-zh-tw="常見問題">자주 묻는 질문</h2>
+                <p class="text-gray-400 multilang"
+                    data-ko="고객님들이 자주 문의하시는 내용을 정리했습니다."
+                    data-en="We have compiled frequently asked questions from our customers."
+                    data-ja="お客様からよくいただく質問をまとめました。"
+                    data-zh-cn="我们整理了客户经常询问的问题。"
+                    data-zh-tw="我們整理了客戶經常詢問的問題。">고객님들이 자주 문의하시는 내용을 정리했습니다.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q1
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="견적은 얼마나 걸리나요?"
+                                data-en="How long does it take to get a quote?"
+                                data-ja="見積もりにはどのくらい時間がかかりますか？"
+                                data-zh-cn="报价需要多长时间？"
+                                data-zh-tw="報價需要多長時間？">견적은 얼마나 걸리나요?</h4>
                         </div>
-                    </div>
-                    <div
-                        class="bg-brand-gray p-6 rounded-lg border border-white/5 hover:border-brand-red transition-colors cursor-pointer">
-                        <div class="flex justify-between items-center">
-                            <h4 class="font-bold" data-lang-key="support.faq_2_q">Q. 최소 주문 수량이 있나요?</h4>
-                            <i class="fa-solid fa-chevron-down text-gray-500"></i>
-                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="일반적으로 도면 접수 후 1영업일 이내에 견적을 제공해드립니다. 복잡한 프로젝트의 경우 2-3영업일이 소요될 수 있으며, 긴급한 경우 당일 견적도 가능합니다."
+                            data-en="Generally, we provide quotes within 1 business day after receiving drawings. Complex projects may take 2-3 business days, and same-day quotes are available for urgent cases."
+                            data-ja="通常、図面受領後1営業日以内にお見積もりを提供いたします。複雑なプロジェクトの場合は2～3営業日かかることがあり、緊急の場合は当日のお見積もりも可能です。"
+                            data-zh-cn="通常在收到图纸后1个工作日内提供报价。复杂项目可能需要2-3个工作日，紧急情况下可当天报价。"
+                            data-zh-tw="通常在收到圖紙後1個工作日內提供報價。複雜項目可能需要2-3個工作日，緊急情況下可當天報價。">일반적으로 도면 접수 후 1영업일 이내에 견적을 제공해드립니다. 복잡한 프로젝트의 경우 2-3영업일이 소요될 수 있으며, 긴급한 경우 당일 견적도 가능합니다.</div>
                     </div>
                 </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q2
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="최소 주문 수량이 있나요?"
+                                data-en="Is there a minimum order quantity?"
+                                data-ja="最小注文数量はありますか？"
+                                data-zh-cn="有最小订购量吗？"
+                                data-zh-tw="有最小訂購量嗎？">최소 주문 수량이 있나요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="최소 주문 수량 제한은 없습니다. 시제품 1개부터 대량 생산까지 모두 대응 가능합니다. 소량 주문도 동일한 품질로 제작해드립니다."
+                            data-en="There is no minimum order quantity. We can handle everything from a single prototype to mass production. Small orders are produced with the same quality."
+                            data-ja="最小注文数量の制限はありません。試作品1個から大量生産まですべて対応可能です。少量注文も同じ品質で製作いたします。"
+                            data-zh-cn="没有最小订购量限制。从单个原型到批量生产都可以处理。小订单也以相同的质量生产。"
+                            data-zh-tw="沒有最小訂購量限制。從單個原型到批量生產都可以處理。小訂單也以相同的質量生產。">최소 주문 수량 제한은 없습니다. 시제품 1개부터 대량 생산까지 모두 대응 가능합니다. 소량 주문도 동일한 품질로 제작해드립니다.</div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q3
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="어떤 재질을 가공할 수 있나요?"
+                                data-en="What materials can be processed?"
+                                data-ja="どのような素材を加工できますか？"
+                                data-zh-cn="可以加工哪些材料？"
+                                data-zh-tw="可以加工哪些材料？">어떤 재질을 가공할 수 있나요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="철강(SS400, SPHC 등), 스테인리스(SUS304, SUS316 등), 알루미늄, 동, 황동 등 다양한 금속 소재를 가공할 수 있습니다. 특수 소재의 경우 문의 주시면 가공 가능 여부를 확인해드립니다."
+                            data-en="We can process various metal materials including steel (SS400, SPHC, etc.), stainless steel (SUS304, SUS316, etc.), aluminum, copper, and brass. For special materials, please inquire about processing availability."
+                            data-ja="鋼材（SS400、SPHCなど）、ステンレス（SUS304、SUS316など）、アルミニウム、銅、真鍮など、さまざまな金属素材を加工できます。特殊素材の場合は、お問い合わせいただければ加工可能かどうかを確認いたします。"
+                            data-zh-cn="我们可以加工各种金属材料，包括钢材（SS400、SPHC等）、不锈钢（SUS304、SUS316等）、铝、铜和黄铜。对于特殊材料，请咨询加工可行性。"
+                            data-zh-tw="我們可以加工各種金屬材料，包括鋼材（SS400、SPHC等）、不鏽鋼（SUS304、SUS316等）、鋁、銅和黃銅。對於特殊材料，請諮詢加工可行性。">철강(SS400, SPHC 등), 스테인리스(SUS304, SUS316 등), 알루미늄, 동, 황동 등 다양한 금속 소재를 가공할 수 있습니다. 특수 소재의 경우 문의 주시면 가공 가능 여부를 확인해드립니다.</div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q4
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="납기일은 얼마나 걸리나요?"
+                                data-en="What is the delivery time?"
+                                data-ja="納期はどのくらいかかりますか？"
+                                data-zh-cn="交货时间是多长？"
+                                data-zh-tw="交貨時間是多長？">납기일은 얼마나 걸리나요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="일반적인 레이저 커팅의 경우 3-5영업일, 절곡 및 용접 포함 시 5-7영업일이 소요됩니다. 수량과 난이도에 따라 달라질 수 있으며, 긴급 납기도 협의 가능합니다."
+                            data-en="General laser cutting takes 3-5 business days, and 5-7 business days including bending and welding. It may vary depending on quantity and difficulty, and urgent delivery can be negotiated."
+                            data-ja="一般的なレーザーカットの場合は3～5営業日、曲げおよび溶接を含む場合は5～7営業日かかります。数量と難易度によって異なる場合があり、緊急納期も相談可能です。"
+                            data-zh-cn="一般激光切割需要3-5个工作日，包括折弯和焊接需要5-7个工作日。可能会根据数量和难度而有所不同，紧急交货可以协商。"
+                            data-zh-tw="一般激光切割需要3-5個工作日，包括折彎和焊接需要5-7個工作日。可能會根據數量和難度而有所不同，緊急交貨可以協商。">일반적인 레이저 커팅의 경우 3-5영업일, 절곡 및 용접 포함 시 5-7영업일이 소요됩니다. 수량과 난이도에 따라 달라질 수 있으며, 긴급 납기도 협의 가능합니다.</div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q5
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="도면은 어떤 형식으로 제출하나요?"
+                                data-en="What format should drawings be submitted in?"
+                                data-ja="図面はどの形式で提出しますか？"
+                                data-zh-cn="图纸应该以什么格式提交？"
+                                data-zh-tw="圖紙應該以什麼格式提交？">도면은 어떤 형식으로 제출하나요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="CAD 도면(DWG, DXF), PDF, JPG 등 다양한 형식을 지원합니다. 가급적 DXF 파일을 권장하며, 도면이 없는 경우 샘플 제품이나 스케치를 보내주셔도 견적이 가능합니다."
+                            data-en="We support various formats including CAD drawings (DWG, DXF), PDF, and JPG. DXF files are recommended. If you don't have drawings, you can send sample products or sketches for quotation."
+                            data-ja="CAD図面（DWG、DXF）、PDF、JPGなど、さまざまな形式をサポートしています。できればDXFファイルをお勧めします。図面がない場合は、サンプル製品やスケッチを送っていただいてもお見積もりが可能です。"
+                            data-zh-cn="我们支持各种格式，包括CAD图纸（DWG、DXF）、PDF和JPG。建议使用DXF文件。如果没有图纸，您可以发送样品产品或草图进行报价。"
+                            data-zh-tw="我們支持各種格式，包括CAD圖紙（DWG、DXF）、PDF和JPG。建議使用DXF文件。如果沒有圖紙，您可以發送樣品產品或草圖進行報價。">CAD 도면(DWG, DXF), PDF, JPG 등 다양한 형식을 지원합니다. 가급적 DXF 파일을 권장하며, 도면이 없는 경우 샘플 제품이나 스케치를 보내주셔도 견적이 가능합니다.</div>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q6
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="방문 상담이 가능한가요?"
+                                data-en="Is on-site consultation available?"
+                                data-ja="訪問相談は可能ですか？"
+                                data-zh-cn="可以现场咨询吗？"
+                                data-zh-tw="可以現場諮詢嗎？">방문 상담이 가능한가요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="네, 가능합니다. 사전 예약 후 방문해주시면 장비 견학 및 상담이 가능합니다. 프로젝트 규모가 큰 경우 저희가 직접 방문하여 상담해드릴 수도 있습니다."
+                            data-en="Yes, it is possible. You can tour our facilities and consult after making a reservation. For large projects, we can visit your site for consultation."
+                            data-ja="はい、可能です。事前予約後にご訪問いただければ、設備見学および相談が可能です。プロジェクト規模が大きい場合は、当社が直接訪問して相談させていただくこともできます。"
+                            data-zh-cn="是的，可以。预约后您可以参观我们的设施并进行咨询。对于大型项目，我们可以访问您的现场进行咨询。"
+                            data-zh-tw="是的，可以。預約後您可以參觀我們的設施並進行諮詢。對於大型項目，我們可以訪問您的現場進行諮詢。">네, 가능합니다. 사전 예약 후 방문해주시면 장비 견학 및 상담이 가능합니다. 프로젝트 규모가 큰 경우 저희가 직접 방문하여 상담해드릴 수도 있습니다.</div>
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q7
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="품질 보증 및 A/S는 어떻게 되나요?"
+                                data-en="What about quality assurance and after-sales service?"
+                                data-ja="品質保証およびアフターサービスはどうなりますか？"
+                                data-zh-cn="质量保证和售后服务如何？"
+                                data-zh-tw="質量保證和售後服務如何？">품질 보증 및 A/S는 어떻게 되나요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="모든 제품은 출고 전 품질 검사를 거치며, 제작 과정의 문제로 인한 하자는 전액 책임지고 재제작해드립니다. 제품 인도 후에도 문제가 발생하면 신속하게 대응해드립니다."
+                            data-en="All products undergo quality inspection before shipment. We take full responsibility for defects caused by manufacturing issues and will remake them. We respond quickly to any problems after product delivery."
+                            data-ja="すべての製品は出荷前に品質検査を受け、製作過程の問題による欠陥は全額責任を持って再製作いたします。製品引き渡し後も問題が発生した場合は迅速に対応いたします。"
+                            data-zh-cn="所有产品在出货前都经过质量检查。我们对制造问题引起的缺陷承担全部责任并重新制作。产品交付后如有任何问题，我们会迅速响应。"
+                            data-zh-tw="所有產品在出貨前都經過質量檢查。我們對製造問題引起的缺陷承擔全部責任並重新製作。產品交付後如有任何問題，我們會迅速響應。">모든 제품은 출고 전 품질 검사를 거치며, 제작 과정의 문제로 인한 하자는 전액 책임지고 재제작해드립니다. 제품 인도 후에도 문제가 발생하면 신속하게 대응해드립니다.</div>
+                    </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="faq-item bg-gradient-to-br from-brand-gray to-brand-darker rounded-2xl border border-white/10 overflow-hidden">
+                    <button onclick="toggleFAQ(this)" class="w-full p-6 text-left flex justify-between items-center hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-brand-red/10 rounded-lg flex items-center justify-center text-brand-red font-bold">
+                                Q8
+                            </div>
+                            <h4 class="font-bold text-lg multilang"
+                                data-ko="결제 방법은 어떻게 되나요?"
+                                data-en="What are the payment methods?"
+                                data-ja="支払い方法はどうなりますか？"
+                                data-zh-cn="付款方式是什么？"
+                                data-zh-tw="付款方式是什麼？">결제 방법은 어떻게 되나요?</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-brand-red faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="px-6 pb-6 pl-20 text-gray-300 leading-relaxed multilang"
+                            data-ko="세금계산서 발행이 가능하며, 계좌이체 또는 현금 결제가 가능합니다. 거래처 등록 후에는 월말 결제도 가능합니다. 자세한 결제 조건은 상담 시 협의 가능합니다."
+                            data-en="Tax invoices can be issued, and payment can be made by bank transfer or cash. Monthly payment is available after account registration. Detailed payment terms can be negotiated during consultation."
+                            data-ja="税務請求書の発行が可能で、口座振込または現金払いが可能です。取引先登録後は月末決済も可能です。詳細な決済条件は相談時に協議可能です。"
+                            data-zh-cn="可以开具税务发票，可以通过银行转账或现金付款。注册账户后可以进行月结付款。具体付款条件可在咨询时协商。"
+                            data-zh-tw="可以開具稅務發票，可以通過銀行轉賬或現金付款。註冊帳戶後可以進行月結付款。具體付款條件可在諮詢時協商。">세금계산서 발행이 가능하며, 계좌이체 또는 현금 결제가 가능합니다. 거래처 등록 후에는 월말 결제도 가능합니다. 자세한 결제 조건은 상담 시 협의 가능합니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-brand-red/10 to-transparent">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold mb-6 multilang"
+                data-ko="더 궁금하신 점이 있으신가요?"
+                data-en="Have more questions?"
+                data-ja="さらにご質問がありますか？"
+                data-zh-cn="还有更多问题吗？"
+                data-zh-tw="還有更多問題嗎？">더 궁금하신 점이 있으신가요?</h2>
+            <p class="text-xl text-gray-300 mb-8 multilang"
+                data-ko="전문 상담원이 친절하게 답변해 드립니다."
+                data-en="Our professional consultants will kindly answer your questions."
+                data-ja="専門相談員が親切にお答えいたします。"
+                data-zh-cn="我们的专业顾问会亲切地回答您的问题。"
+                data-zh-tw="我們的專業顧問會親切地回答您的問題。">전문 상담원이 친절하게 답변해 드립니다.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="quote.html" class="group bg-brand-red text-white font-bold py-5 px-12 rounded-full hover:bg-red-700 hover:shadow-glow transition-all duration-300 inline-flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span class="multilang"
+                        data-ko="견적 문의하기"
+                        data-en="Request Quote"
+                        data-ja="見積もりを依頼する"
+                        data-zh-cn="请求报价"
+                        data-zh-tw="請求報價">견적 문의하기</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="tel:0505-540-3000" class="bg-transparent border-2 border-white/20 text-white font-bold py-5 px-12 rounded-full hover:border-brand-red hover:bg-brand-red/10 transition-all duration-300 inline-flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-phone"></i>
+                    <span class="multilang"
+                        data-ko="전화 상담하기"
+                        data-en="Call Us"
+                        data-ja="お電話でのご相談"
+                        data-zh-cn="电话咨询"
+                        data-zh-tw="電話諮詢">전화 상담하기</span>
+                </a>
             </div>
         </div>
     </section>
@@ -106,9 +443,26 @@
     </footer>
 
     <script src="assets/js/components.js?v=2"></script>
-
     <script src="assets/js/multilang.js"></script>
     <script src="assets/js/laser-text.js"></script>
+
+    <script>
+        // FAQ 토글 함수
+        function toggleFAQ(button) {
+            const faqItem = button.closest('.faq-item');
+            const isActive = faqItem.classList.contains('active');
+
+            // 모든 FAQ 닫기
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // 클릭한 FAQ만 열기 (이미 열려있던 것은 닫힘)
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
 </body>
 
 </html>

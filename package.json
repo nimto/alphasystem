@@ -1,11 +1,16 @@
 {
-    "name": "alpha-laser-system",
-    "version": "1.0.0",
-    "description": "Alpha Laser System Landing Page",
-    "scripts": {
-        "dev": "npx http-server -p 8008"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+  "name": "alphasystem",
+  "version": "1.0.0",
+  "description": "Alpha Laser System - 정밀 레이저 가공 전문기업",
+  "scripts": {
+    "dev": "npx http-server -p 8668 -o -c-1",
+    "start": "npx http-server -p 8668 -c-1"
+  },
+  "keywords": [
+    "laser",
+    "cutting",
+    "manufacturing"
+  ],
+  "author": "Alpha Laser System",
+  "license": "ISC"
 }

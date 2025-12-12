@@ -90,6 +90,121 @@
             height: auto;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            border: none;
+            padding: 20px 15px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background-color: rgba(255, 0, 0, 1);
+            padding: 20px 20px;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #ff0000;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 80%;
+        }
+
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .lightbox-prev,
+            .lightbox-next {
+                padding: 15px 10px;
+                font-size: 20px;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-caption {
+                bottom: 10px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -107,7 +222,12 @@
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
         <div class="relative z-10 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat" data-laser-text="RESOURCES"></h2>
-            <p class="text-gray-400" data-lang-key="resources.page_desc">제품 카탈로그 및 기술 자료를 다운로드하세요.</p>
+            <p class="text-gray-400 multilang"
+                data-ko="제품 카탈로그 및 기술 자료를 다운로드하세요."
+                data-en="Download product catalogs and technical materials."
+                data-ja="製品カタログおよび技術資料をダウンロードしてください。"
+                data-zh-cn="下载产品目录和技术资料。"
+                data-zh-tw="下載產品目錄和技術資料。">제품 카탈로그 및 기술 자료를 다운로드하세요.</p>
         </div>
     </section>
 
@@ -116,22 +236,38 @@
         <div class="container mx-auto max-w-5xl">
             <!-- Tabs -->
             <div class="flex justify-center gap-4 mb-12">
-                <button class="px-6 py-2 rounded-full bg-brand-red text-white font-bold text-sm"
-                    data-lang-key="resources.tab_all">전체</button>
+                <button class="px-6 py-2 rounded-full bg-brand-red text-white font-bold text-sm multilang"
+                    data-ko="전체"
+                    data-en="All"
+                    data-ja="全て"
+                    data-zh-cn="全部"
+                    data-zh-tw="全部">전체</button>
                 <button
-                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm"
-                    data-lang-key="resources.tab_catalog">카탈로그</button>
+                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm multilang"
+                    data-ko="카탈로그"
+                    data-en="Catalog"
+                    data-ja="カタログ"
+                    data-zh-cn="产品目录"
+                    data-zh-tw="產品目錄">카탈로그</button>
                 <button
-                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm"
-                    data-lang-key="resources.tab_manual">매뉴얼</button>
+                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm multilang"
+                    data-ko="매뉴얼"
+                    data-en="Manual"
+                    data-ja="マニュアル"
+                    data-zh-cn="手册"
+                    data-zh-tw="手冊">매뉴얼</button>
                 <button
-                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm"
-                    data-lang-key="resources.tab_tech">기술자료</button>
+                    class="px-6 py-2 rounded-full bg-brand-gray border border-white/5 text-gray-400 hover:text-white hover:border-brand-red transition-all text-sm multilang"
+                    data-ko="기술자료"
+                    data-en="Technical"
+                    data-ja="技術資料"
+                    data-zh-cn="技术资料"
+                    data-zh-tw="技術資料">기술자료</button>
             </div>
 
             <!-- List -->
             <div class="space-y-4">
-                <!-- Item 1 -->
+                <!-- Item 1: 2026 AGT Product Catalog -->
                 <div
                     class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
                     <div class="flex items-center gap-6">
@@ -140,62 +276,40 @@
                             <i class="fa-solid fa-file-pdf"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors"
-                                data-lang-key="resources.item_1_title">[CATALOG]
-                                2025 종합 제품 소개서</h3>
-                            <p class="text-gray-500 text-sm" data-lang-key="resources.item_1_meta">2025-01-15 | 5.2MB
-                            </p>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
+                                data-ko="[CATALOG] 2025 종합 제품 소개서"
+                                data-en="[CATALOG] 2025 Comprehensive Product Brochure"
+                                data-ja="[カタログ] 2025 総合製品カタログ"
+                                data-zh-cn="[目录] 2025 综合产品手册"
+                                data-zh-tw="[目錄] 2025 綜合產品手冊">[CATALOG] 2025 종합 제품 소개서</h3>
+                            <p class="text-gray-500 text-sm">2025-01-15 | 5.2MB</p>
                         </div>
                     </div>
-                    <button
-                        class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
-                    </button>
-                </div>
-                <!-- Item 2 -->
-                <div
-                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div
-                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-blue-400">
-                            <i class="fa-solid fa-book"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors"
-                                data-lang-key="resources.item_2_title">[MANUAL]
-                                Fiber Laser Operation Guide</h3>
-                            <p class="text-gray-500 text-sm" data-lang-key="resources.item_2_meta">2024-12-10 | 12.8MB
-                            </p>
-                        </div>
+                    <div class="flex gap-2">
+                        <button onclick="viewPDF('data/2026_AGT_Product_01.pdf', '2025 종합 제품 소개서')"
+                            class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-eye"></i>
+                            <span class="multilang"
+                                data-ko="바로보기"
+                                data-en="View"
+                                data-ja="閲覧"
+                                data-zh-cn="查看"
+                                data-zh-tw="查看">바로보기</span>
+                        </button>
+                        <a href="data/2026_AGT_Product_01.pdf" download
+                            class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-download"></i>
+                            <span class="multilang"
+                                data-ko="다운로드"
+                                data-en="Download"
+                                data-ja="ダウンロード"
+                                data-zh-cn="下载"
+                                data-zh-tw="下載">다운로드</span>
+                        </a>
                     </div>
-                    <button
-                        class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
-                    </button>
-                </div>
-                <!-- Item 3 -->
-                <div
-                    class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div
-                            class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-green-400">
-                            <i class="fa-solid fa-file-lines"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors"
-                                data-lang-key="resources.item_3_title">[TECH]
-                                SUS304 Cutting Parameters</h3>
-                            <p class="text-gray-500 text-sm" data-lang-key="resources.item_3_meta">2024-11-05 | 1.5MB
-                            </p>
-                        </div>
-                    </div>
-                    <button
-                        class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-download"></i> <span data-lang-key="common.btn_download">Download</span>
-                    </button>
                 </div>
 
-                <!-- Item 4: 가로수보호일체 시방서 -->
+                <!-- Item 2: 가로수보호일체 시방서 -->
                 <div
                     class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
                     <div class="flex items-center gap-6">
@@ -204,25 +318,45 @@
                             <i class="fa-solid fa-file-pdf"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors">
-                                [시방서] 가로수보호일체 시방서
-                            </h3>
-                            <p class="text-gray-500 text-sm">조달청 등록 제품 시방서</p>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
+                                data-ko="[시방서] 가로수보호일체 시방서"
+                                data-en="[SPEC] Tree Protection Integrated Specification"
+                                data-ja="[仕様書] 街路樹保護一体型仕様書"
+                                data-zh-cn="[规格] 行道树保护一体化规范"
+                                data-zh-tw="[規格] 行道樹保護一體化規範">[시방서] 가로수보호일체 시방서</h3>
+                            <p class="text-gray-500 text-sm multilang"
+                                data-ko="조달청 등록 제품 시방서"
+                                data-en="Public Procurement Service Registered Product Specification"
+                                data-ja="調達庁登録製品仕様書"
+                                data-zh-cn="政府采购服务注册产品规格"
+                                data-zh-tw="政府採購服務註冊產品規格">조달청 등록 제품 시방서</p>
                         </div>
                     </div>
                     <div class="flex gap-2">
                         <button onclick="viewPDF('data/가로수보호일체 시방서.pdf', '가로수보호일체 시방서')"
                             class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i> <span>바로보기</span>
+                            <i class="fa-solid fa-eye"></i>
+                            <span class="multilang"
+                                data-ko="바로보기"
+                                data-en="View"
+                                data-ja="閲覧"
+                                data-zh-cn="查看"
+                                data-zh-tw="查看">바로보기</span>
                         </button>
                         <a href="data/가로수보호일체 시방서.pdf" download
                             class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i> <span>다운로드</span>
+                            <i class="fa-solid fa-download"></i>
+                            <span class="multilang"
+                                data-ko="다운로드"
+                                data-en="Download"
+                                data-ja="ダウンロード"
+                                data-zh-cn="下载"
+                                data-zh-tw="下載">다운로드</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Item 5: 빗물받이 시방서 -->
+                <!-- Item 3: 빗물받이 시방서 -->
                 <div
                     class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
                     <div class="flex items-center gap-6">
@@ -231,25 +365,45 @@
                             <i class="fa-solid fa-file-pdf"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors">
-                                [시방서] 빗물받이 시방서
-                            </h3>
-                            <p class="text-gray-500 text-sm">조달청 등록 제품 시방서</p>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
+                                data-ko="[시방서] 빗물받이 시방서"
+                                data-en="[SPEC] Storm Drain Specification"
+                                data-ja="[仕様書] 雨水桝仕様書"
+                                data-zh-cn="[规格] 雨水口规范"
+                                data-zh-tw="[規格] 雨水口規範">[시방서] 빗물받이 시방서</h3>
+                            <p class="text-gray-500 text-sm multilang"
+                                data-ko="조달청 등록 제품 시방서"
+                                data-en="Public Procurement Service Registered Product Specification"
+                                data-ja="調達庁登録製品仕様書"
+                                data-zh-cn="政府采购服务注册产品规格"
+                                data-zh-tw="政府採購服務註冊產品規格">조달청 등록 제품 시방서</p>
                         </div>
                     </div>
                     <div class="flex gap-2">
                         <button onclick="viewPDF('data/빗물받이 시방서.pdf', '빗물받이 시방서')"
                             class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i> <span>바로보기</span>
+                            <i class="fa-solid fa-eye"></i>
+                            <span class="multilang"
+                                data-ko="바로보기"
+                                data-en="View"
+                                data-ja="閲覧"
+                                data-zh-cn="查看"
+                                data-zh-tw="查看">바로보기</span>
                         </button>
                         <a href="data/빗물받이 시방서.pdf" download
                             class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i> <span>다운로드</span>
+                            <i class="fa-solid fa-download"></i>
+                            <span class="multilang"
+                                data-ko="다운로드"
+                                data-en="Download"
+                                data-ja="ダウンロード"
+                                data-zh-cn="下载"
+                                data-zh-tw="下載">다운로드</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Item 6: 트렌치 시방서 -->
+                <!-- Item 4: 트렌치 시방서 -->
                 <div
                     class="bg-brand-gray p-6 rounded-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-brand-red transition-colors group">
                     <div class="flex items-center gap-6">
@@ -258,26 +412,212 @@
                             <i class="fa-solid fa-file-pdf"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors">
-                                [시방서] 트렌치 시방서
-                            </h3>
-                            <p class="text-gray-500 text-sm">조달청 등록 제품 시방서</p>
+                            <h3 class="text-lg font-bold mb-1 group-hover:text-brand-red transition-colors multilang"
+                                data-ko="[시방서] 트렌치 시방서"
+                                data-en="[SPEC] Trench Specification"
+                                data-ja="[仕様書] トレンチ仕様書"
+                                data-zh-cn="[规格] 排水沟规范"
+                                data-zh-tw="[規格] 排水溝規範">[시방서] 트렌치 시방서</h3>
+                            <p class="text-gray-500 text-sm multilang"
+                                data-ko="조달청 등록 제품 시방서"
+                                data-en="Public Procurement Service Registered Product Specification"
+                                data-ja="調達庁登録製品仕様書"
+                                data-zh-cn="政府采购服务注册产品规格"
+                                data-zh-tw="政府採購服務註冊產品規格">조달청 등록 제품 시방서</p>
                         </div>
                     </div>
                     <div class="flex gap-2">
                         <button onclick="viewPDF('data/트렌치 시방서.pdf', '트렌치 시방서')"
                             class="px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-eye"></i> <span>바로보기</span>
+                            <i class="fa-solid fa-eye"></i>
+                            <span class="multilang"
+                                data-ko="바로보기"
+                                data-en="View"
+                                data-ja="閲覧"
+                                data-zh-cn="查看"
+                                data-zh-tw="查看">바로보기</span>
                         </button>
                         <a href="data/트렌치 시방서.pdf" download
                             class="px-6 py-2 border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all flex items-center gap-2 text-sm">
-                            <i class="fa-solid fa-download"></i> <span>다운로드</span>
+                            <i class="fa-solid fa-download"></i>
+                            <span class="multilang"
+                                data-ko="다운로드"
+                                data-en="Download"
+                                data-ja="ダウンロード"
+                                data-zh-cn="下载"
+                                data-zh-tw="下載">다운로드</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Certifications Section -->
+    <section class="py-20 px-6 bg-brand-darker">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-4 multilang"
+                data-ko="인증 및 수상"
+                data-en="Certifications & Awards"
+                data-ja="認証・受賞"
+                data-zh-cn="认证与获奖"
+                data-zh-tw="認證與獲獎">
+                인증 및 수상
+            </h2>
+            <p class="text-center text-gray-400 mb-12 multilang"
+                data-ko="알파레이저의 기술력과 품질을 입증하는 공식 인증서입니다."
+                data-en="Official certificates proving ALPHA LASER's technology and quality."
+                data-ja="アルファレーザーの技術力と品質を証明する公式認証書です。"
+                data-zh-cn="证明ALPHA LASER技术和质量的官方证书。"
+                data-zh-tw="證明ALPHA LASER技術和品質的官方證書。">
+                알파레이저의 기술력과 품질을 입증하는 공식 인증서입니다.
+            </p>
+
+            <!-- Certificates Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Certificate 1: 조달청 입찰자격 -->
+                <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
+                    onclick="openLightbox(0)">
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <img src="assets/img/certs/cert_bidder.jpg" alt="조달청 경쟁입찰참가자격등록증"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-sm mb-1 group-hover:text-brand-red transition-colors multilang"
+                            data-ko="조달청 입찰자격"
+                            data-en="Public Procurement"
+                            data-ja="調達庁入札資格"
+                            data-zh-cn="采购厅投标资格"
+                            data-zh-tw="採購廳投標資格">
+                            조달청 입찰자격
+                        </h3>
+                        <p class="text-gray-500 text-xs multilang"
+                            data-ko="경쟁입찰참가자격등록증"
+                            data-en="Competitive Bidding"
+                            data-ja="競争入札参加資格"
+                            data-zh-cn="竞争性投标资格"
+                            data-zh-tw="競爭性投標資格">
+                            경쟁입찰참가자격등록증
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Certificate 2: 클린사업장 -->
+                <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
+                    onclick="openLightbox(1)">
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <img src="assets/img/certs/cert_clean.jpg" alt="클린사업장 인증서"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-sm mb-1 group-hover:text-brand-red transition-colors multilang"
+                            data-ko="클린사업장"
+                            data-en="Clean Workplace"
+                            data-ja="クリーン事業場"
+                            data-zh-cn="清洁工作场所"
+                            data-zh-tw="清潔工作場所">
+                            클린사업장
+                        </h3>
+                        <p class="text-gray-500 text-xs multilang"
+                            data-ko="깨끗한 작업 환경 인증"
+                            data-en="Clean Workplace Cert."
+                            data-ja="クリーン職場認証"
+                            data-zh-cn="清洁工作环境认证"
+                            data-zh-tw="清潔工作環境認證">
+                            깨끗한 작업 환경 인증
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Certificate 3: ISO 9001 -->
+                <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
+                    onclick="openLightbox(2)">
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <img src="assets/img/certs/cert_iso9001.jpg" alt="ISO 9001:2015 인증서"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-sm mb-1 group-hover:text-brand-red transition-colors">
+                            ISO 9001:2015
+                        </h3>
+                        <p class="text-gray-500 text-xs multilang"
+                            data-ko="품질경영시스템 인증"
+                            data-en="Quality Management"
+                            data-ja="品質マネジメント"
+                            data-zh-cn="质量管理体系"
+                            data-zh-tw="品質管理體系">
+                            품질경영시스템 인증
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Certificate 4: 연구개발전담부서 -->
+                <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
+                    onclick="openLightbox(3)">
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <img src="assets/img/certs/cert_rnd.jpg" alt="연구개발전담부서 인정서"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-sm mb-1 group-hover:text-brand-red transition-colors multilang"
+                            data-ko="R&D 전담부서"
+                            data-en="R&D Department"
+                            data-ja="R&D専担部署"
+                            data-zh-cn="研发专责部门"
+                            data-zh-tw="研發專責部門">
+                            R&D 전담부서
+                        </h3>
+                        <p class="text-gray-500 text-xs multilang"
+                            data-ko="연구개발 전담부서 인정"
+                            data-en="R&D Department Cert."
+                            data-ja="研究開発部署認定"
+                            data-zh-cn="研发部门认定"
+                            data-zh-tw="研發部門認定">
+                            연구개발 전담부서 인정
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Certificate 5: 벤처기업 -->
+                <div class="bg-brand-gray rounded-xl overflow-hidden border border-white/5 hover:border-brand-red transition-all cursor-pointer group"
+                    onclick="openLightbox(4)">
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <img src="assets/img/certs/cert_venture.jpg" alt="벤처기업확인서"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-sm mb-1 group-hover:text-brand-red transition-colors multilang"
+                            data-ko="벤처기업"
+                            data-en="Venture Company"
+                            data-ja="ベンチャー企業"
+                            data-zh-cn="风险企业"
+                            data-zh-tw="風險企業">
+                            벤처기업
+                        </h3>
+                        <p class="text-gray-500 text-xs multilang"
+                            data-ko="벤처기업 확인서"
+                            data-en="Venture Certification"
+                            data-ja="ベンチャー企業確認書"
+                            data-zh-cn="风险企业确认书"
+                            data-zh-tw="風險企業確認書">
+                            벤처기업 확인서
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="certLightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+        <button class="lightbox-next" onclick="changeImage(1)">&#10095;</button>
+    </div>
 
     <!-- Footer (Dynamic) -->
     <footer id="footer-container" class="bg-black border-t border-white/10 pt-20 pb-10">
@@ -360,6 +700,113 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closePDF();
+            }
+        });
+    </script>
+
+    <script>
+        // 인증서 라이트박스
+        const certificates = [
+            {
+                src: 'assets/img/certs/cert_bidder.jpg',
+                ko: '조달청 경쟁입찰참가자격등록증',
+                en: 'Public Procurement Service - Competitive Bidding Registration',
+                ja: '調達庁競争入札参加資格登録証',
+                'zh-cn': '采购厅竞争性投标参与资格登记证',
+                'zh-tw': '採購廳競爭性投標參與資格登記證'
+            },
+            {
+                src: 'assets/img/certs/cert_clean.jpg',
+                ko: '클린사업장 인증서',
+                en: 'Clean Workplace Certification',
+                ja: 'クリーン事業場認証書',
+                'zh-cn': '清洁工作场所认证',
+                'zh-tw': '清潔工作場所認證'
+            },
+            {
+                src: 'assets/img/certs/cert_iso9001.jpg',
+                ko: 'ISO 9001:2015 품질경영시스템 인증서',
+                en: 'ISO 9001:2015 Quality Management System Certification',
+                ja: 'ISO 9001:2015 品質マネジメントシステム認証書',
+                'zh-cn': 'ISO 9001:2015 质量管理体系认证',
+                'zh-tw': 'ISO 9001:2015 品質管理體系認證'
+            },
+            {
+                src: 'assets/img/certs/cert_rnd.jpg',
+                ko: '연구개발전담부서 인정서',
+                en: 'R&D Dedicated Department Certification',
+                ja: '研究開発専担部署認定書',
+                'zh-cn': '研发专责部门认定书',
+                'zh-tw': '研發專責部門認定書'
+            },
+            {
+                src: 'assets/img/certs/cert_venture.jpg',
+                ko: '벤처기업확인서',
+                en: 'Venture Company Certificate',
+                ja: 'ベンチャー企業確認書',
+                'zh-cn': '风险企业确认书',
+                'zh-tw': '風險企業確認書'
+            }
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('certLightbox');
+            const image = document.getElementById('lightboxImage');
+            const caption = document.getElementById('lightboxCaption');
+
+            const currentLang = localStorage.getItem('alpha_lang') || 'ko';
+
+            image.src = certificates[index].src;
+            caption.textContent = certificates[index][currentLang] || certificates[index].ko;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('certLightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex >= certificates.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = certificates.length - 1;
+            }
+
+            const image = document.getElementById('lightboxImage');
+            const caption = document.getElementById('lightboxCaption');
+            const currentLang = localStorage.getItem('alpha_lang') || 'ko';
+
+            image.src = certificates[currentImageIndex].src;
+            caption.textContent = certificates[currentImageIndex][currentLang] || certificates[currentImageIndex].ko;
+        }
+
+        // 키보드 이벤트 (화살표, ESC)
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('certLightbox');
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    changeImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeImage(1);
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            }
+        });
+
+        // 라이트박스 외부 클릭 시 닫기
+        document.getElementById('certLightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'certLightbox') {
+                closeLightbox();
             }
         });
     </script>

@@ -34,3 +34,13 @@ npm-debug.log*
 # Temporary files
 *.tmp
 *.temp
+*.backup
+
+# Documentation (private/development)
+CLAUDE.md
+GEMIN.md
+EMAILJS_SETUP.md
+readme.html
+
+# Sensitive configuration files
+.vscode/sftp.json

@@ -201,45 +201,6 @@ header.scrolled {
     margin-bottom: 60px;
 }
 
-/* 레이저 글씨 효과 */
-.laser-writing-box {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-svg.writing-svg {
-    width: 100%;
-    height: auto;
-    max-height: 160px;
-    overflow: visible;
-}
-
-svg text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
-    font-size: 110px;
-}
-
-.text-stroke tspan {
-    fill: none;
-    stroke: var(--laser-red);
-    stroke-width: 2px;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: writeStroke 4s cubic-bezier(0.37, 0, 0.63, 1) forwards;
-    filter: drop-shadow(0 0 5px var(--laser-red));
-}
-
-.text-fill {
-    fill: var(--laser-red);
-    opacity: 0;
-    animation: fillText 1s ease-out 3.5s forwards;
-    filter: drop-shadow(0 0 25px var(--laser-red));
-}
-
 .sub-title {
     color: #fff;
     font-weight: 700;
@@ -446,22 +407,6 @@ section.content-section {
 }
 
 /* --- [Animations] --- */
-@keyframes writeStroke {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes fillText {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
