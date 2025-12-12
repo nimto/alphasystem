@@ -8,6 +8,7 @@ scripts/
 
 # Backup folders
 products_backup/
+products_back/
 
 # OS files
 .DS_Store
@@ -35,6 +36,10 @@ npm-debug.log*
 *.tmp
 *.temp
 *.backup
+
+# Test files
+test_*.py
+test_screenshots/
 
 # Documentation (private/development)
 CLAUDE.md
